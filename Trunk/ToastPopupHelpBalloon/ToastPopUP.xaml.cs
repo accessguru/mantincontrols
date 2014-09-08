@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 
-namespace Foundation.Common.Controls.Wpf.Notification
+namespace Mantin.Controls.Wpf.Notification
 {
     public partial class ToastPopUp : Window
     {

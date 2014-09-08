@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Foundation.Common.Controls.Wpf.Notification.Properties {
+namespace Mantin.Controls.Wpf.Notification.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

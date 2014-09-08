@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Foundation.Common.Controls.Wpf.Notification
+namespace Mantin.Controls.Wpf.Notification
 {
     public partial class Balloon : Window
     {

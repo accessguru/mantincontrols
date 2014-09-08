@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Foundation.Common.Controls.Wpf.Notification.Properties {
+namespace Mantin.Controls.Wpf.Notification.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Foundation.Common.Controls.Wpf.Notification.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Foundation.Common.Controls.Wpf.Notification.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mantin.Controls.Wpf.Notification.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,8 +1,8 @@
-﻿using Foundation.Common.Controls.Wpf.Notification;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using Mantin.Controls.Wpf.Notification;
 
 namespace TestApplication
 {
