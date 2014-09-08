@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Foundation.Common.Controls.Wpf.Notification
+namespace Mantin.Controls.Wpf.Notification
 {
     public enum NotificationType : int
     {

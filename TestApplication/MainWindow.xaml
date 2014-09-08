@@ -1,7 +1,7 @@
 ﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Notification="clr-namespace:Foundation.Common.Controls.Wpf.Notification;assembly=Foundation.Common.Controls.Wpf.Notification" x:Class="TestApplication.MainWindow"
+    xmlns:Notification="clr-namespace:Mantin.Controls.Wpf.Notification;assembly=Mantin.Controls.Wpf.Notification" x:Class="TestApplication.MainWindow"
     Title="Toast Popup/Help Balloon Sample Application" SizeToContent="Height" Width="525" WindowStartupLocation="CenterScreen"
     Background="LightGray" ResizeMode="NoResize">
     <Grid>

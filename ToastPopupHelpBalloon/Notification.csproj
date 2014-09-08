@@ -7,8 +7,8 @@
     <ProjectGuid>{5966439C-A414-42F5-B58A-D6B161FA3B98}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Foundation.Common.Controls.Wpf.Notification</RootNamespace>
-    <AssemblyName>Foundation.Common.Controls.Wpf.Notification</AssemblyName>
+    <RootNamespace>Mantin.Controls.Wpf.Notification</RootNamespace>
+    <AssemblyName>Mantin.Controls.Wpf.Notification</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

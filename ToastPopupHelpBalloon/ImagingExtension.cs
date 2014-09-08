@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Media.Imaging;
 
-namespace Foundation.Common.Controls.Wpf.Notification
+namespace Mantin.Controls.Wpf.Notification
 {
     internal static class ImagingExtension
     {

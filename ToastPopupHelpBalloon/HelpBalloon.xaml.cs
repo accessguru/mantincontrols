@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Foundation.Common.Controls.Wpf.Notification
+namespace Mantin.Controls.Wpf.Notification
 {
     public partial class HelpBalloon : UserControl
     {
