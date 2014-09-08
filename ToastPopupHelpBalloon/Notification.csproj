@@ -62,7 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ToastPopUP.xaml">
+    <Page Include="ToastPopUp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -72,10 +72,11 @@
     <Compile Include="HelpBalloon.xaml.cs">
       <DependentUpon>HelpBalloon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HyperLinkEventArgs.cs" />
     <Compile Include="ImagingExtension.cs" />
     <Compile Include="NotificationType.cs" />
-    <Compile Include="ToastPopUP.xaml.cs">
-      <DependentUpon>ToastPopUP.xaml</DependentUpon>
+    <Compile Include="ToastPopUp.xaml.cs">
+      <DependentUpon>ToastPopUp.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
