@@ -185,6 +185,30 @@ namespace TestApplication
                     toast.ClosedByUser += this.ToastClosedByUser;
                     toast.Show();
                 }));
+
+            //// This example shows how to register the available events
+            //var toast = new ToastPopUp(
+            //    "My Title",
+            //    "This is the main content.",
+            //    "Click this Hyperlink",
+            //    NotificationType.Information);
+
+            //// This is what will be passed back through the HyperlinkClicked event.
+            //toast.HyperlinkObjectForRaisedEvent = new object(); 
+            //toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+            //toast.ClosedByUser += this.ToastClosedByUser;
+            //toast.Show();
+
+            //// Passing rich text as inlines and overrides the image.
+            //var inlines = new List<Inline>();
+            //inlines.Add(new Run() { Text = "This is the first line of my main content." });
+            //inlines.Add(new Run() { Text = Environment.NewLine });
+            //inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
+
+            //new ToastPopUp(title, inlines, HyperLinkText, Properties.Resources.data_disk.ToBitmapImage());
+
+            //// If you don't need any events fired, you can do this.
+            //new ToastPopUp("My Title", "This is the main content.", NotificationType.Information).Show();
         }
 
         #endregion Public Methods
