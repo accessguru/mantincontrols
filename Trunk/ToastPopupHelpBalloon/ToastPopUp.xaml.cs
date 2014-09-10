@@ -246,8 +246,13 @@ namespace Mantin.Controls.Wpf.Notification
                 if (windowName.Equals(this.name) && window != this)
                 {
                     window.Topmost = true;
-                    //top = window.Top - window.ActualHeight;
-                    top = top - window.ActualHeight;
+                    top = top - window.ActualHeight;                
+
+                    if (top < 0)
+                    {
+                        this.Left = this.Left - this.ActualWidth;
+                        top = workingArea.Bottom - this.ActualHeight;
+                    }
                 }
             }
 
