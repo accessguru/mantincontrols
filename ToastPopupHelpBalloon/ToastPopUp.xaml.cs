@@ -20,36 +20,147 @@ namespace Mantin.Controls.Wpf.Notification
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
-        /// </summary>
-        /// <param name="title">The title.</param>
-        public ToastPopUp(string title)
-            : base()
-        {
-            this.InitializeComponent();
-            System.Windows.Application.Current.MainWindow.Closing += this.MainWindowClosing;
-
-            this.TextBoxTitle.Text = title;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
+        /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
         /// </summary>
         /// <param name="title">The title.</param>
         /// <param name="text">The text.</param>
-        public ToastPopUp(string title, string text)
-            : this(title)
+        /// <param name="notificationType">Type of the notification.</param>
+        public ToastPopUp(string title, string text, NotificationType notificationType)
+            : this(title, notificationType)
         {
             this.TextBoxShortDescription.Text = text;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
+        /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
         /// </summary>
         /// <param name="title">The title.</param>
         /// <param name="text">The text.</param>
-        public ToastPopUp(string title, string text, NotificationType notificationType)
-            : this(title, text)
+        /// <param name="hyperlinkText">The hyperlink text.</param>
+        /// <param name="notificationType">Type of the notification.</param>
+        /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
+        public ToastPopUp(string title, string text, string hyperlinkText, NotificationType notificationType, object hyperlinkObjectForRaisedEvent = null)
+            : this(title, text, notificationType)
+        {
+            this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
+            this.SetHyperLinkButton(hyperlinkText);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="textInlines">The inlines.</param>
+        /// <param name="hyperlinkText">The hyperlink text.</param>
+        /// <param name="imageSource">The image source.</param>
+        /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
+        public ToastPopUp(string title, List<Inline> textInlines, string hyperlinkText, ImageSource imageSource, object hyperlinkObjectForRaisedEvent = null) 
+            : this(title)
+        {
+            this.imageLeft.Source = imageSource;
+            this.TextBoxShortDescription.Inlines.AddRange(textInlines);
+            this.SetHyperLinkButton(hyperlinkText);
+            this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="textInlines">The inlines.</param>
+        /// <param name="hyperlinkText">The hyperlink text.</param>
+        /// <param name="imageSource">The image source.</param>
+        /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
+        public ToastPopUp(string title, List<Inline> textInlines, string hyperlinkText, Bitmap imageSource, object hyperlinkObjectForRaisedEvent = null)
+            : this(title, textInlines, hyperlinkText, imageSource.ToBitmapImage(), hyperlinkObjectForRaisedEvent)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="textInlines">The text inlines.</param>
+        /// <param name="hyperlinkText">The hyperlink text.</param>
+        /// <param name="notificationType">Type of the notification.</param>
+        /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
+        public ToastPopUp(string title, List<Inline> textInlines, string hyperlinkText, NotificationType notificationType, object hyperlinkObjectForRaisedEvent = null)
+            : this(title, notificationType)
+        {           
+            this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
+            this.TextBoxShortDescription.Inlines.AddRange(textInlines);
+            this.SetHyperLinkButton(hyperlinkText);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="text">The text.</param>
+        /// <param name="hyperlinkText">The hyperlink text.</param>
+        /// <param name="notificationType">Type of the notification.</param>
+        /// <param name="imageSource">The image source.</param>
+        /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
+        public ToastPopUp(string title, string text, string hyperlinkText, Bitmap imageSource, object hyperlinkObjectForRaisedEvent = null)
+            : this(title)
+        {
+            this.TextBoxShortDescription.Text = text;
+            this.SetHyperLinkButton(hyperlinkText);
+            this.imageLeft.Source = imageSource.ToBitmapImage();
+            this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="text">The text.</param>
+        /// <param name="notificationType">Type of the notification.</param>
+        /// <param name="imageSource">The image source.</param>
+        public ToastPopUp(string title, string text, NotificationType notificationType, ImageSource imageSource)
+            : this(title, text, notificationType)
+        {
+            this.imageLeft.Source = imageSource;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="text">The text.</param>
+        /// <param name="notificationType">Type of the notification.</param>
+        /// <param name="imageSource">The image source.</param>
+        public ToastPopUp(string title, string text, NotificationType notificationType, Bitmap imageSource)
+            : this(title, text, notificationType, imageSource.ToBitmapImage())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="text">The text.</param>
+        /// <param name="hyperlinkText">The hyperlink text.</param>
+        /// <param name="notificationType">Type of the notification.</param>
+        /// <param name="imageSource">The image source.</param>
+        /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
+        public ToastPopUp(string title, string text, string hyperlinkText, NotificationType notificationType, ImageSource imageSource, object hyperlinkObjectForRaisedEvent = null)
+            : this(title, text, notificationType)
+        {
+            this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
+            this.SetHyperLinkButton(hyperlinkText);
+            this.imageLeft.Source = imageSource;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="notificationType">Type of the notification.</param>
+        /// <exception cref="System.ArgumentOutOfRangeException">notificationType</exception>
+        private ToastPopUp(string title, NotificationType notificationType)
+            : this(title)
         {
             switch (notificationType)
             {
@@ -74,68 +185,24 @@ namespace Mantin.Controls.Wpf.Notification
         /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
         /// </summary>
         /// <param name="title">The title.</param>
-        /// <param name="text">The text.</param>
-        /// <param name="hyperlinkText">The hyper link text.</param>
-        /// <param name="notificationType">Type of the notification.</param>
-        public ToastPopUp(string title, string text, string hyperlinkText, NotificationType notificationType)
-            : this(title, text, notificationType)
+        private ToastPopUp(string title)
+            : base()
         {
-            this.SetHyperLinkButton(hyperlinkText);
-        }
+            this.InitializeComponent();
+            System.Windows.Application.Current.MainWindow.Closing += this.MainWindowClosing;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
-        /// </summary>
-        /// <param name="title">The title.</param>
-        /// <param name="inlines">The inlines.</param>
-        /// <param name="hyperlinkText">The hyper link text.</param>
-        /// <param name="notificationType">Type of the notification.</param>
-        public ToastPopUp(string title, List<Inline> inlines, string hyperlinkText, ImageSource imageSource)
-            : this(title)
-        {
-            this.imageLeft.Source = imageSource;
-            this.TextBoxShortDescription.Inlines.AddRange(inlines);
-            this.SetHyperLinkButton(hyperlinkText);
+            this.TextBoxTitle.Text = title;
         }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
-        /// </summary>
-        /// <param name="title">The title.</param>
-        /// <param name="text">The text.</param>
-        /// <param name="notificationType">Type of the notification.</param>
-        /// <param name="imageSource">The image source.</param>
-        public ToastPopUp(string title, string text, ImageSource imageSource)
-            : this(title, text)
-        {
-            this.imageLeft.Source = imageSource;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
-        /// </summary>
-        /// <param name="title">The title.</param>
-        /// <param name="text">The text.</param>
-        /// <param name="hyperlinkText">The hyper link text.</param>
-        /// <param name="notificationType">Type of the notification.</param>
-        /// <param name="imageSource">The image source.</param>
-        public ToastPopUp(string title, string text, string hyperlinkText, ImageSource imageSource)
-            : this(title, text)
-        {
-            this.SetHyperLinkButton(hyperlinkText);
-            this.imageLeft.Source = imageSource;
-        }
-
         #endregion Constructors
 
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the hyper link object for raised event.  This object will be passed back when
+        /// Gets or sets the hyperlink object for raised event.  This object will be passed back when
         /// the control raises the HyperlinkClicked event.
         /// </summary>
         /// <value>
-        /// The hyper link object for raised event.
+        /// The hyperlink object for raised event.
         /// </value>
         public object HyperlinkObjectForRaisedEvent { get; set; }
 
@@ -149,7 +216,7 @@ namespace Mantin.Controls.Wpf.Notification
         public event EventHandler<System.EventArgs> ClosedByUser;
 
         /// <summary>
-        /// Occurs when [hyper link clicked].
+        /// Occurs when [hyperlink clicked].
         /// </summary>
         public event EventHandler<HyperLinkEventArgs> HyperlinkClicked;
 
@@ -179,11 +246,21 @@ namespace Mantin.Controls.Wpf.Notification
                 if (windowName.Equals(this.name) && window != this)
                 {
                     window.Topmost = true;
-                    top = window.Top - window.ActualHeight;
+                    //top = window.Top - window.ActualHeight;
+                    top = top - window.ActualHeight;
                 }
             }
 
             this.Top = top;
+        }
+
+        /// <summary>
+        /// Shows the dialog.
+        /// </summary>
+        /// <exception cref="System.NotImplementedException">ShowDialog() is not supported.  Use Show() instead.</exception>
+        public new void ShowDialog()
+        {
+            throw new NotImplementedException("ShowDialog() is not supported.  Use Show() instead.");
         }
 
         #endregion Public Methods
@@ -294,9 +371,9 @@ namespace Mantin.Controls.Wpf.Notification
         #region Private Methods
 
         /// <summary>
-        /// Sets the hyper link button.
+        /// Sets the hyperlink button.
         /// </summary>
-        /// <param name="hyperlinkText">The hyper link text.</param>
+        /// <param name="hyperlinkText">The hyperlink text.</param>
         private void SetHyperLinkButton(string hyperlinkText)
         {
             if (!string.IsNullOrWhiteSpace(hyperlinkText))
