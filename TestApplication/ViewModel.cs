@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 using Mantin.Controls.Wpf.Notification;
 
@@ -26,7 +28,7 @@ namespace TestApplication
         public ViewModel()
         {
             this.SelectedNotificationType = this.NotificationTypeList.First();
-            this.PopToastCommand = new RelayCommand(param => this.PopToastExecute());
+            this.PopToastCommand = new RelayCommand(param => this.PopToastExecute(param));
         }
 
         #endregion Constructor
@@ -174,41 +176,38 @@ namespace TestApplication
         /// <summary>
         /// Pops the toast execute.
         /// </summary>
-        public void PopToastExecute()
+        public void PopToastExecute(object param)
         {
             App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(
                 () =>
                 {
-                    NotificationType notificationType = (NotificationType)System.Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
-                    var toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType);
-                    toast.HyperlinkClicked += this.ToastHyperlinkClicked;
-                    toast.ClosedByUser += this.ToastClosedByUser;
-                    toast.Show();
+                   NotificationType notificationType = (NotificationType)System.Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
+
+                    switch (param.ToString())
+                    {
+                        case "1":
+                            var toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType);
+                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                            toast.ClosedByUser += this.ToastClosedByUser;
+                            toast.Show();
+
+                            break;
+
+                        case "2":
+                            new ToastPopUp(this.Title, this.Text, this.HyperlinkText, Properties.Resources.disk_blue).Show();
+                            break;
+
+                        case "3":
+                            var inlines = new List<Inline>();
+                            inlines.Add(new Run() { Text = this.Text });
+                            inlines.Add(new Run() { Text = Environment.NewLine });
+                            inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
+
+                            new ToastPopUp(this.Title, inlines,this.HyperlinkText, notificationType).Show();
+                            break;
+                    }
+
                 }));
-
-            //// This example shows how to register the available events
-            //var toast = new ToastPopUp(
-            //    "My Title",
-            //    "This is the main content.",
-            //    "Click this Hyperlink",
-            //    NotificationType.Information);
-
-            //// This is what will be passed back through the HyperlinkClicked event.
-            //toast.HyperlinkObjectForRaisedEvent = new object(); 
-            //toast.HyperlinkClicked += this.ToastHyperlinkClicked;
-            //toast.ClosedByUser += this.ToastClosedByUser;
-            //toast.Show();
-
-            //// Passing rich text as inlines and overrides the image.
-            //var inlines = new List<Inline>();
-            //inlines.Add(new Run() { Text = "This is the first line of my main content." });
-            //inlines.Add(new Run() { Text = Environment.NewLine });
-            //inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
-
-            //new ToastPopUp(title, inlines, HyperLinkText, Properties.Resources.data_disk.ToBitmapImage());
-
-            //// If you don't need any events fired, you can do this.
-            //new ToastPopUp("My Title", "This is the main content.", NotificationType.Information).Show();
         }
 
         #endregion Public Methods
