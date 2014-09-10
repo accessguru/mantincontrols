@@ -14,6 +14,7 @@ namespace Mantin.Controls.Wpf.Notification
         #region Members
 
         private readonly string name = typeof(ToastPopUp).Name;
+        private volatile object lockObject = new object();
 
         #endregion Members
 
@@ -234,29 +235,7 @@ namespace Mantin.Controls.Wpf.Notification
 
             this.Owner = System.Windows.Application.Current.MainWindow;
             this.Closed += this.NotificationWindowClosed;
-            Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
-
-            this.Left = workingArea.Right - this.ActualWidth;
-            double top = workingArea.Bottom - this.ActualHeight;
-
-            foreach (Window window in System.Windows.Application.Current.Windows)
-            {
-                string windowName = window.GetType().Name;
-
-                if (windowName.Equals(this.name) && window != this)
-                {
-                    window.Topmost = true;
-                    top = top - window.ActualHeight;                
-
-                    if (top < 0)
-                    {
-                        this.Left = this.Left - this.ActualWidth;
-                        top = workingArea.Bottom - this.ActualHeight;
-                    }
-                }
-            }
-
-            this.Top = top;
+            AdjustWindows();
         }
 
         /// <summary>
@@ -268,8 +247,8 @@ namespace Mantin.Controls.Wpf.Notification
             throw new NotImplementedException("ShowDialog() is not supported.  Use Show() instead.");
         }
 
-        #endregion Public Methods
-
+        #endregion
+        
         #region Event Handlers
 
         /// <summary>
@@ -363,17 +342,83 @@ namespace Mantin.Controls.Wpf.Notification
                 if (windowName.Equals(this.name) && window != this)
                 {
                     // Adjust any windows that were above this one to drop down
-                    if (window.Top < this.Top)
+                    if (window.Top < this.Top &&  window.Left == this.Left)
                     {
                         window.Top = window.Top + this.ActualHeight;
+
+                        if (!WindowsExistToTheRight(this.Left))
+                        {
+                            window.Left = window.Left + this.ActualWidth;
+                        }
                     }
                 }
             }
+
+            this.AdjustWindows();
         }
 
         #endregion Event Handlers
 
         #region Private Methods
+
+        /// <summary>
+        /// Dow windows exist to the right.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <returns></returns>
+        private bool WindowsExistToTheRight(double left)
+        {
+            foreach (Window window in System.Windows.Application.Current.Windows)
+            {
+                string windowName = window.GetType().Name;
+
+                if (windowName.Equals(this.name) &&
+                    window != this &&
+                    left == Screen.PrimaryScreen.WorkingArea.Width - this.Width)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Adjusts the windows.
+        /// </summary>
+        private void AdjustWindows()
+        {
+            lock (lockObject)
+            {
+                Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
+
+                this.Left = workingArea.Right - this.ActualWidth;
+                double top = workingArea.Bottom - this.ActualHeight;
+
+                foreach (Window window in System.Windows.Application.Current.Windows)
+                {
+                    string windowName = window.GetType().Name;
+
+                    if (windowName.Equals(this.name) && window != this)
+                    {
+                        window.Topmost = true;
+
+                        if (this.Left == window.Left)
+                        {
+                            top = top - window.ActualHeight;
+                        }
+
+                        if (top < 0)
+                        {
+                            this.Left = this.Left - this.ActualWidth;
+                            top = workingArea.Bottom - this.ActualHeight;
+                        }
+                    }
+                }
+
+                this.Top = top;
+            }
+        }
 
         /// <summary>
         /// Sets the hyperlink button.
