@@ -99,7 +99,6 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="title">The title.</param>
         /// <param name="text">The text.</param>
         /// <param name="hyperlinkText">The hyperlink text.</param>
-        /// <param name="notificationType">Type of the notification.</param>
         /// <param name="imageSource">The image source.</param>
         /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
         public ToastPopUp(string title, string text, string hyperlinkText, Bitmap imageSource, object hyperlinkObjectForRaisedEvent = null)
@@ -117,11 +116,11 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="title">The title.</param>
         /// <param name="text">The text.</param>
-        /// <param name="notificationType">Type of the notification.</param>
         /// <param name="imageSource">The image source.</param>
-        public ToastPopUp(string title, string text, NotificationType notificationType, ImageSource imageSource)
-            : this(title, text, notificationType)
+        public ToastPopUp(string title, string text, ImageSource imageSource)
+            : this(title)
         {
+            this.TextBoxShortDescription.Text = text;
             this.imageLeft.Source = imageSource;
         }
 
@@ -130,10 +129,9 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="title">The title.</param>
         /// <param name="text">The text.</param>
-        /// <param name="notificationType">Type of the notification.</param>
         /// <param name="imageSource">The image source.</param>
-        public ToastPopUp(string title, string text, NotificationType notificationType, Bitmap imageSource)
-            : this(title, text, notificationType, imageSource.ToBitmapImage())
+        public ToastPopUp(string title, string text, Bitmap imageSource)
+            : this(title, text, imageSource.ToBitmapImage())
         {
         }
 
@@ -143,12 +141,12 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="title">The title.</param>
         /// <param name="text">The text.</param>
         /// <param name="hyperlinkText">The hyperlink text.</param>
-        /// <param name="notificationType">Type of the notification.</param>
         /// <param name="imageSource">The image source.</param>
         /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
-        public ToastPopUp(string title, string text, string hyperlinkText, NotificationType notificationType, ImageSource imageSource, object hyperlinkObjectForRaisedEvent = null)
-            : this(title, text, notificationType)
+        public ToastPopUp(string title, string text, string hyperlinkText, ImageSource imageSource, object hyperlinkObjectForRaisedEvent = null)
+            : this(title)
         {
+            this.TextBoxShortDescription.Text = text;
             this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
             this.SetHyperLinkButton(hyperlinkText);
             this.imageLeft.Source = imageSource;
