@@ -5,18 +5,22 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using Mantin.Controls.Wpf.Notification;
+using TestApplication;
 
-namespace TestApplication
+namespace DemoApplication
 {
     internal class ViewModel : ObservableBase
     {
         #region Members
 
-        private string helpText = "Help Balloon will default to the bottom and right side unless it will move off of the screen, then it will shift to the left side.";
+        private string helpText = "Help Balloon will default to the bottom and right side unless it will move off of the screen, then it will shift to the left side.  Setting the Max Height property will auto enable vertical scrollbars.";
         private string hyperlinkText = "Click Me!";
         private EnumMember selectedNotificationType;
+        private EnumMember selectedBalloonType;
+        private BalloonType balloonType;
         private string text = "This is unobtrusive text that I want my user to see.";
         private string title = "My Title";
+        private double maxHeight;
 
         #endregion Members
 
@@ -28,12 +32,59 @@ namespace TestApplication
         public ViewModel()
         {
             this.SelectedNotificationType = this.NotificationTypeList.First();
+            this.SelectedBalloonType = this.BalloonTypeList.First();
             this.PopToastCommand = new RelayCommand(param => this.PopToastExecute(param));
         }
 
         #endregion Constructor
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the maximum height.
+        /// </summary>
+        /// <value>
+        /// The maximum height.
+        /// </value>
+        public double MaxHeight
+        {
+            get
+            {
+                return this.maxHeight;
+            }
+
+            set
+            {
+                if (this.maxHeight != value)
+                {
+                    this.maxHeight = value;
+                    this.OnPropertyChanged(() => this.MaxHeight);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the type of the balloon.
+        /// </summary>
+        /// <value>
+        /// The type of the balloon.
+        /// </value>
+        public BalloonType BalloonType
+        {
+            get
+            {
+                return this.balloonType;
+            }
+
+            set
+            {
+                if (this.balloonType != value)
+                {
+                    this.balloonType = value;
+                    this.OnPropertyChanged(() => this.BalloonType);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the help text.
@@ -113,6 +164,31 @@ namespace TestApplication
         }
 
         /// <summary>
+        /// Gets or sets the type of the selected balloon.
+        /// </summary>
+        /// <value>
+        /// The type of the selected balloon.
+        /// </value>
+        public EnumMember SelectedBalloonType
+        {
+            get
+            {
+                return this.selectedNotificationType;
+            }
+
+            set
+            {
+                if (this.selectedBalloonType != value)
+                {
+                    this.selectedBalloonType = value;
+                    this.OnPropertyChanged(() => this.SelectedBalloonType);
+
+                    this.BalloonType = (BalloonType)System.Enum.Parse(typeof(BalloonType), value.Value.ToString());
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the text.
         /// </summary>
         /// <value>
@@ -174,6 +250,17 @@ namespace TestApplication
         }
 
         /// <summary>
+        /// Gets the balloon type list.
+        /// </summary>
+        /// <value>
+        /// The balloon type list.
+        /// </value>
+        public List<EnumMember> BalloonTypeList
+        {
+            get { return EnumMember.ConvertToList<BalloonType>(); }
+        }
+
+        /// <summary>
         /// Pops the toast execute.
         /// </summary>
         public void PopToastExecute(object param)
@@ -182,28 +269,34 @@ namespace TestApplication
                 () =>
                 {
                    NotificationType notificationType = (NotificationType)System.Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
-
+                   ToastPopUp toast;
                     switch (param.ToString())
                     {
                         case "1":
-                            var toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType);
+                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType);
                             toast.HyperlinkClicked += this.ToastHyperlinkClicked;
                             toast.ClosedByUser += this.ToastClosedByUser;
                             toast.Show();
 
                             break;
-
                         case "2":
-                            new ToastPopUp(this.Title, this.Text, this.HyperlinkText, Properties.Resources.disk_blue).Show();
-                            break;
+                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, DemoApplication.Properties.Resources.disk_blue);
+                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                            toast.ClosedByUser += this.ToastClosedByUser;
+                            toast.Show();
 
+                            break;
                         case "3":
                             var inlines = new List<Inline>();
                             inlines.Add(new Run() { Text = this.Text });
                             inlines.Add(new Run() { Text = Environment.NewLine });
                             inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
 
-                            new ToastPopUp(this.Title, inlines,this.HyperlinkText, notificationType).Show();
+                            toast = new ToastPopUp(this.Title, inlines,this.HyperlinkText, notificationType);
+                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                            toast.ClosedByUser += this.ToastClosedByUser;
+                            toast.Show();
+
                             break;
                     }
 

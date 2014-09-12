@@ -8,7 +8,24 @@
         SizeToContent="Height"
         AllowsTransparency="True" 
         Background="Transparent" >
-    <Grid RenderTransformOrigin="0,1" >        
+    <Window.Resources>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" x:Key="HelpGradient">
+            <LinearGradientBrush.RelativeTransform>
+                <RotateTransform Angle="90" CenterX="0.7" CenterY="0.7" />
+            </LinearGradientBrush.RelativeTransform>
+            <GradientStop Color="#FFFDFDFD" Offset=".2"/>
+            <GradientStop Color="#FFB6FB88" Offset=".8"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" x:Key="InfoGradient">
+            <LinearGradientBrush.RelativeTransform>
+                <RotateTransform Angle="90" CenterX="0.7" CenterY="0.7" />
+            </LinearGradientBrush.RelativeTransform>
+            <GradientStop Color="#FFFDFDFD" Offset=".2"/>
+            <GradientStop Color="#FF88CEFB" Offset=".8"/>
+        </LinearGradientBrush>
+    </Window.Resources>
+    <Grid RenderTransformOrigin="0,1" >
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <StackPanel.Resources>
@@ -41,16 +58,9 @@
             
             <Border Margin="5,-3,5,5" 
                     CornerRadius="7" Panel.ZIndex="100"
+                    Background="{StaticResource InfoGradient}"
+                    x:Name="borderBalloon"
                     VerticalAlignment="Top">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <LinearGradientBrush.RelativeTransform>
-                            <RotateTransform Angle="90" CenterX="0.7" CenterY="0.7" />
-                        </LinearGradientBrush.RelativeTransform>
-                        <GradientStop Color="#FFFDFDFD" Offset=".2"/>
-                        <GradientStop Color="#FFB6FB88" Offset=".8"/>
-                    </LinearGradientBrush>
-                </Border.Background>
                 <Border.Effect>
                     <DropShadowEffect Color="#FF757575" Opacity=".7"/>
                 </Border.Effect>
@@ -63,15 +73,21 @@
                     <Image Grid.Column="0" 
                            Width="35" 
                            Margin="5"
-                           VerticalAlignment="Top" Height="35" 
-                           Source="Resources/help.png" />
+                           VerticalAlignment="Top" 
+                           Height="35" 
+                           x:Name="imageType"
+                           Source="Resources/information.png" />
 
-                    <TextBlock Grid.Column="1" 
-                               TextWrapping="Wrap"
-                               Margin="0,10,10,10" 
-                               TextOptions.TextFormattingMode="Display"
-                               x:Name="textBlockCaption"
-                               Text="This is the caption"/>
+                    <ScrollViewer Grid.Column="1" 
+                                  Margin="0,10,10,10" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  x:Name="scrollViewerCaption" >
+                        <TextBlock 
+                            TextWrapping="Wrap"                            
+                            TextOptions.TextFormattingMode="Display"
+                            x:Name="textBlockCaption"
+                            Text="This is the caption"/>
+                    </ScrollViewer>
                 </Grid>
             </Border>
         </StackPanel>
