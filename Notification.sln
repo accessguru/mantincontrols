@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplication", "TestApplication\TestApplication.csproj", "{653867F1-5A9E-42E5-AFD9-D19066B40B3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApplication", "TestApplication\DemoApplication.csproj", "{653867F1-5A9E-42E5-AFD9-D19066B40B3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification", "ToastPopupHelpBalloon\Notification.csproj", "{5966439C-A414-42F5-B58A-D6B161FA3B98}"
 EndProject
@@ -12,15 +12,15 @@ Global
 		SccNumberOfProjects = 2
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs12
-		SccProjectUniqueName0 = TestApplication\\TestApplication.csproj
-		SccProjectName0 = TestApplication
+		SccProjectUniqueName0 = ToastPopupHelpBalloon\\Notification.csproj
+		SccProjectName0 = ToastPopupHelpBalloon
 		SccAuxPath0 = https://tfs.codeplex.com/tfs/tfs12
-		SccLocalPath0 = TestApplication
+		SccLocalPath0 = ToastPopupHelpBalloon
 		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName1 = ToastPopupHelpBalloon\\Notification.csproj
-		SccProjectName1 = ToastPopupHelpBalloon
+		SccProjectUniqueName1 = TestApplication\\DemoApplication.csproj
+		SccProjectName1 = TestApplication
 		SccAuxPath1 = https://tfs.codeplex.com/tfs/tfs12
-		SccLocalPath1 = ToastPopupHelpBalloon
+		SccLocalPath1 = TestApplication
 		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using DemoApplication;
 
-namespace TestApplication
+namespace DemoApplication
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Mantin.Controls.Wpf.Notification
 {
@@ -15,13 +16,35 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="control">The control.</param>
         /// <param name="caption">The caption.</param>
-        public Balloon(Control control, string caption)
+        /// <param name="balloonType">Type of the balloon.</param>
+        /// <param name="maxHeight">The maximum height.</param>
+        public Balloon(Control control, string caption, BalloonType balloonType, double maxHeight = 0)
         {
             InitializeComponent();
             this.control = control;
 
             Application.Current.MainWindow.Closing += this.OwnerClosing;
             Application.Current.MainWindow.LocationChanged += this.MainWindowLocationChanged;
+
+            LinearGradientBrush brush;
+
+            if (balloonType == BalloonType.Help)
+            {
+                this.imageType.Source = Properties.Resources.help.ToBitmapImage();
+                brush = this.FindResource("HelpGradient") as LinearGradientBrush;
+            }
+            else
+            {
+                this.imageType.Source = Properties.Resources.Information.ToBitmapImage();
+                brush = this.FindResource("InfoGradient") as LinearGradientBrush;
+            }
+
+            this.borderBalloon.SetValue(Control.BackgroundProperty, brush);
+
+            if (maxHeight > 0)
+            {
+                this.scrollViewerCaption.Height = maxHeight;
+            }
 
             this.textBlockCaption.Text = caption;
             this.CalcPosition();

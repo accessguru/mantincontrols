@@ -10,6 +10,7 @@
                MouseEnter="ImageMouseEnter" 
                IsManipulationEnabled="True" 
                Cursor="Hand"
+               x:Name="imageControl"
                Source="Resources/help.png" />
 
 </UserControl>
