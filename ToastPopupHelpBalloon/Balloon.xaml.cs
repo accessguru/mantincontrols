@@ -25,6 +25,7 @@ namespace Mantin.Controls.Wpf.Notification
 
             Application.Current.MainWindow.Closing += this.OwnerClosing;
             Application.Current.MainWindow.LocationChanged += this.MainWindowLocationChanged;
+            control.LayoutUpdated += this.MainWindowLocationChanged;            
 
             LinearGradientBrush brush;
 
