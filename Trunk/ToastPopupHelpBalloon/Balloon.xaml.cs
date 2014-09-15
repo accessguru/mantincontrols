@@ -63,18 +63,19 @@ namespace Mantin.Controls.Wpf.Notification
             Rectangle workingArea = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
             var location = this.control.PointToScreen(new System.Windows.Point(0, 0));
 
-            // Since the Width is NaN, using the ActualHeight since it is the same as the Width.
-            if (location.X + this.Width + (this.Width / 2) - this.control.ActualHeight <= workingArea.Width)
+            double leftPosition = location.X + (this.control.ActualWidth / 2) - captionPointMargin;
+
+            if (leftPosition + this.Width < workingArea.Width)
             {
                 this.PathPointRight.Visibility = Visibility.Hidden;
                 this.PathPointLeft.Visibility = Visibility.Visible;
-                this.Left = location.X + (this.control.ActualWidth / 2) - captionPointMargin;
+                this.Left = leftPosition;
             }
             else
             {
                 this.PathPointLeft.Visibility = Visibility.Hidden;
                 this.PathPointRight.Visibility = Visibility.Visible;
-                this.Left = location.X - (this.control.ActualWidth / 2);
+                this.Left = location.X + (this.control.ActualWidth / 2) + captionPointMargin - this.Width;
             }
 
             this.Top = location.Y + (this.control.ActualHeight / 2);
