@@ -22,6 +22,9 @@ namespace Mantin.Controls.Wpf.Notification
         public static readonly DependencyProperty MaxHeightProperty =
             DependencyProperty.Register("MaxHeight", typeof(double), typeof(HelpBalloon));
 
+        public static readonly DependencyProperty AutoWidthProperty =
+            DependencyProperty.Register("AutoWidth", typeof(bool), typeof(HelpBalloon));
+
         #endregion
 
         #region Constructor
@@ -52,6 +55,23 @@ namespace Mantin.Controls.Wpf.Notification
             set
             {
                 this.SetValue(MaxHeightProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the width of the element.
+        /// </summary>
+        [Description("Sets whether the Help Balloon's width will be auto set."), Category("Common Properties")]
+        public bool AutoWidth
+        {
+            get
+            {
+                return (bool)GetValue(AutoWidthProperty);
+            }
+
+            set
+            {
+                this.SetValue(AutoWidthProperty, value);
             }
         }
 
@@ -95,7 +115,7 @@ namespace Mantin.Controls.Wpf.Notification
             }
         }
 
-        #endregion 
+        #endregion
 
         #region Event Handlers
 
@@ -127,7 +147,7 @@ namespace Mantin.Controls.Wpf.Notification
         {
             if (balloon == null)
             {
-                balloon = new Balloon(this, this.Caption, this.BalloonType, this.MaxHeight);
+                balloon = new Balloon(this, this.Caption, this.BalloonType, this.MaxHeight, this.AutoWidth);
                 balloon.Closed += this.BalloonClosed;
                 balloon.Show();
             }

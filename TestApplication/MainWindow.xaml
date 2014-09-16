@@ -78,9 +78,16 @@
 
             <StackPanel Orientation="Horizontal">
                 <TextBox Width="105" Text="{Binding MaxHeight}"/>
-                <Notification:HelpBalloon Margin="4,0,0,0" Caption="Setting the Max Height to a value greater than zero will automatically show vertical scrollbars if the caption text exceeds the content area's height." BalloonType="Information" />
+                <Notification:HelpBalloon Margin="4,0,0,0" Caption="Setting the Max Height to a value greater than zero will automatically show vertical scrollbars if the caption text exceeds the content area's height." 
+                                          BalloonType="Information" />
             </StackPanel>
 
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <CheckBox Content="Auto Width" VerticalAlignment="Center" IsChecked="{Binding AutoWidth}"/>
+                <Notification:HelpBalloon Margin="28,0,0,0" 
+                                          Caption="The default width is 250.  When this property is set, the text will not wrap.  This is good for displaying list values." 
+                                          BalloonType="Information" />
+            </StackPanel>
             
             <TextBlock Text="Type"/>
             <ComboBox ItemsSource="{Binding BalloonTypeList}"
@@ -89,7 +96,11 @@
                       SelectedIndex="0"
                       SelectedValuePath="Value"/>
 
-            <Notification:HelpBalloon Margin="0,20,0,0" Caption="{Binding HelpText}" BalloonType="{Binding BalloonType}" MaxHeight="{Binding MaxHeight}"/>
+            <Notification:HelpBalloon Margin="0,20,0,0" 
+                                      Caption="{Binding HelpText}" 
+                                      BalloonType="{Binding BalloonType}" 
+                                      AutoWidth="{Binding AutoWidth}"
+                                      MaxHeight="{Binding MaxHeight}"/>
         </StackPanel>
 
     </Grid>

@@ -27,8 +27,12 @@
     </Window.Resources>
     <Grid RenderTransformOrigin="0,1" >
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel.Resources>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
                     <Style TargetType="Path">
                         <Setter Property="Fill" Value="#fdfdfd"/>
                         <Setter Property="Stretch" Value="Fill"/>
@@ -42,20 +46,20 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-                </StackPanel.Resources>
-                <Path  
-                  HorizontalAlignment="Left"  
-                  Margin="15,3,0,0" 
-                    Data="M10402.99154,55.5381L10.9919,0.64 0.7,54.9"
-                  x:Name="PathPointLeft"/>
-                <Path  
-                    HorizontalAlignment="Right"  
-                    Margin="175,3,0,0"
-                    Data="M10402.992,55.5381 L10284.783,3.2963597 0.7,54.9"
-                    x:Name="PathPointRight">
+                </Grid.Resources>
+                <Path Grid.Column="0"
+                        HorizontalAlignment="Left"  
+                        Margin="15,3,0,0" 
+                        Data="M10402.99154,55.5381L10.9919,0.64 0.7,54.9"
+                        x:Name="PathPointLeft"/>
+                <Path Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Margin="0,3,15,0"
+                        Data="M10402.992,55.5381 L10284.783,3.2963597 0.7,54.9"
+                        x:Name="PathPointRight">
                 </Path>
-            </StackPanel>
-            
+            </Grid>
+
             <Border Margin="5,-3,5,5" 
                     CornerRadius="7" Panel.ZIndex="100"
                     Background="{StaticResource InfoGradient}"
