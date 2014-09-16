@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace Mantin.Controls.Wpf.Notification
@@ -69,12 +69,13 @@ namespace Mantin.Controls.Wpf.Notification
             // Compensate for the bubble point
             double captionPointMargin = this.PathPointLeft.Margin.Left;
 
-            Rectangle workingArea = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
+            var screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
             var location = this.control.PointToScreen(new System.Windows.Point(0, 0));
-
             double leftPosition = location.X + (this.control.ActualWidth / 2) - captionPointMargin;
 
-            if (leftPosition + this.Width < workingArea.Width)
+            // Check if the window is on the secondary screen.
+            if (((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + this.Width < screen.WorkingArea.Width)) ||
+                leftPosition >= 0 && leftPosition + this.Width < screen.WorkingArea.Width)
             {
                 this.PathPointRight.Visibility = Visibility.Hidden;
                 this.PathPointLeft.Visibility = Visibility.Visible;
