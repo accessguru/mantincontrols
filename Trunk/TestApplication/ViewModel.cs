@@ -21,6 +21,7 @@ namespace DemoApplication
         private string text = "This is unobtrusive text that I want my user to see.";
         private string title = "My Title";
         private double maxHeight;
+        private bool autoWidth;
 
         #endregion Members
 
@@ -39,6 +40,29 @@ namespace DemoApplication
         #endregion Constructor
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [automatic width].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [automatic width]; otherwise, <c>false</c>.
+        /// </value>
+        public bool AutoWidth
+        {
+            get
+            {
+                return this.autoWidth;
+            }
+
+            set
+            {
+                if (this.autoWidth != value)
+                {
+                    this.autoWidth = value;
+                    this.OnPropertyChanged(() => this.AutoWidth);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the maximum height.

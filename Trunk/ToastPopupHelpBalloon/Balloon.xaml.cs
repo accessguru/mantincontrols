@@ -18,14 +18,15 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="caption">The caption.</param>
         /// <param name="balloonType">Type of the balloon.</param>
         /// <param name="maxHeight">The maximum height.</param>
-        public Balloon(Control control, string caption, BalloonType balloonType, double maxHeight = 0)
+        /// <param name="autoWidth">if set to <c>true</c> [automatic width].</param>
+        public Balloon(Control control, string caption, BalloonType balloonType, double maxHeight = 0, bool autoWidth = false)
         {
             InitializeComponent();
             this.control = control;
 
             Application.Current.MainWindow.Closing += this.OwnerClosing;
             Application.Current.MainWindow.LocationChanged += this.MainWindowLocationChanged;
-            control.LayoutUpdated += this.MainWindowLocationChanged;            
+            control.LayoutUpdated += this.MainWindowLocationChanged;
 
             LinearGradientBrush brush;
 
@@ -42,12 +43,19 @@ namespace Mantin.Controls.Wpf.Notification
 
             this.borderBalloon.SetValue(Control.BackgroundProperty, brush);
 
-            if (maxHeight > 0)
+            if (autoWidth)
             {
-                this.scrollViewerCaption.Height = maxHeight;
+                this.SizeToContent = SizeToContent.WidthAndHeight;
+                this.textBlockCaption.TextWrapping = TextWrapping.NoWrap;
             }
 
             this.textBlockCaption.Text = caption;
+
+            if (maxHeight > 0)
+            {
+                this.scrollViewerCaption.MaxHeight = maxHeight;
+            }
+
             this.CalcPosition();
         }
 
