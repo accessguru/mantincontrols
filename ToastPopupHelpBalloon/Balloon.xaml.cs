@@ -65,30 +65,35 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="control">The control.</param>
         private void CalcPosition()
         {
-            // Position balloon relative to the help image and screen placement
-            // Compensate for the bubble point
-            double captionPointMargin = this.PathPointLeft.Margin.Left;
+            PresentationSource source = PresentationSource.FromVisual(this.control);
 
-            var screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
-            var location = this.control.PointToScreen(new System.Windows.Point(0, 0));
-            double leftPosition = location.X + (this.control.ActualWidth / 2) - captionPointMargin;
-
-            // Check if the window is on the secondary screen.
-            if (((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + this.Width < screen.WorkingArea.Width)) ||
-                leftPosition >= 0 && leftPosition + this.Width < screen.WorkingArea.Width)
+            if (source != null)
             {
-                this.PathPointRight.Visibility = Visibility.Hidden;
-                this.PathPointLeft.Visibility = Visibility.Visible;
-                this.Left = leftPosition;
-            }
-            else
-            {
-                this.PathPointLeft.Visibility = Visibility.Hidden;
-                this.PathPointRight.Visibility = Visibility.Visible;
-                this.Left = location.X + (this.control.ActualWidth / 2) + captionPointMargin - this.Width;
-            }
+                // Position balloon relative to the help image and screen placement
+                // Compensate for the bubble point
+                double captionPointMargin = this.PathPointLeft.Margin.Left;
 
-            this.Top = location.Y + (this.control.ActualHeight / 2);
+                var screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
+                var location = this.control.PointToScreen(new System.Windows.Point(0, 0));
+                double leftPosition = location.X + (this.control.ActualWidth / 2) - captionPointMargin;
+
+                // Check if the window is on the secondary screen.
+                if (((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + this.Width < screen.WorkingArea.Width)) ||
+                    leftPosition >= 0 && leftPosition + this.Width < screen.WorkingArea.Width)
+                {
+                    this.PathPointRight.Visibility = Visibility.Hidden;
+                    this.PathPointLeft.Visibility = Visibility.Visible;
+                    this.Left = leftPosition;
+                }
+                else
+                {
+                    this.PathPointLeft.Visibility = Visibility.Hidden;
+                    this.PathPointRight.Visibility = Visibility.Visible;
+                    this.Left = location.X + (this.control.ActualWidth / 2) + captionPointMargin - this.Width;
+                }
+
+                this.Top = location.Y + (this.control.ActualHeight / 2);
+            }
         }
 
         /// <summary>
