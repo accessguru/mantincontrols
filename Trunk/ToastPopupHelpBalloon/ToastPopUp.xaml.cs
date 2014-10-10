@@ -15,6 +15,7 @@ namespace Mantin.Controls.Wpf.Notification
 
         private readonly string name = typeof(ToastPopUp).Name;
         private volatile object lockObject = new object();
+        private string title;
 
         #endregion Members
 
@@ -191,6 +192,7 @@ namespace Mantin.Controls.Wpf.Notification
             System.Windows.Application.Current.MainWindow.Closing += this.MainWindowClosing;
 
             this.TextBoxTitle.Text = title;
+            this.title = title;
         }
         #endregion Constructors
 
@@ -415,6 +417,8 @@ namespace Mantin.Controls.Wpf.Notification
                 }
 
                 this.Top = top;
+
+                Console.WriteLine(string.Format("Window Title: {0}; Top = {1}; Left = {2}", this.title, this.Top, this.Left));
             }
         }
 
