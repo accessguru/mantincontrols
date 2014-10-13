@@ -392,8 +392,8 @@ namespace Mantin.Controls.Wpf.Notification
             {
                 Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
 
-                this.Left = workingArea.Right - this.ActualWidth;
-                double top = workingArea.Bottom - this.ActualHeight;
+                this.Left = SystemParameters.WorkArea.Width - this.ActualWidth;
+                double top = SystemParameters.WorkArea.Height - this.ActualHeight;
 
                 foreach (Window window in System.Windows.Application.Current.Windows)
                 {
@@ -417,8 +417,6 @@ namespace Mantin.Controls.Wpf.Notification
                 }
 
                 this.Top = top;
-
-                Console.WriteLine(string.Format("Window Title: {0}; Top = {1}; Left = {2}", this.title, this.Top, this.Left));
             }
         }
 
