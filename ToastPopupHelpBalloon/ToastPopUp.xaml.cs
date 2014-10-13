@@ -235,7 +235,7 @@ namespace Mantin.Controls.Wpf.Notification
 
             this.Owner = System.Windows.Application.Current.MainWindow;
             this.Closed += this.NotificationWindowClosed;
-            AdjustWindows();
+            this.AdjustWindows();
         }
 
         /// <summary>
