@@ -24,6 +24,14 @@
             <GradientStop Color="#FFFDFDFD" Offset=".2"/>
             <GradientStop Color="#FF88CEFB" Offset=".8"/>
         </LinearGradientBrush>
+
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" x:Key="WarningGradient">
+            <LinearGradientBrush.RelativeTransform>
+                <RotateTransform Angle="90" CenterX="0.7" CenterY="0.7" />
+            </LinearGradientBrush.RelativeTransform>
+            <GradientStop Color="#FFFDFDFD" Offset=".2"/>
+            <GradientStop Color="#FFF7FB88" Offset=".8"/>
+        </LinearGradientBrush>
     </Window.Resources>
     <Grid RenderTransformOrigin="0,1" >
         <StackPanel Orientation="Vertical">

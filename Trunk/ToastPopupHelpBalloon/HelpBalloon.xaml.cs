@@ -128,13 +128,22 @@ namespace Mantin.Controls.Wpf.Notification
         {
             HelpBalloon helpBalloon = (HelpBalloon)d;
 
-            if (helpBalloon.BalloonType == BalloonType.Help)
+            switch (helpBalloon.BalloonType)
             {
-                helpBalloon.imageControl.Source = Properties.Resources.help20.ToBitmapImage();
-            }
-            else
-            {
-                helpBalloon.imageControl.Source = Properties.Resources.information20.ToBitmapImage();
+                case BalloonType.Help:
+                    helpBalloon.imageControl.Source = Properties.Resources.help20.ToBitmapImage();
+                    break;
+
+                case BalloonType.Information:
+                    helpBalloon.imageControl.Source = Properties.Resources.information20.ToBitmapImage();
+                    break;
+
+                case BalloonType.Warning:
+                    helpBalloon.imageControl.Source = Properties.Resources.warning20.ToBitmapImage();
+                    break;
+
+                default:
+                    throw new InvalidOperationException("unsupported BalloonType");
             }
         }
 
