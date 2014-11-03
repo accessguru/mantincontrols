@@ -10,6 +10,19 @@ namespace Mantin.Controls.Wpf.Notification
     public partial class Balloon : Window
     {
         private Control control;
+        private bool placeInCenter;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Balloon"/> class.
+        /// </summary>
+        /// <param name="control">The control.</param>
+        /// <param name="caption">The caption.</param>
+        /// <param name="balloonType">Type of the balloon.</param>
+        /// <param name="placeInCenter">if set to <c>true</c> [place in center].</param>
+        public Balloon(Control control, string caption, BalloonType balloonType, bool placeInCenter)
+            : this(control, caption, balloonType, 0, false, placeInCenter)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Balloon" /> class.
@@ -19,15 +32,20 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="balloonType">Type of the balloon.</param>
         /// <param name="maxHeight">The maximum height.</param>
         /// <param name="autoWidth">if set to <c>true</c> [automatic width].</param>
-        public Balloon(Control control, string caption, BalloonType balloonType, double maxHeight = 0, bool autoWidth = false)
+        /// <param name="placeInCenter">if set to <c>true</c> [place in center].</param>
+        public Balloon(Control control, string caption, BalloonType balloonType, double maxHeight = 0, bool autoWidth = false, bool placeInCenter = true)
         {
             InitializeComponent();
             this.control = control;
+            this.placeInCenter = placeInCenter;
+
+            if (placeInCenter)
+            {
+                Application.Current.MainWindow.LocationChanged += this.MainWindowLocationChanged;
+                control.LayoutUpdated += this.MainWindowLocationChanged;
+            }
 
             Application.Current.MainWindow.Closing += this.OwnerClosing;
-            Application.Current.MainWindow.LocationChanged += this.MainWindowLocationChanged;
-            control.LayoutUpdated += this.MainWindowLocationChanged;
-
             LinearGradientBrush brush;
 
             if (balloonType == BalloonType.Help)
@@ -35,10 +53,15 @@ namespace Mantin.Controls.Wpf.Notification
                 this.imageType.Source = Properties.Resources.help.ToBitmapImage();
                 brush = this.FindResource("HelpGradient") as LinearGradientBrush;
             }
-            else
+            else if (balloonType == BalloonType.Information)
             {
                 this.imageType.Source = Properties.Resources.Information.ToBitmapImage();
                 brush = this.FindResource("InfoGradient") as LinearGradientBrush;
+            }
+            else
+            {
+                this.imageType.Source = Properties.Resources.Warning.ToBitmapImage();
+                brush = this.FindResource("WarningGradient") as LinearGradientBrush;
             }
 
             this.borderBalloon.SetValue(Control.BackgroundProperty, brush);
@@ -62,7 +85,6 @@ namespace Mantin.Controls.Wpf.Notification
         /// <summary>
         /// Calculates the position.
         /// </summary>
-        /// <param name="control">The control.</param>
         private void CalcPosition()
         {
             PresentationSource source = PresentationSource.FromVisual(this.control);
@@ -74,8 +96,18 @@ namespace Mantin.Controls.Wpf.Notification
                 double captionPointMargin = this.PathPointLeft.Margin.Left;
 
                 var screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
-                var location = this.control.PointToScreen(new System.Windows.Point(0, 0));
-                double leftPosition = location.X + (this.control.ActualWidth / 2) - captionPointMargin;
+                Point location = this.control.PointToScreen(new System.Windows.Point(0, 0));
+
+                double leftPosition = 0;
+
+                if (this.placeInCenter)
+                {
+                    leftPosition = location.X + (this.control.ActualWidth / 2) - captionPointMargin;
+                }
+                else
+                {
+                    leftPosition = System.Windows.Forms.Control.MousePosition.X - captionPointMargin;
+                }
 
                 // Check if the window is on the secondary screen.
                 if (((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + this.Width < screen.WorkingArea.Width)) ||

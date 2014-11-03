@@ -15,9 +15,13 @@
         </Grid.RowDefinitions>
 
         <Grid.Resources>
-            <Style TargetType="Label">
+            <Style TargetType="Label" x:Key="Header">
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style TargetType="Label" x:Key="SubHeader">
+                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="FontWeight" Value="Bold"/>
             </Style>
             <Style TargetType="Button">
@@ -26,7 +30,7 @@
             </Style>
         </Grid.Resources>
 
-        <Label Grid.Column="0" Grid.Row="0">Toast Popup</Label>
+        <Label Style="{StaticResource Header}" Grid.Column="0" Grid.Row="0">Toast Popup</Label>
 
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="10">
             <TextBlock Text="Title"/>
@@ -62,11 +66,19 @@
                     CommandParameter="3"/>
         </StackPanel>
 
-        <Label Grid.Column="1" Grid.Row="0">Help Balloon</Label>
+        <Label Style="{StaticResource Header}" Grid.Column="1" Grid.Row="0">Help Balloon</Label>
         <StackPanel Grid.Column="1" 
                     Grid.Row="1"
                     Orientation="Vertical" 
                     Margin="10">
+            <TextBlock Text="Type"/>
+            <ComboBox ItemsSource="{Binding BalloonTypeList}"
+                      SelectedItem="{Binding SelectedBalloonType}"
+                      DisplayMemberPath="Description"
+                      SelectedIndex="0"
+                      SelectedValuePath="Value"/>
+
+            <Label Style="{StaticResource SubHeader}">Bound to Help Balloon Control</Label>
             <TextBlock Text="Help Caption Text"/>
             <TextBox TextWrapping="WrapWithOverflow" 
                      AcceptsReturn="True" 
@@ -89,18 +101,18 @@
                                           BalloonType="Information" />
             </StackPanel>
             
-            <TextBlock Text="Type"/>
-            <ComboBox ItemsSource="{Binding BalloonTypeList}"
-                      SelectedItem="{Binding SelectedBalloonType}"
-                      DisplayMemberPath="Description"
-                      SelectedIndex="0"
-                      SelectedValuePath="Value"/>
-
             <Notification:HelpBalloon Margin="0,20,0,0" 
                                       Caption="{Binding HelpText}" 
                                       BalloonType="{Binding BalloonType}" 
                                       AutoWidth="{Binding AutoWidth}"
                                       MaxHeight="{Binding MaxHeight}"/>
+
+            <Label Style="{StaticResource SubHeader}">General Use</Label>
+            <TextBox x:Name="textBoxGeneralUse" 
+                     TextWrapping="WrapWithOverflow" 
+                     Height="40" 
+                     Text="Move your mouse over this textbox."
+                     MouseEnter="TextBoxGeneralUseMouseEnter"/>
         </StackPanel>
 
     </Grid>

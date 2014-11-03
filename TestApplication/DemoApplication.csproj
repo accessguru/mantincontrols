@@ -19,7 +19,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftp://ftp.cierra.net/www/notification/</PublishUrl>
+    <PublishUrl>c:\temp\notification\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -29,15 +29,15 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://www.cierra.net/notification/</InstallUrl>
+    <InstallUrl>http://162.250.159.55:90/Notification/</InstallUrl>
     <SupportUrl>https://toastspopuphelpballoon.codeplex.com/</SupportUrl>
     <ProductName>Mantin.Controls.Wpf.Notification</ProductName>
     <PublisherName>Mantin Enterprises, Inc.</PublisherName>
-    <MinimumRequiredVersion>2.3.3.0</MinimumRequiredVersion>
+    <MinimumRequiredVersion>2.4.0.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>2.3.3.0</ApplicationVersion>
+    <ApplicationVersion>2.4.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>

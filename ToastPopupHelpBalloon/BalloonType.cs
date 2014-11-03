@@ -7,6 +7,8 @@ namespace Mantin.Controls.Wpf.Notification
     {
         Help = 0,
 
-        Information = 1
+        Information = 1,
+
+        Warning = 2
     }
 }
