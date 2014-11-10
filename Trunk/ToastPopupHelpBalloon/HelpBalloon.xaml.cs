@@ -38,6 +38,7 @@ namespace Mantin.Controls.Wpf.Notification
         public HelpBalloon()
         {
             InitializeComponent();
+            this.ShowCloseButton = true;
         }
         
         #endregion

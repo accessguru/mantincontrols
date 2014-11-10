@@ -90,7 +90,7 @@
                            Height="35" 
                            x:Name="imageType"
                            Source="Resources/information.png" />
-                    
+
                     <Image Source="Resources/delete24.png" 
                            x:Name="imageClose"
                            ToolTip="Close"
@@ -98,13 +98,13 @@
                            Grid.Column="2" 
                            Width="16"
                            Height="16"
-                           Margin="5"
+                           Margin="0,5,5,5"
                            Grid.Row="1" 
                            Cursor="Hand"
                            MouseDown="ImageCloseMouseDown"/>
 
                     <ScrollViewer Grid.Column="1" 
-                                  Margin="0,8,10,10" 
+                                  Margin="0,8,5,10" 
                                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                                   x:Name="scrollViewerCaption" >
                         <TextBlock 
