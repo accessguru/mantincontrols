@@ -29,7 +29,7 @@ namespace DemoApplication
         {
             if (this.balloon == null || !this.balloon.IsLoaded)
             {
-                this.balloon = new Balloon(this.textBoxGeneralUse, "You have moused over this textbox.", this.viewModel.BalloonType, false);
+                this.balloon = new Balloon(this.textBoxGeneralUse, "You have moused over this textbox.", this.viewModel.BalloonType, false, false);
                 this.balloon.Show();
             }
         }

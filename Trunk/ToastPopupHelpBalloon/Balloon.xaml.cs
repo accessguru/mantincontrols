@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,18 +10,38 @@ namespace Mantin.Controls.Wpf.Notification
 {
     public partial class Balloon : Window
     {
+        #region Members
+
         private Control control;
         private bool placeInCenter;
 
+        public static readonly DependencyProperty ShowCloseButtonProperty =
+            DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(Balloon), new PropertyMetadata(new PropertyChangedCallback(OnShowCloseButtonChanged)));
+
+        #endregion
+
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Balloon"/> class.
         /// </summary>
         /// <param name="control">The control.</param>
         /// <param name="caption">The caption.</param>
         /// <param name="balloonType">Type of the balloon.</param>
+        public Balloon(Control control, string caption, BalloonType balloonType) 
+            : this(control, caption, balloonType, 0, false, true, true)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Balloon" /> class.
+        /// </summary>
+        /// <param name="control">The control.</param>
+        /// <param name="caption">The caption.</param>
+        /// <param name="balloonType">Type of the balloon.</param>
         /// <param name="placeInCenter">if set to <c>true</c> [place in center].</param>
-        public Balloon(Control control, string caption, BalloonType balloonType, bool placeInCenter)
-            : this(control, caption, balloonType, 0, false, placeInCenter)
+        /// <param name="showCloseButton">if set to <c>true</c> [show close button].</param>
+        public Balloon(Control control, string caption, BalloonType balloonType, bool placeInCenter, bool showCloseButton)
+            : this(control, caption, balloonType, 0, false, placeInCenter, showCloseButton)
         {
         }
 
@@ -33,16 +54,27 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="maxHeight">The maximum height.</param>
         /// <param name="autoWidth">if set to <c>true</c> [automatic width].</param>
         /// <param name="placeInCenter">if set to <c>true</c> [place in center].</param>
-        public Balloon(Control control, string caption, BalloonType balloonType, double maxHeight = 0, bool autoWidth = false, bool placeInCenter = true)
+        /// <param name="showCloseButton">if set to <c>true</c> [show close button].</param>
+        public Balloon(Control control, string caption, BalloonType balloonType, double maxHeight = 0, bool autoWidth = false, bool placeInCenter = true, bool showCloseButton = true)
         {
             InitializeComponent();
             this.control = control;
             this.placeInCenter = placeInCenter;
+            this.ShowCloseButton = showCloseButton;
 
             if (placeInCenter)
             {
                 Application.Current.MainWindow.LocationChanged += this.MainWindowLocationChanged;
                 control.LayoutUpdated += this.MainWindowLocationChanged;
+            }
+
+            if (showCloseButton)
+            {
+                this.imageClose.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.imageClose.Visibility = Visibility.Collapsed;
             }
 
             Application.Current.MainWindow.Closing += this.OwnerClosing;
@@ -82,6 +114,34 @@ namespace Mantin.Controls.Wpf.Notification
             this.CalcPosition();
         }
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [show close button].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [show close button]; otherwise, <c>false</c>.
+        /// </value>
+        [Description("Sets whether the Help Balloon's close button will be visible."), Category("Common Properties")]
+        public bool ShowCloseButton
+        {
+            get
+            {
+                return (bool)GetValue(ShowCloseButtonProperty);
+            }
+
+            set
+            {
+                this.SetValue(ShowCloseButtonProperty, value);
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
+
         /// <summary>
         /// Calculates the position.
         /// </summary>
@@ -107,6 +167,15 @@ namespace Mantin.Controls.Wpf.Notification
                 else
                 {
                     leftPosition = System.Windows.Forms.Control.MousePosition.X - captionPointMargin;
+
+                    if (leftPosition < location.X)
+                    {
+                        leftPosition = location.X;
+                    }
+                    else if (leftPosition > location.X + this.control.ActualWidth)
+                    {
+                        leftPosition = location.X + this.control.ActualWidth - (captionPointMargin * 2);
+                    }
                 }
 
                 // Check if the window is on the secondary screen.
@@ -125,6 +194,29 @@ namespace Mantin.Controls.Wpf.Notification
                 }
 
                 this.Top = location.Y + (this.control.ActualHeight / 2);
+            }
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        /// <summary>
+        /// Called when [show close button changed].
+        /// </summary>
+        /// <param name="d">The d.</param>
+        /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        private static void OnShowCloseButtonChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Balloon balloon = (Balloon)d;
+
+            if (balloon.ShowCloseButton)
+            {
+                balloon.imageClose.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                balloon.imageClose.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -169,5 +261,16 @@ namespace Mantin.Controls.Wpf.Notification
                 }
             }
         }
+
+        /// <summary>
+        /// Images the close mouse down.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
+        private void ImageCloseMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
     }
 }
