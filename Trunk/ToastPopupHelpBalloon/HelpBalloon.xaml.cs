@@ -176,7 +176,7 @@ namespace Mantin.Controls.Wpf.Notification
         {
             if (balloon == null)
             {
-                balloon = new Balloon(this, this.Caption, this.BalloonType, this.MaxHeight, this.AutoWidth, false, this.ShowCloseButton);
+                balloon = new Balloon(this, this.Caption, this.BalloonType, this.MaxHeight, this.AutoWidth, true, this.ShowCloseButton);
                 balloon.Closed += this.BalloonClosed;
                 balloon.Show();
             }
