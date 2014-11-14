@@ -19,7 +19,7 @@ namespace Mantin.Controls.Wpf.Notification
         public static readonly DependencyProperty BalloonTypeProperty =
             DependencyProperty.Register("BalloonType", typeof(BalloonType), typeof(HelpBalloon), new PropertyMetadata(new PropertyChangedCallback(OnBalloonTypeChanged)));
         
-        public static readonly DependencyProperty MaxHeightProperty =
+        public new static readonly DependencyProperty MaxHeightProperty =
             DependencyProperty.Register("MaxHeight", typeof(double), typeof(HelpBalloon));
         
         public static readonly DependencyProperty AutoWidthProperty =
@@ -69,7 +69,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// Gets or sets the maximum height constraint of the element.
         /// </summary>
         [Description("The maximum height of the Balloon caption."), Category("Common Properties")]
-        public double MaxHeight
+        public new double MaxHeight
         {
             get
             {

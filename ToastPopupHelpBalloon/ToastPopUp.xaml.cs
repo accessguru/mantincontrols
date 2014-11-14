@@ -230,12 +230,22 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         public new void Show()
         {
+            var focusedElement = Keyboard.FocusedElement;
+
             this.Topmost = true;
             base.Show();
 
             this.Owner = System.Windows.Application.Current.MainWindow;
             this.Closed += this.NotificationWindowClosed;
             this.AdjustWindows();
+
+            if (focusedElement != null)
+            {
+                // Restore keyboard focus to the original element that had focus. That way if someone
+                // was typing into a control we don't steal keyboard focus away from that control.
+                focusedElement.Focusable = true;
+                Keyboard.Focus(focusedElement);
+            }
         }
 
         /// <summary>
