@@ -85,7 +85,11 @@
             <CheckBox Content="Show Close Button" VerticalAlignment="Center" IsChecked="{Binding ShowBalloonCloseButton}"/>
 
             <Label Style="{StaticResource SubHeader}">Bound to Help Balloon Control</Label>
-            <TextBlock Text="Help Caption Text"/>
+
+            <TextBlock Text="Caption Title"/>
+            <TextBox Text="{Binding BalloonTitle}"/>
+
+            <TextBlock Text="Caption Text"/>
             <TextBox TextWrapping="WrapWithOverflow" 
                      AcceptsReturn="True" 
                      Height="80" 
@@ -93,27 +97,24 @@
                      Text="{Binding HelpText, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBlock Text="Max Height"/>
+             <TextBox Width="105" 
+                      HorizontalAlignment="Left"
+                      Text="{Binding MaxHeight}"/>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBox Width="105" Text="{Binding MaxHeight}"/>
-                <Notification:HelpBalloon Margin="4,0,0,0" Caption="Setting the Max Height to a value greater than zero will automatically show vertical scrollbars if the caption text exceeds the content area's height." 
-                                          BalloonType="Information"
-                                          ShowCloseButton="{Binding ShowBalloonCloseButton}"/>
-            </StackPanel>
+            <TextBlock Text="Max Width"/>
+            <TextBox Width="105" 
+                     HorizontalAlignment="Left" 
+                     Text="{Binding MaxWidth}"/>
 
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <CheckBox Content="Auto Width" VerticalAlignment="Center" IsChecked="{Binding AutoWidth}"/>
-                <Notification:HelpBalloon Margin="28,0,0,0" 
-                                          Caption="The default width is 250.  When this property is set, the text will not wrap.  This is good for displaying list values." 
-                                          BalloonType="Information"
-                                          ShowCloseButton="{Binding ShowBalloonCloseButton}"/>
-            </StackPanel>
-            
+            <CheckBox Content="Auto Width" VerticalAlignment="Center" IsChecked="{Binding AutoWidth}"/>
+
             <Notification:HelpBalloon Margin="0,20,0,0" 
                                       Caption="{Binding HelpText}" 
                                       BalloonType="{Binding BalloonType}" 
                                       AutoWidth="{Binding AutoWidth}"
                                       MaxHeight="{Binding MaxHeight}"
+                                      MaxWidth="{Binding MaxWidth}"
+                                      Title="{Binding BalloonTitle}"
                                       ShowCloseButton="{Binding ShowBalloonCloseButton}" />
 
             <Label Style="{StaticResource SubHeader}">General Use</Label>

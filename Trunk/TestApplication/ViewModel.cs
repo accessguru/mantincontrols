@@ -23,6 +23,8 @@ namespace DemoApplication
         private double maxHeight;
         private bool autoWidth;
         private bool showBalloonCloseButton = true;
+        private string balloonTitle;
+        private double maxWidth;
 
         #endregion Members
 
@@ -41,6 +43,52 @@ namespace DemoApplication
         #endregion Constructor
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the maximum width.
+        /// </summary>
+        /// <value>
+        /// The maximum width.
+        /// </value>
+        public double MaxWidth
+        {
+            get
+            {
+                return this.maxWidth;
+            }
+
+            set
+            {
+                if (this.maxWidth != value)
+                {
+                    this.maxWidth = value;
+                    this.OnPropertyChanged(() => this.MaxWidth);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the balloon title.
+        /// </summary>
+        /// <value>
+        /// The balloon title.
+        /// </value>
+        public string BalloonTitle
+        {
+            get
+            {
+                return this.balloonTitle;
+            }
+
+            set
+            {
+                if (this.balloonTitle != value)
+                {
+                    this.balloonTitle = value;
+                    this.OnPropertyChanged(() => this.BalloonTitle);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether [show balloon close button].

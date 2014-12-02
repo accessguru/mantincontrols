@@ -27,8 +27,8 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="control">The control.</param>
         /// <param name="caption">The caption.</param>
         /// <param name="balloonType">Type of the balloon.</param>
-        public Balloon(Control control, string caption, BalloonType balloonType) 
-            : this(control, caption, balloonType, 0, false, true, true)
+        public Balloon(Control control, string caption, BalloonType balloonType)
+            : this(control, caption, balloonType, 0, 0, false, true, true)
         {
         }
 
@@ -41,7 +41,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="placeInCenter">if set to <c>true</c> [place in center].</param>
         /// <param name="showCloseButton">if set to <c>true</c> [show close button].</param>
         public Balloon(Control control, string caption, BalloonType balloonType, bool placeInCenter, bool showCloseButton)
-            : this(control, caption, balloonType, 0, false, placeInCenter, showCloseButton)
+            : this(control, caption, balloonType, 0, 0, false, placeInCenter, showCloseButton)
         {
         }
 
@@ -52,10 +52,20 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="caption">The caption.</param>
         /// <param name="balloonType">Type of the balloon.</param>
         /// <param name="maxHeight">The maximum height.</param>
+        /// <param name="maxWidth">The maximum width.</param>
         /// <param name="autoWidth">if set to <c>true</c> [automatic width].</param>
         /// <param name="placeInCenter">if set to <c>true</c> [place in center].</param>
         /// <param name="showCloseButton">if set to <c>true</c> [show close button].</param>
-        public Balloon(Control control, string caption, BalloonType balloonType, double maxHeight = 0, bool autoWidth = false, bool placeInCenter = true, bool showCloseButton = true)
+        /// <param name="title">The title.</param>
+        public Balloon(Control control,
+            string caption,
+            BalloonType balloonType,
+            double maxHeight = 0,
+            double maxWidth = 0,
+            bool autoWidth = false,
+            bool placeInCenter = true,
+            bool showCloseButton = true,
+            string title = null)
         {
             InitializeComponent();
             this.control = control;
@@ -101,7 +111,6 @@ namespace Mantin.Controls.Wpf.Notification
             if (autoWidth)
             {
                 this.SizeToContent = SizeToContent.WidthAndHeight;
-                this.textBlockCaption.TextWrapping = TextWrapping.NoWrap;
             }
 
             this.textBlockCaption.Text = caption;
@@ -109,6 +118,21 @@ namespace Mantin.Controls.Wpf.Notification
             if (maxHeight > 0)
             {
                 this.scrollViewerCaption.MaxHeight = maxHeight;
+            }
+
+            if (maxWidth > 0)
+            {
+                this.MaxWidth = maxWidth;
+            }
+
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                this.textBlockTitle.Text = title;
+            }
+            else
+            {
+                this.textBlockTitle.Visibility = Visibility.Collapsed;
+                this.lineTitle.Visibility = Visibility.Collapsed;
             }
 
             this.CalcPosition();
