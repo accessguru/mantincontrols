@@ -33,11 +33,11 @@
     <SupportUrl>https://toastspopuphelpballoon.codeplex.com/</SupportUrl>
     <ProductName>Mantin.Controls.Wpf.Notification</ProductName>
     <PublisherName>Mantin Enterprises, Inc.</PublisherName>
-    <MinimumRequiredVersion>2.6.1.0</MinimumRequiredVersion>
+    <MinimumRequiredVersion>2.7.0.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>2.6.1.0</ApplicationVersion>
+    <ApplicationVersion>2.7.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -94,6 +94,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>bin\Debug\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
