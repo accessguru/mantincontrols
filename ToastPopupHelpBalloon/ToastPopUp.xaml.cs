@@ -16,6 +16,9 @@ namespace Mantin.Controls.Wpf.Notification
         private readonly string name = typeof(ToastPopUp).Name;
         private volatile object lockObject = new object();
         private string title;
+        //private LinearGradientBrush background;
+        //private System.Windows.Media.Brush borderBrush;
+        //private System.Windows.Media.Brush fontColor;
 
         #endregion Members
 
@@ -197,6 +200,58 @@ namespace Mantin.Controls.Wpf.Notification
         #endregion Constructors
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the color of the font.
+        /// </summary>
+        /// <value>
+        /// The color of the font.
+        /// </value>
+        public System.Windows.Media.Brush FontColor
+        {
+            get
+            {
+                return this.TextBoxTitle.Foreground;
+            }
+
+            set
+            {
+                this.TextBoxTitle.Foreground = value;
+                this.TextBoxShortDescription.Foreground = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a brush that describes the border background of a control.
+        /// </summary>
+        public System.Windows.Media.Brush BorderBrush
+        {
+            get
+            {
+                return this.borderBackground.BorderBrush;
+            }
+
+            set
+            {
+                this.borderBackground.BorderBrush = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a brush that describes the background of a control.
+        /// </summary>
+        public LinearGradientBrush Background
+        {
+            get
+            {
+                return (LinearGradientBrush)this.borderBackground.Background;
+            }
+
+            set
+            {
+                this.borderBackground.Background = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the hyperlink object for raised event.  This object will be passed back when

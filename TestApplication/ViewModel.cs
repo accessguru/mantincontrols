@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
@@ -25,6 +26,10 @@ namespace DemoApplication
         private bool showBalloonCloseButton = true;
         private string balloonTitle;
         private double maxWidth;
+        private Color startColor;
+        private Color endColor;
+        private Color borderColor;
+        private Color fontColor;
 
         #endregion Members
 
@@ -38,11 +43,106 @@ namespace DemoApplication
             this.SelectedNotificationType = this.NotificationTypeList.First();
             this.SelectedBalloonType = this.BalloonTypeList.First();
             this.PopToastCommand = new RelayCommand(param => this.PopToastExecute(param));
+            this.StartColor = Color.FromRgb(253, 213, 167);
+            this.EndColor = Color.FromRgb(252, 231, 159);
+            this.BorderColor = Color.FromRgb(169, 169, 169);
+            this.FontColor = Color.FromRgb(0, 0, 0);
         }
-
+        
         #endregion Constructor
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the color of the font.
+        /// </summary>
+        /// <value>
+        /// The color of the font.
+        /// </value>
+        public Color FontColor
+        {
+            get
+            {
+                return this.fontColor;
+            }
+
+            set
+            {
+                if (this.fontColor != value)
+                {
+                    this.fontColor = value;
+                    this.OnPropertyChanged(() => this.FontColor);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the color of the border.
+        /// </summary>
+        /// <value>
+        /// The color of the border.
+        /// </value>
+        public Color BorderColor
+        {
+            get
+            {
+                return this.borderColor;
+            }
+
+            set
+            {
+                if (this.borderColor != value)
+                {
+                    this.borderColor = value;
+                    this.OnPropertyChanged(() => this.BorderColor);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the end color.
+        /// </summary>
+        /// <value>
+        /// The end color.
+        /// </value>
+        public Color EndColor
+        {
+            get
+            {
+                return this.endColor;
+            }
+            set
+            {
+                if (this.endColor != value)
+                {
+                    this.endColor = value;
+                    this.OnPropertyChanged(() => this.EndColor);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the start color.
+        /// </summary>
+        /// <value>
+        /// The start color.
+        /// </value>
+        public Color StartColor
+        {
+            get
+            {
+                return this.startColor;
+            }
+
+            set
+            {
+                if (this.startColor != value)
+                {
+                    this.startColor = value;
+                    this.OnPropertyChanged(() => this.StartColor);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the maximum width.
@@ -364,12 +464,19 @@ namespace DemoApplication
             App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(
                 () =>
                 {
+                   var background = new LinearGradientBrush(this.StartColor, this.EndColor, 90);
+                   var brush = new SolidColorBrush(this.BorderColor);
+                   var font = new SolidColorBrush(this.fontColor);
+
                    NotificationType notificationType = (NotificationType)System.Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
                    ToastPopUp toast;
                     switch (param.ToString())
                     {
                         case "1":
                             toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType);
+                            toast.Background = background;
+                            toast.BorderBrush = brush;
+                            toast.FontColor = font;
                             toast.HyperlinkClicked += this.ToastHyperlinkClicked;
                             toast.ClosedByUser += this.ToastClosedByUser;
                             toast.Show();
@@ -377,6 +484,9 @@ namespace DemoApplication
                             break;
                         case "2":
                             toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, DemoApplication.Properties.Resources.disk_blue);
+                            toast.Background = background;
+                            toast.BorderBrush = brush;
+                            toast.FontColor = font;
                             toast.HyperlinkClicked += this.ToastHyperlinkClicked;
                             toast.ClosedByUser += this.ToastClosedByUser;
                             toast.Show();
@@ -389,6 +499,9 @@ namespace DemoApplication
                             inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
 
                             toast = new ToastPopUp(this.Title, inlines,this.HyperlinkText, notificationType);
+                            toast.Background = background;
+                            toast.BorderBrush = brush;
+                            toast.FontColor = font;
                             toast.HyperlinkClicked += this.ToastHyperlinkClicked;
                             toast.ClosedByUser += this.ToastClosedByUser;
                             toast.Show();
