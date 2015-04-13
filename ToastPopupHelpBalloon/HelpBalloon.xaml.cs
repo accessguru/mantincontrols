@@ -20,7 +20,7 @@ namespace Mantin.Controls.Wpf.Notification
             DependencyProperty.Register("Title", typeof(string), typeof(HelpBalloon));
 
         public static readonly DependencyProperty BalloonTypeProperty =
-            DependencyProperty.Register("BalloonType", typeof(BalloonType), typeof(HelpBalloon), new PropertyMetadata(new PropertyChangedCallback(OnBalloonTypeChanged)));
+            DependencyProperty.Register("BalloonType", typeof(BalloonType), typeof(HelpBalloon), new PropertyMetadata(OnBalloonTypeChanged));
 
         public new static readonly DependencyProperty MaxHeightProperty =
             DependencyProperty.Register("MaxHeight", typeof(double), typeof(HelpBalloon));

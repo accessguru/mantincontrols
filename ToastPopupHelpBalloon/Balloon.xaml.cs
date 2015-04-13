@@ -12,11 +12,11 @@ namespace Mantin.Controls.Wpf.Notification
     {
         #region Members
 
-        private Control control;
-        private bool placeInCenter;
+        private readonly Control control;
+        private readonly bool placeInCenter;
 
         public static readonly DependencyProperty ShowCloseButtonProperty =
-            DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(Balloon), new PropertyMetadata(new PropertyChangedCallback(OnShowCloseButtonChanged)));
+            DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(Balloon), new PropertyMetadata(OnShowCloseButtonChanged));
 
         #endregion
 
@@ -106,7 +106,7 @@ namespace Mantin.Controls.Wpf.Notification
                 brush = this.FindResource("WarningGradient") as LinearGradientBrush;
             }
 
-            this.borderBalloon.SetValue(Control.BackgroundProperty, brush);
+            this.borderBalloon.SetValue(BackgroundProperty, brush);
 
             if (autoWidth)
             {
@@ -180,9 +180,9 @@ namespace Mantin.Controls.Wpf.Notification
                 double captionPointMargin = this.PathPointLeft.Margin.Left;
 
                 var screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
-                Point location = this.control.PointToScreen(new System.Windows.Point(0, 0));
+                Point location = this.control.PointToScreen(new Point(0, 0));
 
-                double leftPosition = 0;
+                double leftPosition;
 
                 if (this.placeInCenter)
                 {
@@ -272,11 +272,11 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
-        private void OwnerClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void OwnerClosing(object sender, CancelEventArgs e)
         {
             string name = typeof(Balloon).Name;
 
-            foreach (Window window in System.Windows.Application.Current.Windows)
+            foreach (Window window in Application.Current.Windows)
             {
                 string windowType = window.GetType().Name;
                 if (windowType.Equals(name))
