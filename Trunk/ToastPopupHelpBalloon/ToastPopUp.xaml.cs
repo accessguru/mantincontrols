@@ -16,9 +16,6 @@ namespace Mantin.Controls.Wpf.Notification
         private readonly string name = typeof(ToastPopUp).Name;
         private volatile object lockObject = new object();
         private string title;
-        //private LinearGradientBrush background;
-        //private System.Windows.Media.Brush borderBrush;
-        //private System.Windows.Media.Brush fontColor;
 
         #endregion Members
 
@@ -189,7 +186,6 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="title">The title.</param>
         private ToastPopUp(string title)
-            : base()
         {
             this.InitializeComponent();
             System.Windows.Application.Current.MainWindow.Closing += this.MainWindowClosing;
@@ -224,7 +220,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <summary>
         /// Gets or sets a brush that describes the border background of a control.
         /// </summary>
-        public System.Windows.Media.Brush BorderBrush
+        public new System.Windows.Media.Brush BorderBrush
         {
             get
             {
@@ -240,11 +236,11 @@ namespace Mantin.Controls.Wpf.Notification
         /// <summary>
         /// Gets or sets a brush that describes the background of a control.
         /// </summary>
-        public LinearGradientBrush Background
+        public new System.Windows.Media.Brush Background
         {
             get
             {
-                return (LinearGradientBrush)this.borderBackground.Background;
+                return this.borderBackground.Background;
             }
 
             set
@@ -269,7 +265,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <summary>
         /// Occurs when [closed by user].
         /// </summary>
-        public event EventHandler<System.EventArgs> ClosedByUser;
+        public event EventHandler<EventArgs> ClosedByUser;
 
         /// <summary>
         /// Occurs when [hyperlink clicked].
@@ -322,7 +318,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected virtual void OnClosedByUser(EventArgs e)
         {
-            EventHandler<System.EventArgs> onClosedByUser = ClosedByUser;
+            EventHandler<EventArgs> onClosedByUser = ClosedByUser;
             if (onClosedByUser != null)
             {
                 onClosedByUser(this, e);
@@ -349,7 +345,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void ButtonViewClick(object sender, RoutedEventArgs e)
         {
-            this.OnHyperlinkClicked(new HyperLinkEventArgs() { HyperlinkObjectForRaisedEvent = this.HyperlinkObjectForRaisedEvent });
+            this.OnHyperlinkClicked(new HyperLinkEventArgs { HyperlinkObjectForRaisedEvent = this.HyperlinkObjectForRaisedEvent });
         }
 
         /// <summary>
