@@ -15,8 +15,7 @@ namespace Mantin.Controls.Wpf.Notification
         private readonly Control control;
         private readonly bool placeInCenter;
 
-        public static readonly DependencyProperty ShowCloseButtonProperty =
-            DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(Balloon), new PropertyMetadata(OnShowCloseButtonChanged));
+        public static readonly DependencyProperty ShowCloseButtonProperty = DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(Balloon), new PropertyMetadata(OnShowCloseButtonChanged));
 
         #endregion
 
@@ -36,12 +35,38 @@ namespace Mantin.Controls.Wpf.Notification
         /// Initializes a new instance of the <see cref="Balloon" /> class.
         /// </summary>
         /// <param name="control">The control.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="caption">The caption.</param>
+        /// <param name="balloonType">Type of the balloon.</param>
+        public Balloon(Control control, string title, string caption, BalloonType balloonType)
+            : this(control, caption, balloonType, 0, 0, false, true, true, title)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Balloon" /> class.
+        /// </summary>
+        /// <param name="control">The control.</param>
         /// <param name="caption">The caption.</param>
         /// <param name="balloonType">Type of the balloon.</param>
         /// <param name="placeInCenter">if set to <c>true</c> [place in center].</param>
         /// <param name="showCloseButton">if set to <c>true</c> [show close button].</param>
         public Balloon(Control control, string caption, BalloonType balloonType, bool placeInCenter, bool showCloseButton)
             : this(control, caption, balloonType, 0, 0, false, placeInCenter, showCloseButton)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Balloon"/> class.
+        /// </summary>
+        /// <param name="control">The control.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="caption">The caption.</param>
+        /// <param name="balloonType">Type of the balloon.</param>
+        /// <param name="placeInCenter">if set to <c>true</c> [place in center].</param>
+        /// <param name="showCloseButton">if set to <c>true</c> [show close button].</param>
+        public Balloon(Control control, string title, string caption, BalloonType balloonType, bool placeInCenter, bool showCloseButton)
+            : this(control, caption, balloonType, 0, 0, false, placeInCenter, showCloseButton, title)
         {
         }
 
@@ -106,7 +131,7 @@ namespace Mantin.Controls.Wpf.Notification
                 brush = this.FindResource("WarningGradient") as LinearGradientBrush;
             }
 
-            this.borderBalloon.SetValue(BackgroundProperty, brush);
+            this.borderBalloon.SetValue(Control.BackgroundProperty, brush);
 
             if (autoWidth)
             {
@@ -156,7 +181,7 @@ namespace Mantin.Controls.Wpf.Notification
                 return (bool)GetValue(ShowCloseButtonProperty);
             }
 
-            set
+            private set
             {
                 this.SetValue(ShowCloseButtonProperty, value);
             }
