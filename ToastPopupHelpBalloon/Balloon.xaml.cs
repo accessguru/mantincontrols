@@ -96,6 +96,7 @@ namespace Mantin.Controls.Wpf.Notification
             this.control = control;
             this.placeInCenter = placeInCenter;
             this.ShowCloseButton = showCloseButton;
+            this.Owner = Application.Current.MainWindow;
 
             if (placeInCenter)
             {
@@ -192,10 +193,34 @@ namespace Mantin.Controls.Wpf.Notification
         #region Private Methods
 
         /// <summary>
+        /// Determines whether [is visible to user].
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">container</exception>
+        public bool IsVisibleToUser()
+        {
+            if (!this.control.IsVisible)
+            {
+                return false;
+            }
+
+            var container =(FrameworkElement)VisualTreeHelper.GetParent(this.control);
+            Rect bounds = this.control.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, this.control.RenderSize.Width, this.control.RenderSize.Height));
+            Rect rect = new Rect(0.0, 0.0, container.ActualWidth, container.ActualHeight);
+            return rect.IntersectsWith(bounds);
+        }
+
+        /// <summary>
         /// Calculates the position.
         /// </summary>
         private void CalcPosition()
         {
+            if (!this.IsVisibleToUser())
+            {
+                this.Close();
+                return;
+            }
+
             PresentationSource source = PresentationSource.FromVisual(this.control);
 
             if (source != null)
