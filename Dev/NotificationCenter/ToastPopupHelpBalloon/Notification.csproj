@@ -63,6 +63,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="NotificationCenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ToastPopUp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -76,6 +80,9 @@
     <Compile Include="BalloonType.cs" />
     <Compile Include="HyperLinkEventArgs.cs" />
     <Compile Include="ImagingExtension.cs" />
+    <Compile Include="NotificationCenter.xaml.cs">
+      <DependentUpon>NotificationCenter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NotificationType.cs" />
     <Compile Include="ToastPopUp.xaml.cs">
       <DependentUpon>ToastPopUp.xaml</DependentUpon>
@@ -131,6 +138,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\warning20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\media_rewind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\media_beginning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\media_end.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\media_fast_forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\navigate_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\navigate_down.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

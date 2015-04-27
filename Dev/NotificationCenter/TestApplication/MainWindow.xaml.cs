@@ -10,14 +10,16 @@ namespace DemoApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        Balloon balloon = null;
-        ViewModel viewModel = new ViewModel();
+        Balloon balloon;
+        readonly ViewModel viewModel = new ViewModel();
 
         public MainWindow()
         {
             InitializeComponent();
 
             this.DataContext = this.viewModel;
+            var navCenter = new NotificationCenter();
+            navCenter.Show();
         }
 
         /// <summary>
