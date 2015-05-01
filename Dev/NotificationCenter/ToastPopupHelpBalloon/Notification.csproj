@@ -74,6 +74,7 @@
     <Compile Include="Balloon.xaml.cs">
       <DependentUpon>Balloon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="HelpBalloon.xaml.cs">
       <DependentUpon>HelpBalloon.xaml</DependentUpon>
     </Compile>

@@ -18,8 +18,6 @@ namespace DemoApplication
             InitializeComponent();
 
             this.DataContext = this.viewModel;
-            var navCenter = new NotificationCenter();
-            navCenter.Show();
         }
 
         /// <summary>
@@ -34,6 +32,12 @@ namespace DemoApplication
                 this.balloon = new Balloon(this.textBoxGeneralUse, "You have moused over this textbox.", this.viewModel.BalloonType, false, this.viewModel.ShowBalloonCloseButton);
                 this.balloon.Show();
             }
+        }
+
+        private void ButtonPopToastNotificationCenterClick(object sender, RoutedEventArgs e)
+        {
+            ToastPopUp toast = this.viewModel.CreateToast(ToastType.Basic);
+            this.NotificationCenter.Add(toast);
         }
     }
 }

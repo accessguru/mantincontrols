@@ -123,6 +123,7 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="ObservableBase.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="ToastType.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

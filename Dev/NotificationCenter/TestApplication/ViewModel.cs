@@ -42,7 +42,7 @@ namespace DemoApplication
         {
             this.SelectedNotificationType = this.NotificationTypeList.First();
             this.SelectedBalloonType = this.BalloonTypeList.First();
-            this.PopToastCommand = new RelayCommand(param => this.PopToastExecute(param));
+            this.PopToastCommand = new RelayCommand<ToastType>(this.PopToastExecute);
             this.StartColor = Color.FromRgb(253, 213, 167);
             this.EndColor = Color.FromRgb(252, 231, 159);
             this.BorderColor = Color.FromRgb(169, 169, 169);
@@ -456,60 +456,71 @@ namespace DemoApplication
             get { return EnumMember.ConvertToList<BalloonType>(); }
         }
 
+        public ToastPopUp CreateToast(ToastType toastType)
+        {
+            var background = new LinearGradientBrush(this.StartColor, this.EndColor, 90);
+            var brush = new SolidColorBrush(this.BorderColor);
+            var font = new SolidColorBrush(this.fontColor);
+
+            NotificationType notificationType = (NotificationType) Enum.Parse(typeof (NotificationType), this.SelectedNotificationType.Value.ToString());
+            ToastPopUp toast = null;
+
+            switch (toastType)
+            {
+                case ToastType.Basic:
+                    toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType);
+                    toast.Background = background;
+                    toast.BorderBrush = brush;
+                    toast.FontColor = font;
+                    toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                    toast.ClosedByUser += this.ToastClosedByUser;
+
+                    break;
+
+                case ToastType.Image:
+                    toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, Properties.Resources.disk_blue);
+                    toast.Background = background;
+                    toast.BorderBrush = brush;
+                    toast.FontColor = font;
+                    toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                    toast.ClosedByUser += this.ToastClosedByUser;
+
+                    break;
+
+                case ToastType.Inlines:
+                    var inlines = new List<Inline>();
+                    inlines.Add(new Run
+                    {
+                        Text = this.Text
+                    });
+                    inlines.Add(new Run
+                    {
+                        Text = Environment.NewLine
+                    });
+                    inlines.Add(new Run("This text will be italic.")
+                    {
+                        FontStyle = FontStyles.Italic
+                    });
+
+                    toast = new ToastPopUp(this.Title, inlines, this.HyperlinkText, notificationType);
+                    toast.Background = background;
+                    toast.BorderBrush = brush;
+                    toast.FontColor = font;
+                    toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                    toast.ClosedByUser += this.ToastClosedByUser;
+
+                    break;
+            }
+
+            return toast;
+        }
+
         /// <summary>
         /// Pops the toast execute.
         /// </summary>
-        public void PopToastExecute(object param)
+        public void PopToastExecute(ToastType toastType)
         {
-            App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(
-                () =>
-                {
-                   var background = new LinearGradientBrush(this.StartColor, this.EndColor, 90);
-                   var brush = new SolidColorBrush(this.BorderColor);
-                   var font = new SolidColorBrush(this.fontColor);
-
-                   NotificationType notificationType = (NotificationType)System.Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
-                   ToastPopUp toast;
-                    switch (param.ToString())
-                    {
-                        case "1":
-                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType);
-                            toast.Background = background;
-                            toast.BorderBrush = brush;
-                            toast.FontColor = font;
-                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
-                            toast.ClosedByUser += this.ToastClosedByUser;
-                            toast.Show();
-
-                            break;
-                        case "2":
-                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, DemoApplication.Properties.Resources.disk_blue);
-                            toast.Background = background;
-                            toast.BorderBrush = brush;
-                            toast.FontColor = font;
-                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
-                            toast.ClosedByUser += this.ToastClosedByUser;
-                            toast.Show();
-
-                            break;
-                        case "3":
-                            var inlines = new List<Inline>();
-                            inlines.Add(new Run() { Text = this.Text });
-                            inlines.Add(new Run() { Text = Environment.NewLine });
-                            inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
-
-                            toast = new ToastPopUp(this.Title, inlines,this.HyperlinkText, notificationType);
-                            toast.Background = background;
-                            toast.BorderBrush = brush;
-                            toast.FontColor = font;
-                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
-                            toast.ClosedByUser += this.ToastClosedByUser;
-                            toast.Show();
-
-                            break;
-                    }
-
-                }));
+            Application.Current.Dispatcher.Invoke(new Action(() =>  this.CreateToast(toastType).Show()));
         }
 
         #endregion Public Methods
