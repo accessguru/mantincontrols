@@ -379,7 +379,7 @@ namespace DemoApplication
                     this.selectedBalloonType = value;
                     this.OnPropertyChanged(() => this.SelectedBalloonType);
 
-                    this.BalloonType = (BalloonType)System.Enum.Parse(typeof(BalloonType), value.Value.ToString());
+                    this.BalloonType = (BalloonType)Enum.Parse(typeof(BalloonType), value.Value.ToString());
                 }
             }
         }
@@ -440,10 +440,7 @@ namespace DemoApplication
         /// <value>
         /// The notification type list.
         /// </value>
-        public List<EnumMember> NotificationTypeList
-        {
-            get { return EnumMember.ConvertToList<NotificationType>(); }
-        }
+        public List<EnumMember> NotificationTypeList => EnumMember.ConvertToList<NotificationType>();
 
         /// <summary>
         /// Gets the balloon type list.
@@ -451,24 +448,21 @@ namespace DemoApplication
         /// <value>
         /// The balloon type list.
         /// </value>
-        public List<EnumMember> BalloonTypeList
-        {
-            get { return EnumMember.ConvertToList<BalloonType>(); }
-        }
+        public List<EnumMember> BalloonTypeList => EnumMember.ConvertToList<BalloonType>();
 
         /// <summary>
         /// Pops the toast execute.
         /// </summary>
         public void PopToastExecute(object param)
         {
-            App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(
+            Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(
                 () =>
                 {
                    var background = new LinearGradientBrush(this.StartColor, this.EndColor, 90);
                    var brush = new SolidColorBrush(this.BorderColor);
                    var font = new SolidColorBrush(this.fontColor);
 
-                   NotificationType notificationType = (NotificationType)System.Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
+                   var notificationType = (NotificationType)Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
                    ToastPopUp toast;
                     switch (param.ToString())
                     {
@@ -483,7 +477,7 @@ namespace DemoApplication
 
                             break;
                         case "2":
-                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, DemoApplication.Properties.Resources.disk_blue);
+                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, Properties.Resources.disk_blue);
                             toast.Background = background;
                             toast.BorderBrush = brush;
                             toast.FontColor = font;
@@ -494,8 +488,8 @@ namespace DemoApplication
                             break;
                         case "3":
                             var inlines = new List<Inline>();
-                            inlines.Add(new Run() { Text = this.Text });
-                            inlines.Add(new Run() { Text = Environment.NewLine });
+                            inlines.Add(new Run { Text = this.Text });
+                            inlines.Add(new Run { Text = Environment.NewLine });
                             inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
 
                             toast = new ToastPopUp(this.Title, inlines,this.HyperlinkText, notificationType);
@@ -523,7 +517,7 @@ namespace DemoApplication
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ToastHyperlinkClicked(object sender, EventArgs e)
         {
-            System.Windows.MessageBox.Show("Hyper link clicked.");
+            MessageBox.Show("Hyper link clicked.");
         }
 
         /// <summary>
@@ -533,7 +527,7 @@ namespace DemoApplication
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ToastClosedByUser(object sender, EventArgs e)
         {
-            System.Windows.MessageBox.Show("User closed the toast.");
+            MessageBox.Show("User closed the toast.");
         }
 
         #endregion Event Handlers
