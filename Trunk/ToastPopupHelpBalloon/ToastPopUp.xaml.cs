@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace Mantin.Controls.Wpf.Notification
@@ -473,14 +474,14 @@ namespace Mantin.Controls.Wpf.Notification
             {
                 Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
 
-                this.Left = SystemParameters.WorkArea.Width - this.ActualWidth;
-                double top = SystemParameters.WorkArea.Height - this.ActualHeight;
+                this.Left = workingArea.Width - this.ActualWidth;
+                double top = workingArea.Height - this.ActualHeight;
 
                 foreach (Window window in System.Windows.Application.Current.Windows)
                 {
                     string windowName = window.GetType().Name;
 
-                    if (windowName.Equals(this.name) && window != this)
+                    if (windowName.Equals(this.name) && !Equals(window, this))
                     {
                         window.Topmost = true;
 
