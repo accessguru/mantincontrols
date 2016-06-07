@@ -229,7 +229,6 @@ namespace Mantin.Controls.Wpf.Notification
                 // Compensate for the bubble point
                 double captionPointMargin = this.PathPointLeft.Margin.Left;
 
-                var screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
                 Point location = this.control.PointToScreen(new Point(0, 0));
 
                 double leftPosition;
@@ -252,8 +251,10 @@ namespace Mantin.Controls.Wpf.Notification
                     }
                 }
 
+                System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
+
                 // Check if the window is on the secondary screen.
-                if (((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + this.Width < screen.WorkingArea.Width)) ||
+                if ((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + this.Width < screen.WorkingArea.Width) ||
                     leftPosition >= 0 && leftPosition + this.Width < screen.WorkingArea.Width)
                 {
                     this.PathPointRight.Visibility = Visibility.Hidden;
