@@ -309,7 +309,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         public new void Show()
         {
-            var focusedElement = Keyboard.FocusedElement;
+            IInputElement focusedElement = Keyboard.FocusedElement;
 
             this.Topmost = true;
             base.Show();
