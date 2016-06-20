@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Forms;
@@ -227,6 +228,14 @@ namespace Mantin.Controls.Wpf.Notification
         #region Public Properties
 
         /// <summary>
+        /// Gets or sets the maximum toast to pop.  Setting to 0 will not limit the count.
+        /// </summary>
+        /// <value>
+        /// The maximum toast.
+        /// </value>
+        public byte MaxToast { get; set; }
+
+        /// <summary>
         /// Gets or sets the color of the font.
         /// </summary>
         /// <value>
@@ -310,6 +319,14 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         public new void Show()
         {
+            int toastCount = System.Windows.Application.Current.Windows.OfType<ToastPopUp>().Count();
+
+            if (this.MaxToast > 0 && toastCount > this.MaxToast)
+            {
+                this.Close();
+                return;
+            }
+
             IInputElement focusedElement = Keyboard.FocusedElement;
 
             this.Topmost = true;
