@@ -137,6 +137,7 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="ObservableBase.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="Status.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -182,6 +183,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\EnumComboBox\Trunk\EnumComboBox\EnumComboBox.csproj">
+      <Project>{ff67b03b-3d35-49cd-b287-41f7ece92722}</Project>
+      <Name>EnumComboBox</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ToastPopupHelpBalloon\Notification.csproj">
       <Project>{5966439c-a414-42f5-b58a-d6b161fa3b98}</Project>
       <Name>Notification</Name>
