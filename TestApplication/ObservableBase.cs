@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace DemoApplication
+namespace TestApplication
 {
     [Serializable]
     public abstract class ObservableBase : INotifyPropertyChanged

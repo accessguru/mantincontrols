@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using DemoApplication;
 
-namespace DemoApplication
+namespace TestApplication
 {
     public static class ExtensionMethods
     {

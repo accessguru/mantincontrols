@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 
-namespace DemoApplication
+namespace TestApplication
 {
     public class RelayCommand : ICommand
     {
@@ -74,4 +74,5 @@ namespace DemoApplication
         }
         #endregion
     }
+
 }
