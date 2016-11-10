@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Windows.Media;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -26,14 +23,6 @@ namespace DemoApplication
         private double maxHeight;
         private bool autoWidth;
         private bool showBalloonCloseButton = true;
-        private string balloonTitle;
-        private double maxWidth;
-        private Color startColor;
-        private Color endColor;
-        private Color borderColor;
-        private Color fontColor;
-        private byte maxToast;
-        private Status status;
 
         #endregion Members
 
@@ -46,186 +35,12 @@ namespace DemoApplication
         {
             this.SelectedNotificationType = this.NotificationTypeList.First();
             this.SelectedBalloonType = this.BalloonTypeList.First();
-            this.PopToastCommand = new RelayCommand(this.PopToastExecute);
-            this.StartColor = Color.FromRgb(253, 213, 167);
-            this.EndColor = Color.FromRgb(252, 231, 159);
-            this.BorderColor = Color.FromRgb(169, 169, 169);
-            this.FontColor = Color.FromRgb(0, 0, 0);
+            this.PopToastCommand = new RelayCommand(param => this.PopToastExecute(param));
         }
 
         #endregion Constructor
 
         #region Public Properties
-
-        public string EnumFile => 
-            @"public enum Status
-    {
-        [StringValue(""-- Select --"")]
-        None = 0,
-
-        Active = 1,
-
-        Inactive = 2,
-
-        [StringValue(""Pending Authorization"")]
-        PendingAuthorization = 3
-    }";
-
-        /// <summary>
-        /// Gets or sets the status.
-        /// </summary>
-        /// <value>
-        /// The status.
-        ///  </value>
-        public Status Status
-        {
-            get { return status; }
-            set
-            {
-                if (this.status != value)
-                {
-                    this.status = value;
-                    this.OnPropertyChanged(() => this.Status);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the color of the font.
-        /// </summary>
-        /// <value>
-        /// The color of the font.
-        /// </value>
-        public Color FontColor
-        {
-            get
-            {
-                return this.fontColor;
-            }
-
-            set
-            {
-                if (this.fontColor != value)
-                {
-                    this.fontColor = value;
-                    this.OnPropertyChanged(() => this.FontColor);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the color of the border.
-        /// </summary>
-        /// <value>
-        /// The color of the border.
-        /// </value>
-        public Color BorderColor
-        {
-            get
-            {
-                return this.borderColor;
-            }
-
-            set
-            {
-                if (this.borderColor != value)
-                {
-                    this.borderColor = value;
-                    this.OnPropertyChanged(() => this.BorderColor);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the end color.
-        /// </summary>
-        /// <value>
-        /// The end color.
-        /// </value>
-        public Color EndColor
-        {
-            get
-            {
-                return this.endColor;
-            }
-            set
-            {
-                if (this.endColor != value)
-                {
-                    this.endColor = value;
-                    this.OnPropertyChanged(() => this.EndColor);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the start color.
-        /// </summary>
-        /// <value>
-        /// The start color.
-        /// </value>
-        public Color StartColor
-        {
-            get
-            {
-                return this.startColor;
-            }
-
-            set
-            {
-                if (this.startColor != value)
-                {
-                    this.startColor = value;
-                    this.OnPropertyChanged(() => this.StartColor);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the maximum width.
-        /// </summary>
-        /// <value>
-        /// The maximum width.
-        /// </value>
-        public double MaxWidth
-        {
-            get
-            {
-                return this.maxWidth;
-            }
-
-            set
-            {
-                if (this.maxWidth != value)
-                {
-                    this.maxWidth = value;
-                    this.OnPropertyChanged(() => this.MaxWidth);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the balloon title.
-        /// </summary>
-        /// <value>
-        /// The balloon title.
-        /// </value>
-        public string BalloonTitle
-        {
-            get
-            {
-                return this.balloonTitle;
-            }
-
-            set
-            {
-                if (this.balloonTitle != value)
-                {
-                    this.balloonTitle = value;
-                    this.OnPropertyChanged(() => this.BalloonTitle);
-                }
-            }
-        }
 
         /// <summary>
         /// Gets or sets a value indicating whether [show balloon close button].
@@ -416,7 +231,7 @@ namespace DemoApplication
                     this.selectedBalloonType = value;
                     this.OnPropertyChanged(() => this.SelectedBalloonType);
 
-                    this.BalloonType = (BalloonType)Enum.Parse(typeof(BalloonType), value.Value.ToString());
+                    this.BalloonType = (BalloonType)System.Enum.Parse(typeof(BalloonType), value.Value.ToString());
                 }
             }
         }
@@ -467,28 +282,6 @@ namespace DemoApplication
             }
         }
 
-        /// <summary>
-        /// Gets or sets the maximum toast.
-        /// </summary>
-        /// <value>
-        /// The maximum toast.
-        /// </value>
-        public byte MaxToast
-        {
-            get
-            {
-                return this.maxToast;
-            }
-            set
-            {
-                if (this.maxToast != value)
-                {
-                    this.maxToast = value;
-                    this.OnPropertyChanged(() => this.MaxToast);
-                }
-            }
-        }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -499,7 +292,10 @@ namespace DemoApplication
         /// <value>
         /// The notification type list.
         /// </value>
-        public List<EnumMember> NotificationTypeList => EnumMember.ConvertToList<NotificationType>();
+        public List<EnumMember> NotificationTypeList
+        {
+            get { return EnumMember.ConvertToList<NotificationType>(); }
+        }
 
         /// <summary>
         /// Gets the balloon type list.
@@ -507,68 +303,51 @@ namespace DemoApplication
         /// <value>
         /// The balloon type list.
         /// </value>
-        public List<EnumMember> BalloonTypeList => EnumMember.ConvertToList<BalloonType>();
+        public List<EnumMember> BalloonTypeList
+        {
+            get { return EnumMember.ConvertToList<BalloonType>(); }
+        }
 
         /// <summary>
         /// Pops the toast execute.
         /// </summary>
         public void PopToastExecute(object param)
         {
-            Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(
+            App.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(
                 () =>
                 {
-                   var background = new LinearGradientBrush(this.StartColor, this.EndColor, 90);
-                   var brush = new SolidColorBrush(this.BorderColor);
-                   var font = new SolidColorBrush(this.fontColor);
-
-                   var notificationType = (NotificationType)Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
-                   ToastPopUp toast = null;
-
+                   NotificationType notificationType = (NotificationType)System.Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
+                   ToastPopUp toast;
                     switch (param.ToString())
                     {
                         case "1":
-                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType)
-                            {
-                                Background = background,
-                                BorderBrush = brush,
-                                FontColor = font,
-                                MaxToast = this.MaxToast
-                            };
+                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType);
+                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                            toast.ClosedByUser += this.ToastClosedByUser;
+                            toast.Show();
 
                             break;
                         case "2":
-                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, Properties.Resources.disk_blue)
-                            {
-                                Background = background,
-                                BorderBrush = brush,
-                                FontColor = font,
-                                MaxToast = this.MaxToast
-                            };
+                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, DemoApplication.Properties.Resources.disk_blue);
+                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                            toast.ClosedByUser += this.ToastClosedByUser;
+                            toast.Show();
 
                             break;
                         case "3":
                             var inlines = new List<Inline>();
-                            inlines.Add(new Run { Text = this.Text });
-                            inlines.Add(new Run { Text = Environment.NewLine });
+                            inlines.Add(new Run() { Text = this.Text });
+                            inlines.Add(new Run() { Text = Environment.NewLine });
                             inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
 
-                            toast = new ToastPopUp(this.Title, inlines, this.HyperlinkText, notificationType)
-                            {
-                                Background = background,
-                                BorderBrush = brush,
-                                FontColor = font,
-                                MaxToast = this.MaxToast
-                            };
+                            toast = new ToastPopUp(this.Title, inlines,this.HyperlinkText, notificationType);
+                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                            toast.ClosedByUser += this.ToastClosedByUser;
+                            toast.Show();
 
                             break;
-
-                        default:
-                            throw new ArgumentOutOfRangeException(nameof(param));
                     }
 
-                    toast.HyperlinkClicked += this.ToastHyperlinkClicked;
-                    toast.ClosedByUser += this.ToastClosedByUser;
-                    toast.Show();
                 }));
         }
 
@@ -583,7 +362,7 @@ namespace DemoApplication
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ToastHyperlinkClicked(object sender, EventArgs e)
         {
-            MessageBox.Show("Hyper link clicked.");
+            System.Windows.MessageBox.Show("Hyper link clicked.");
         }
 
         /// <summary>
@@ -593,7 +372,7 @@ namespace DemoApplication
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ToastClosedByUser(object sender, EventArgs e)
         {
-            MessageBox.Show("User closed the toast.");
+            System.Windows.MessageBox.Show("User closed the toast.");
         }
 
         #endregion Event Handlers

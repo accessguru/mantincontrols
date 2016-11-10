@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Height="90" Width="250" WindowStyle="None" 
         ResizeMode="NoResize" ShowInTaskbar="False"
-        ShowActivated="False"
         Topmost="True" IsTabStop="False" 
         OverridesDefaultStyle="False" 
         SizeToContent="Height"
@@ -67,7 +66,7 @@
                         Data="M10402.992,55.5381 L10284.783,3.2963597 0.7,54.9"
                         x:Name="PathPointRight">
                 </Path>
-            </Grid>
+            </Grid>            
 
             <Border Margin="5,-3,5,5" 
                     CornerRadius="7" Panel.ZIndex="100"
@@ -104,23 +103,16 @@
                            Cursor="Hand"
                            MouseDown="ImageCloseMouseDown"/>
 
-                    <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,5,5,5" >
-                        <TextBlock TextOptions.TextFormattingMode="Display"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   x:Name="textBlockTitle"
-                                   Text="This is the Title"/>
-                        <Line Stretch="Fill" Stroke="Black" X2="1" x:Name="lineTitle"/>
-
-                        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                      x:Name="scrollViewerCaption" >
-                            <TextBlock 
-                                TextWrapping="Wrap"                            
-                                TextOptions.TextFormattingMode="Display"
-                                x:Name="textBlockCaption"
-                                Text="This is the caption"/>
-                        </ScrollViewer>
-                    </StackPanel>
+                    <ScrollViewer Grid.Column="1" 
+                                  Margin="0,8,5,10" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  x:Name="scrollViewerCaption" >
+                        <TextBlock 
+                            TextWrapping="Wrap"                            
+                            TextOptions.TextFormattingMode="Display"
+                            x:Name="textBlockCaption"
+                            Text="This is the caption"/>
+                    </ScrollViewer>
                 </Grid>
             </Border>
         </StackPanel>
