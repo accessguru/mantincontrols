@@ -9,9 +9,7 @@
     
     <Grid RenderTransformOrigin="0,1" >
 		<Grid.Resources>
-			<LinearGradientBrush x:Key="GradientBackground"
-                                 EndPoint="0.504,1.5" 
-                                 StartPoint="0.504,0.03">
+			<LinearGradientBrush x:Key="GradientHeaderBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
 				<GradientStop Color="#FFFDD5A7" Offset="0"/>
 				<GradientStop Color="#FFFCE79F" Offset="0.567"/>
 			</LinearGradientBrush>
@@ -45,10 +43,7 @@
                 <Setter Property="FontSize" Value="13"/>
             </Style>
         </Grid.Resources>
-        <Border BorderThickness="2"
-                Background="{StaticResource GradientBackground}" 
-                x:Name="borderBackground"
-                BorderBrush="DarkGray" CornerRadius="7">
+        <Border BorderThickness="2" Background="{StaticResource GradientHeaderBackground}" BorderBrush="DarkGray" CornerRadius="7">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
