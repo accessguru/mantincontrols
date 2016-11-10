@@ -32,18 +32,18 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs12
 		SccProjectUniqueName0 = ToastPopupHelpBalloon\\Notification.csproj
-		SccProjectName0 = ToastPopupHelpBalloon
-		SccAuxPath0 = https://tfs.codeplex.com/tfs/tfs12
+		SccProjectName0 = ../../../../../Trunk/ToastPopupHelpBalloon
 		SccLocalPath0 = ToastPopupHelpBalloon
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName1 = TestApplication\\DemoApplication.csproj
-		SccProjectName1 = TestApplication
-		SccAuxPath1 = https://tfs.codeplex.com/tfs/tfs12
+		SccProjectName1 = ../../../../../Trunk/TestApplication
 		SccLocalPath1 = TestApplication
-		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = ..\\..\\EnumComboBox\\Trunk\\EnumComboBox\\EnumComboBox.csproj
+		SccProjectName3 = ../../
+		SccLocalPath3 = ..\\..\\EnumComboBox\\Trunk\\EnumComboBox
 	EndGlobalSection
 EndGlobal
