@@ -4,31 +4,33 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5966439C-A414-42F5-B58A-D6B161FA3B98}</ProjectGuid>
-    <OutputType>library</OutputType>
+    <ProjectGuid>{653867F1-5A9E-42E5-AFD9-D19066B40B3F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mantin.Controls.Wpf.Notification</RootNamespace>
-    <AssemblyName>Mantin.Controls.Wpf.Notification</AssemblyName>
+    <RootNamespace>TestApplication</RootNamespace>
+    <AssemblyName>TestApplication</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <ExpressionBlendVersion>12.0.50716.0</ExpressionBlendVersion>
+    <TargetFrameworkProfile />
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,7 +42,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -54,29 +55,27 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Balloon.xaml">
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="EnumExtension.cs" />
+    <Compile Include="EnumMember.cs" />
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="ObservableBase.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModel.cs" />
+    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="HelpBalloon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ToastPopUp.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="Balloon.xaml.cs">
-      <DependentUpon>Balloon.xaml</DependentUpon>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HelpBalloon.xaml.cs">
-      <DependentUpon>HelpBalloon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HyperLinkEventArgs.cs" />
-    <Compile Include="ImagingExtension.cs" />
-    <Compile Include="NotificationType.cs" />
-    <Compile Include="ToastPopUp.xaml.cs">
-      <DependentUpon>ToastPopUp.xaml</DependentUpon>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -104,25 +103,16 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\information.png" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\error20.png" />
+    <ProjectReference Include="..\ToastPopupHelpBalloon\Notification.csproj">
+      <Project>{5966439c-a414-42f5-b58a-d6b161fa3b98}</Project>
+      <Name>Notification</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\help.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\warning.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\error.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\delete24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\help20.png" />
+    <Resource Include="Resources\disk_blue.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

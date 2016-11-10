@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace Mantin.Controls.Wpf.Notification
@@ -101,6 +99,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="title">The title.</param>
         /// <param name="text">The text.</param>
         /// <param name="hyperlinkText">The hyperlink text.</param>
+        /// <param name="notificationType">Type of the notification.</param>
         /// <param name="imageSource">The image source.</param>
         /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
         public ToastPopUp(string title, string text, string hyperlinkText, Bitmap imageSource, object hyperlinkObjectForRaisedEvent = null)
@@ -112,46 +111,17 @@ namespace Mantin.Controls.Wpf.Notification
             this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
-        /// </summary>
-        /// <param name="title">The title.</param>
-        /// <param name="text">The text.</param>
-        /// <param name="hyperlinkText">The hyperlink text.</param>
-        /// <param name="imageSource">The image source.</param>
-        /// <param name="hyperlinkClick">The hyperlink click.</param>
-        public ToastPopUp(string title, string text, string hyperlinkText, ImageSource imageSource, Action hyperlinkClick)
-            : this(title)
-        {
-            this.TextBoxShortDescription.Text = text;
-            this.SetHyperLinkButton(hyperlinkText);
-            this.buttonView.Click += delegate { hyperlinkClick(); };
-            this.imageLeft.Source = imageSource;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
-        /// </summary>
-        /// <param name="title">The title.</param>
-        /// <param name="text">The text.</param>
-        /// <param name="hyperlinkText">The hyperlink text.</param>
-        /// <param name="imageSource">The image source.</param>
-        /// <param name="hyperlinkClick">The hyperlink click.</param>
-        public ToastPopUp(string title, string text, string hyperlinkText, Bitmap imageSource, Action hyperlinkClick)
-            : this(title, text, hyperlinkText, imageSource.ToBitmapImage(), hyperlinkClick)
-        {
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
         /// </summary>
         /// <param name="title">The title.</param>
         /// <param name="text">The text.</param>
+        /// <param name="notificationType">Type of the notification.</param>
         /// <param name="imageSource">The image source.</param>
-        public ToastPopUp(string title, string text, ImageSource imageSource)
-            : this(title)
+        public ToastPopUp(string title, string text, NotificationType notificationType, ImageSource imageSource)
+            : this(title, text, notificationType)
         {
-            this.TextBoxShortDescription.Text = text;
             this.imageLeft.Source = imageSource;
         }
 
@@ -160,9 +130,10 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="title">The title.</param>
         /// <param name="text">The text.</param>
+        /// <param name="notificationType">Type of the notification.</param>
         /// <param name="imageSource">The image source.</param>
-        public ToastPopUp(string title, string text, Bitmap imageSource)
-            : this(title, text, imageSource.ToBitmapImage())
+        public ToastPopUp(string title, string text, NotificationType notificationType, Bitmap imageSource)
+            : this(title, text, notificationType, imageSource.ToBitmapImage())
         {
         }
 
@@ -172,12 +143,12 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="title">The title.</param>
         /// <param name="text">The text.</param>
         /// <param name="hyperlinkText">The hyperlink text.</param>
+        /// <param name="notificationType">Type of the notification.</param>
         /// <param name="imageSource">The image source.</param>
         /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
-        public ToastPopUp(string title, string text, string hyperlinkText, ImageSource imageSource, object hyperlinkObjectForRaisedEvent = null)
-            : this(title)
+        public ToastPopUp(string title, string text, string hyperlinkText, NotificationType notificationType, ImageSource imageSource, object hyperlinkObjectForRaisedEvent = null)
+            : this(title, text, notificationType)
         {
-            this.TextBoxShortDescription.Text = text;
             this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
             this.SetHyperLinkButton(hyperlinkText);
             this.imageLeft.Source = imageSource;
@@ -207,7 +178,7 @@ namespace Mantin.Controls.Wpf.Notification
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(notificationType));
+                    throw new ArgumentOutOfRangeException("notificationType");
             }
         }
 
@@ -216,76 +187,16 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="title">The title.</param>
         private ToastPopUp(string title)
+            : base()
         {
             this.InitializeComponent();
             System.Windows.Application.Current.MainWindow.Closing += this.MainWindowClosing;
 
             this.TextBoxTitle.Text = title;
-            this.Title = title;
         }
         #endregion Constructors
 
         #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the maximum toast to pop.  Setting to 0 will not limit the count.
-        /// </summary>
-        /// <value>
-        /// The maximum toast.
-        /// </value>
-        public byte MaxToast { get; set; }
-
-        /// <summary>
-        /// Gets or sets the color of the font.
-        /// </summary>
-        /// <value>
-        /// The color of the font.
-        /// </value>
-        public System.Windows.Media.Brush FontColor
-        {
-            get
-            {
-                return this.TextBoxTitle.Foreground;
-            }
-
-            set
-            {
-                this.TextBoxTitle.Foreground = value;
-                this.TextBoxShortDescription.Foreground = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a brush that describes the border background of a control.
-        /// </summary>
-        public new System.Windows.Media.Brush BorderBrush
-        {
-            get
-            {
-                return this.borderBackground.BorderBrush;
-            }
-
-            set
-            {
-                this.borderBackground.BorderBrush = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a brush that describes the background of a control.
-        /// </summary>
-        public new System.Windows.Media.Brush Background
-        {
-            get
-            {
-                return this.borderBackground.Background;
-            }
-
-            set
-            {
-                this.borderBackground.Background = value;
-            }
-        }
 
         /// <summary>
         /// Gets or sets the hyperlink object for raised event.  This object will be passed back when
@@ -303,7 +214,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <summary>
         /// Occurs when [closed by user].
         /// </summary>
-        public event EventHandler<EventArgs> ClosedByUser;
+        public event EventHandler<System.EventArgs> ClosedByUser;
 
         /// <summary>
         /// Occurs when [hyperlink clicked].
@@ -319,30 +230,12 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         public new void Show()
         {
-            int toastCount = System.Windows.Application.Current.Windows.OfType<ToastPopUp>().Count();
-
-            if (this.MaxToast > 0 && toastCount > this.MaxToast)
-            {
-                this.Close();
-                return;
-            }
-
-            IInputElement focusedElement = Keyboard.FocusedElement;
-
             this.Topmost = true;
             base.Show();
 
             this.Owner = System.Windows.Application.Current.MainWindow;
             this.Closed += this.NotificationWindowClosed;
-            this.AdjustWindows();
-
-            if (focusedElement != null)
-            {
-                // Restore keyboard focus to the original element that had focus. That way if someone
-                // was typing into a control we don't steal keyboard focus away from that control.
-                focusedElement.Focusable = true;
-                Keyboard.Focus(focusedElement);
-            }
+            AdjustWindows();
         }
 
         /// <summary>
@@ -364,7 +257,11 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected virtual void OnClosedByUser(EventArgs e)
         {
-            ClosedByUser?.Invoke(this, e);
+            EventHandler<System.EventArgs> onClosedByUser = ClosedByUser;
+            if (onClosedByUser != null)
+            {
+                onClosedByUser(this, e);
+            }
         }
 
         /// <summary>
@@ -373,7 +270,11 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected virtual void OnHyperlinkClicked(HyperLinkEventArgs e)
         {
-            HyperlinkClicked?.Invoke(this, e);
+            EventHandler<HyperLinkEventArgs> onHyperlinkClicked = HyperlinkClicked;
+            if (onHyperlinkClicked != null)
+            {
+                onHyperlinkClicked(this, e);
+            }
         }
 
         /// <summary>
@@ -383,7 +284,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void ButtonViewClick(object sender, RoutedEventArgs e)
         {
-            this.OnHyperlinkClicked(new HyperLinkEventArgs { HyperlinkObjectForRaisedEvent = this.HyperlinkObjectForRaisedEvent });
+            this.OnHyperlinkClicked(new HyperLinkEventArgs() { HyperlinkObjectForRaisedEvent = this.HyperlinkObjectForRaisedEvent });
         }
 
         /// <summary>
@@ -472,7 +373,7 @@ namespace Mantin.Controls.Wpf.Notification
                 string windowName = window.GetType().Name;
 
                 if (windowName.Equals(this.name) &&
-                    !Equals(window, this) &&
+                    window != this &&
                     left == Screen.PrimaryScreen.WorkingArea.Width - this.Width)
                 {
                     return true;
@@ -491,14 +392,14 @@ namespace Mantin.Controls.Wpf.Notification
             {
                 Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
 
-                this.Left = workingArea.Width - this.ActualWidth;
-                double top = workingArea.Height - this.ActualHeight;
+                this.Left = workingArea.Right - this.ActualWidth;
+                double top = workingArea.Bottom - this.ActualHeight;
 
                 foreach (Window window in System.Windows.Application.Current.Windows)
                 {
                     string windowName = window.GetType().Name;
 
-                    if (windowName.Equals(this.name) && !Equals(window, this))
+                    if (windowName.Equals(this.name) && window != this)
                     {
                         window.Topmost = true;
 
