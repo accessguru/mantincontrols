@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Height="90" Width="250" WindowStyle="None" 
         ResizeMode="NoResize" ShowInTaskbar="False"
-        ShowActivated="False"
         Topmost="True" IsTabStop="False" 
         OverridesDefaultStyle="False" 
         SizeToContent="Height"
