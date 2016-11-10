@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Markup;
 
-namespace DemoApplication
+namespace TestApplication
 {
     public class EnumExtension : MarkupExtension
     {
