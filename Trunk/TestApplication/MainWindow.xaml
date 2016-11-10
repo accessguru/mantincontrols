@@ -4,13 +4,16 @@
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     xmlns:notification="clr-namespace:Mantin.Controls.Wpf.Notification;assembly=Mantin.Controls.Wpf.Notification"
     xmlns:demoApplication="clr-namespace:DemoApplication"
+    xmlns:enumComboBox="clr-namespace:Mantin.Controls.Wpf.EnumComboBox;assembly=Mantin.Controls.Wpf.EnumComboBox"
     x:Class="DemoApplication.MainWindow"
-    Title="Toast Popup/Help Balloon Sample Application" SizeToContent="Height" Width="525" WindowStartupLocation="CenterScreen"
+    Title="Toast Popup/Help Balloon Sample Application" Height="600" Width="525" WindowStartupLocation="CenterScreen"
     Background="LightGray" ResizeMode="NoResize" Icon="Resources/toast.ico">
     <Window.DataContext>
         <demoApplication:ViewModel/>
     </Window.DataContext>
-    <Grid>
+    <TabControl>
+        <TabItem Header="Toast Popup/Help Balloon">
+                <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
@@ -148,4 +151,21 @@
         <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="-133,276,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
     </Grid>
+        </TabItem>
+        <TabItem Header="EnumComboBox">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0">Enum bound to a ComboBox</Label>
+                <enumComboBox:EnumComboBox EnumType="{x:Type demoApplication:Status}" SelectedValue="{Binding Status}" Grid.Row="1" Margin="4"/>
+                <Border Grid.Row="2" Margin="5" BorderThickness="1" BorderBrush="Gray">
+                    <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding EnumFile}" />
+                </Border>
+            </Grid>
+        </TabItem>
+    </TabControl>
+
 </Window>

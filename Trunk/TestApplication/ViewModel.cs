@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Media;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -31,6 +33,7 @@ namespace DemoApplication
         private Color borderColor;
         private Color fontColor;
         private byte maxToast;
+        private Status status;
 
         #endregion Members
 
@@ -49,10 +52,43 @@ namespace DemoApplication
             this.BorderColor = Color.FromRgb(169, 169, 169);
             this.FontColor = Color.FromRgb(0, 0, 0);
         }
-        
+
         #endregion Constructor
 
         #region Public Properties
+
+        public string EnumFile => 
+            @"public enum Status
+    {
+        [StringValue(""-- Select --"")]
+        None = 0,
+
+        Active = 1,
+
+        Inactive = 2,
+
+        [StringValue(""Pending Authorization"")]
+        PendingAuthorization = 3
+    }";
+
+        /// <summary>
+        /// Gets or sets the status.
+        /// </summary>
+        /// <value>
+        /// The status.
+        ///  </value>
+        public Status Status
+        {
+            get { return status; }
+            set
+            {
+                if (this.status != value)
+                {
+                    this.status = value;
+                    this.OnPropertyChanged(() => this.Status);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the color of the font.
