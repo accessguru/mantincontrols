@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Height="90" Width="250" WindowStyle="None" 
         ResizeMode="NoResize" ShowInTaskbar="False"
-        ShowActivated="False"
         Topmost="True" IsTabStop="False" 
         OverridesDefaultStyle="False" 
         SizeToContent="Height"
@@ -24,14 +23,6 @@
             </LinearGradientBrush.RelativeTransform>
             <GradientStop Color="#FFFDFDFD" Offset=".2"/>
             <GradientStop Color="#FF88CEFB" Offset=".8"/>
-        </LinearGradientBrush>
-
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" x:Key="WarningGradient">
-            <LinearGradientBrush.RelativeTransform>
-                <RotateTransform Angle="90" CenterX="0.7" CenterY="0.7" />
-            </LinearGradientBrush.RelativeTransform>
-            <GradientStop Color="#FFFDFDFD" Offset=".2"/>
-            <GradientStop Color="#FFF7FB88" Offset=".8"/>
         </LinearGradientBrush>
     </Window.Resources>
     <Grid RenderTransformOrigin="0,1" >
@@ -81,7 +72,6 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <Image Grid.Column="0" 
@@ -92,35 +82,16 @@
                            x:Name="imageType"
                            Source="Resources/information.png" />
 
-                    <Image Source="Resources/delete24.png" 
-                           x:Name="imageClose"
-                           ToolTip="Close"
-                           VerticalAlignment="Top"
-                           Grid.Column="2" 
-                           Width="16"
-                           Height="16"
-                           Margin="0,5,5,5"
-                           Grid.Row="1" 
-                           Cursor="Hand"
-                           MouseDown="ImageCloseMouseDown"/>
-
-                    <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,5,5,5" >
-                        <TextBlock TextOptions.TextFormattingMode="Display"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   x:Name="textBlockTitle"
-                                   Text="This is the Title"/>
-                        <Line Stretch="Fill" Stroke="Black" X2="1" x:Name="lineTitle"/>
-
-                        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                      x:Name="scrollViewerCaption" >
-                            <TextBlock 
-                                TextWrapping="Wrap"                            
-                                TextOptions.TextFormattingMode="Display"
-                                x:Name="textBlockCaption"
-                                Text="This is the caption"/>
-                        </ScrollViewer>
-                    </StackPanel>
+                    <ScrollViewer Grid.Column="1" 
+                                  Margin="0,10,10,10" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  x:Name="scrollViewerCaption" >
+                        <TextBlock 
+                            TextWrapping="Wrap"                            
+                            TextOptions.TextFormattingMode="Display"
+                            x:Name="textBlockCaption"
+                            Text="This is the caption"/>
+                    </ScrollViewer>
                 </Grid>
             </Border>
         </StackPanel>
