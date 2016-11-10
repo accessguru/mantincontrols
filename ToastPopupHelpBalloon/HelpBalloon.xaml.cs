@@ -16,23 +16,11 @@ namespace Mantin.Controls.Wpf.Notification
         public static readonly DependencyProperty CaptionProperty =
             DependencyProperty.Register("Caption", typeof(string), typeof(HelpBalloon));
 
-        public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(HelpBalloon));
-
         public static readonly DependencyProperty BalloonTypeProperty =
-            DependencyProperty.Register("BalloonType", typeof(BalloonType), typeof(HelpBalloon), new PropertyMetadata(OnBalloonTypeChanged));
+            DependencyProperty.Register("BalloonType", typeof(BalloonType), typeof(HelpBalloon), new PropertyMetadata(new PropertyChangedCallback(OnBalloonTypeChanged)));
 
-        public new static readonly DependencyProperty MaxHeightProperty =
+        public static readonly DependencyProperty MaxHeightProperty =
             DependencyProperty.Register("MaxHeight", typeof(double), typeof(HelpBalloon));
-
-        public new static readonly DependencyProperty MaxWidthProperty =
-            DependencyProperty.Register("MaxWidth", typeof(double), typeof(HelpBalloon));
-
-        public static readonly DependencyProperty AutoWidthProperty =
-            DependencyProperty.Register("AutoWidth", typeof(bool), typeof(HelpBalloon));
-
-        public static readonly DependencyProperty ShowCloseButtonProperty =
-            DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(HelpBalloon));
 
         #endregion
 
@@ -44,7 +32,6 @@ namespace Mantin.Controls.Wpf.Notification
         public HelpBalloon()
         {
             InitializeComponent();
-            this.ShowCloseButton = true;
         }
 
         #endregion
@@ -52,30 +39,10 @@ namespace Mantin.Controls.Wpf.Notification
         #region Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether [show close button].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [show close button]; otherwise, <c>false</c>.
-        /// </value>
-        [Description("Sets whether the Help Balloon's close button will be visible."), Category("Common Properties")]
-        public bool ShowCloseButton
-        {
-            get
-            {
-                return (bool)GetValue(ShowCloseButtonProperty);
-            }
-
-            set
-            {
-                this.SetValue(ShowCloseButtonProperty, value);
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the maximum height constraint of the element.
         /// </summary>
         [Description("The maximum height of the Balloon caption."), Category("Common Properties")]
-        public new double MaxHeight
+        public double MaxHeight
         {
             get
             {
@@ -85,40 +52,6 @@ namespace Mantin.Controls.Wpf.Notification
             set
             {
                 this.SetValue(MaxHeightProperty, value);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the maximum width constraint of the element.
-        /// </summary>
-        [Description("The maximum width of the Balloon caption."), Category("Common Properties")]
-        public new double MaxWidth
-        {
-            get
-            {
-                return (double)GetValue(MaxWidthProperty);
-            }
-
-            set
-            {
-                this.SetValue(MaxWidthProperty, value);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the width of the element.
-        /// </summary>
-        [Description("Sets whether the Help Balloon's width will be auto set."), Category("Common Properties")]
-        public bool AutoWidth
-        {
-            get
-            {
-                return (bool)GetValue(AutoWidthProperty);
-            }
-
-            set
-            {
-                this.SetValue(AutoWidthProperty, value);
             }
         }
 
@@ -143,26 +76,6 @@ namespace Mantin.Controls.Wpf.Notification
         }
 
         /// <summary>
-        /// Gets or sets the title.
-        /// </summary>
-        /// <value>
-        /// The title.
-        /// </value>
-        [Description("The title displayed in the Help Balloon."), Category("Common Properties")]
-        public string Title
-        {
-            get
-            {
-                return (string)GetValue(TitleProperty);
-            }
-
-            set
-            {
-                this.SetValue(TitleProperty, value);
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the type of the balloon.
         /// </summary>
         /// <value>
@@ -182,7 +95,7 @@ namespace Mantin.Controls.Wpf.Notification
             }
         }
 
-        #endregion
+        #endregion 
 
         #region Event Handlers
 
@@ -195,19 +108,13 @@ namespace Mantin.Controls.Wpf.Notification
         {
             HelpBalloon helpBalloon = (HelpBalloon)d;
 
-            switch (helpBalloon.BalloonType)
+            if (helpBalloon.BalloonType == BalloonType.Help)
             {
-                case BalloonType.Help:
-                    helpBalloon.imageControl.Source = Properties.Resources.help20.ToBitmapImage();
-                    break;
-                case BalloonType.Information:
-                    helpBalloon.imageControl.Source = Properties.Resources.information20.ToBitmapImage();
-                    break;
-                case BalloonType.Warning:
-                    helpBalloon.imageControl.Source = Properties.Resources.warning20.ToBitmapImage();
-                    break;
-                default:
-                    throw new InvalidOperationException("unsupported BalloonType");
+                helpBalloon.imageControl.Source = Properties.Resources.help20.ToBitmapImage();
+            }
+            else
+            {
+                helpBalloon.imageControl.Source = Properties.Resources.information20.ToBitmapImage();
             }
         }
 
@@ -220,7 +127,7 @@ namespace Mantin.Controls.Wpf.Notification
         {
             if (balloon == null)
             {
-                balloon = new Balloon(this, this.Caption, this.BalloonType, this.MaxHeight, this.MaxWidth, this.AutoWidth, true, this.ShowCloseButton, this.Title);
+                balloon = new Balloon(this, this.Caption, this.BalloonType, this.MaxHeight);
                 balloon.Closed += this.BalloonClosed;
                 balloon.Show();
             }
