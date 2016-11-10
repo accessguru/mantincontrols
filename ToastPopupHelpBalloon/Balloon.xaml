@@ -3,45 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Height="90" Width="250" WindowStyle="None" 
         ResizeMode="NoResize" ShowInTaskbar="False"
-        ShowActivated="False"
         Topmost="True" IsTabStop="False" 
         OverridesDefaultStyle="False" 
         SizeToContent="Height"
         AllowsTransparency="True" 
         Background="Transparent" >
-    <Window.Resources>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" x:Key="HelpGradient">
-            <LinearGradientBrush.RelativeTransform>
-                <RotateTransform Angle="90" CenterX="0.7" CenterY="0.7" />
-            </LinearGradientBrush.RelativeTransform>
-            <GradientStop Color="#FFFDFDFD" Offset=".2"/>
-            <GradientStop Color="#FFB6FB88" Offset=".8"/>
-        </LinearGradientBrush>
-
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" x:Key="InfoGradient">
-            <LinearGradientBrush.RelativeTransform>
-                <RotateTransform Angle="90" CenterX="0.7" CenterY="0.7" />
-            </LinearGradientBrush.RelativeTransform>
-            <GradientStop Color="#FFFDFDFD" Offset=".2"/>
-            <GradientStop Color="#FF88CEFB" Offset=".8"/>
-        </LinearGradientBrush>
-
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" x:Key="WarningGradient">
-            <LinearGradientBrush.RelativeTransform>
-                <RotateTransform Angle="90" CenterX="0.7" CenterY="0.7" />
-            </LinearGradientBrush.RelativeTransform>
-            <GradientStop Color="#FFFDFDFD" Offset=".2"/>
-            <GradientStop Color="#FFF7FB88" Offset=".8"/>
-        </LinearGradientBrush>
-    </Window.Resources>
-    <Grid RenderTransformOrigin="0,1" >
+    <Grid RenderTransformOrigin="0,1" >        
         <StackPanel Orientation="Vertical">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.Resources>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Resources>
                     <Style TargetType="Path">
                         <Setter Property="Fill" Value="#fdfdfd"/>
                         <Setter Property="Stretch" Value="Fill"/>
@@ -55,25 +25,32 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-                </Grid.Resources>
-                <Path Grid.Column="0"
-                        HorizontalAlignment="Left"  
-                        Margin="15,3,0,0" 
-                        Data="M10402.99154,55.5381L10.9919,0.64 0.7,54.9"
-                        x:Name="PathPointLeft"/>
-                <Path Grid.Column="1"
-                        HorizontalAlignment="Right"
-                        Margin="0,3,15,0"
-                        Data="M10402.992,55.5381 L10284.783,3.2963597 0.7,54.9"
-                        x:Name="PathPointRight">
+                </StackPanel.Resources>
+                <Path  
+                  HorizontalAlignment="Left"  
+                  Margin="15,3,0,0" 
+                    Data="M10402.99154,55.5381L10.9919,0.64 0.7,54.9"
+                  x:Name="PathPointLeft"/>
+                <Path  
+                    HorizontalAlignment="Right"  
+                    Margin="175,3,0,0"
+                    Data="M10402.992,55.5381 L10284.783,3.2963597 0.7,54.9"
+                    x:Name="PathPointRight">
                 </Path>
-            </Grid>
-
+            </StackPanel>
+            
             <Border Margin="5,-3,5,5" 
                     CornerRadius="7" Panel.ZIndex="100"
-                    Background="{StaticResource InfoGradient}"
-                    x:Name="borderBalloon"
                     VerticalAlignment="Top">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <RotateTransform Angle="90" CenterX="0.7" CenterY="0.7" />
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FFFDFDFD" Offset=".2"/>
+                        <GradientStop Color="#FFB6FB88" Offset=".8"/>
+                    </LinearGradientBrush>
+                </Border.Background>
                 <Border.Effect>
                     <DropShadowEffect Color="#FF757575" Opacity=".7"/>
                 </Border.Effect>
@@ -81,46 +58,20 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <Image Grid.Column="0" 
                            Width="35" 
                            Margin="5"
-                           VerticalAlignment="Top" 
-                           Height="35" 
-                           x:Name="imageType"
-                           Source="Resources/information.png" />
+                           VerticalAlignment="Top" Height="35" 
+                           Source="Resources/help.png" />
 
-                    <Image Source="Resources/delete24.png" 
-                           x:Name="imageClose"
-                           ToolTip="Close"
-                           VerticalAlignment="Top"
-                           Grid.Column="2" 
-                           Width="16"
-                           Height="16"
-                           Margin="0,5,5,5"
-                           Grid.Row="1" 
-                           Cursor="Hand"
-                           MouseDown="ImageCloseMouseDown"/>
-
-                    <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0,5,5,5" >
-                        <TextBlock TextOptions.TextFormattingMode="Display"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   x:Name="textBlockTitle"
-                                   Text="This is the Title"/>
-                        <Line Stretch="Fill" Stroke="Black" X2="1" x:Name="lineTitle"/>
-
-                        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                      x:Name="scrollViewerCaption" >
-                            <TextBlock 
-                                TextWrapping="Wrap"                            
-                                TextOptions.TextFormattingMode="Display"
-                                x:Name="textBlockCaption"
-                                Text="This is the caption"/>
-                        </ScrollViewer>
-                    </StackPanel>
+                    <TextBlock Grid.Column="1" 
+                               TextWrapping="Wrap"
+                               Margin="0,10,10,10" 
+                               TextOptions.TextFormattingMode="Display"
+                               x:Name="textBlockCaption"
+                               Text="This is the caption"/>
                 </Grid>
             </Border>
         </StackPanel>
