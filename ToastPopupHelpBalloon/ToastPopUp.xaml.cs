@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace Mantin.Controls.Wpf.Notification
@@ -228,14 +226,6 @@ namespace Mantin.Controls.Wpf.Notification
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the maximum toast to pop.  Setting to 0 will not limit the count.
-        /// </summary>
-        /// <value>
-        /// The maximum toast.
-        /// </value>
-        public byte MaxToast { get; set; }
-
-        /// <summary>
         /// Gets or sets the color of the font.
         /// </summary>
         /// <value>
@@ -319,14 +309,6 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         public new void Show()
         {
-            int toastCount = System.Windows.Application.Current.Windows.OfType<ToastPopUp>().Count();
-
-            if (this.MaxToast > 0 && toastCount > this.MaxToast)
-            {
-                this.Close();
-                return;
-            }
-
             IInputElement focusedElement = Keyboard.FocusedElement;
 
             this.Topmost = true;
@@ -491,14 +473,14 @@ namespace Mantin.Controls.Wpf.Notification
             {
                 Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
 
-                this.Left = workingArea.Width - this.ActualWidth;
-                double top = workingArea.Height - this.ActualHeight;
+                this.Left = SystemParameters.WorkArea.Width - this.ActualWidth;
+                double top = SystemParameters.WorkArea.Height - this.ActualHeight;
 
                 foreach (Window window in System.Windows.Application.Current.Windows)
                 {
                     string windowName = window.GetType().Name;
 
-                    if (windowName.Equals(this.name) && !Equals(window, this))
+                    if (windowName.Equals(this.name) && window != this)
                     {
                         window.Topmost = true;
 

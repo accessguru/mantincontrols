@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Media;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -32,8 +30,6 @@ namespace DemoApplication
         private Color endColor;
         private Color borderColor;
         private Color fontColor;
-        private byte maxToast;
-        private Status status;
 
         #endregion Members
 
@@ -46,49 +42,16 @@ namespace DemoApplication
         {
             this.SelectedNotificationType = this.NotificationTypeList.First();
             this.SelectedBalloonType = this.BalloonTypeList.First();
-            this.PopToastCommand = new RelayCommand(this.PopToastExecute);
+            this.PopToastCommand = new RelayCommand(param => this.PopToastExecute(param));
             this.StartColor = Color.FromRgb(253, 213, 167);
             this.EndColor = Color.FromRgb(252, 231, 159);
             this.BorderColor = Color.FromRgb(169, 169, 169);
             this.FontColor = Color.FromRgb(0, 0, 0);
         }
-
+        
         #endregion Constructor
 
         #region Public Properties
-
-        public string EnumFile => 
-            @"public enum Status
-    {
-        [StringValue(""-- Select --"")]
-        None = 0,
-
-        Active = 1,
-
-        Inactive = 2,
-
-        [StringValue(""Pending Authorization"")]
-        PendingAuthorization = 3
-    }";
-
-        /// <summary>
-        /// Gets or sets the status.
-        /// </summary>
-        /// <value>
-        /// The status.
-        ///  </value>
-        public Status Status
-        {
-            get { return status; }
-            set
-            {
-                if (this.status != value)
-                {
-                    this.status = value;
-                    this.OnPropertyChanged(() => this.Status);
-                }
-            }
-        }
 
         /// <summary>
         /// Gets or sets the color of the font.
@@ -467,28 +430,6 @@ namespace DemoApplication
             }
         }
 
-        /// <summary>
-        /// Gets or sets the maximum toast.
-        /// </summary>
-        /// <value>
-        /// The maximum toast.
-        /// </value>
-        public byte MaxToast
-        {
-            get
-            {
-                return this.maxToast;
-            }
-            set
-            {
-                if (this.maxToast != value)
-                {
-                    this.maxToast = value;
-                    this.OnPropertyChanged(() => this.MaxToast);
-                }
-            }
-        }
-
         #endregion Public Properties
 
         #region Public Methods
@@ -522,28 +463,27 @@ namespace DemoApplication
                    var font = new SolidColorBrush(this.fontColor);
 
                    var notificationType = (NotificationType)Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
-                   ToastPopUp toast = null;
-
+                   ToastPopUp toast;
                     switch (param.ToString())
                     {
                         case "1":
-                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType)
-                            {
-                                Background = background,
-                                BorderBrush = brush,
-                                FontColor = font,
-                                MaxToast = this.MaxToast
-                            };
+                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType);
+                            toast.Background = background;
+                            toast.BorderBrush = brush;
+                            toast.FontColor = font;
+                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                            toast.ClosedByUser += this.ToastClosedByUser;
+                            toast.Show();
 
                             break;
                         case "2":
-                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, Properties.Resources.disk_blue)
-                            {
-                                Background = background,
-                                BorderBrush = brush,
-                                FontColor = font,
-                                MaxToast = this.MaxToast
-                            };
+                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, Properties.Resources.disk_blue);
+                            toast.Background = background;
+                            toast.BorderBrush = brush;
+                            toast.FontColor = font;
+                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                            toast.ClosedByUser += this.ToastClosedByUser;
+                            toast.Show();
 
                             break;
                         case "3":
@@ -552,23 +492,17 @@ namespace DemoApplication
                             inlines.Add(new Run { Text = Environment.NewLine });
                             inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
 
-                            toast = new ToastPopUp(this.Title, inlines, this.HyperlinkText, notificationType)
-                            {
-                                Background = background,
-                                BorderBrush = brush,
-                                FontColor = font,
-                                MaxToast = this.MaxToast
-                            };
+                            toast = new ToastPopUp(this.Title, inlines,this.HyperlinkText, notificationType);
+                            toast.Background = background;
+                            toast.BorderBrush = brush;
+                            toast.FontColor = font;
+                            toast.HyperlinkClicked += this.ToastHyperlinkClicked;
+                            toast.ClosedByUser += this.ToastClosedByUser;
+                            toast.Show();
 
                             break;
-
-                        default:
-                            throw new ArgumentOutOfRangeException(nameof(param));
                     }
 
-                    toast.HyperlinkClicked += this.ToastHyperlinkClicked;
-                    toast.ClosedByUser += this.ToastClosedByUser;
-                    toast.Show();
                 }));
         }
 
