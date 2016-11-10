@@ -96,7 +96,6 @@ namespace Mantin.Controls.Wpf.Notification
             this.control = control;
             this.placeInCenter = placeInCenter;
             this.ShowCloseButton = showCloseButton;
-            this.Owner = Application.Current.MainWindow;
 
             if (placeInCenter)
             {
@@ -193,34 +192,10 @@ namespace Mantin.Controls.Wpf.Notification
         #region Private Methods
 
         /// <summary>
-        /// Determines whether [is visible to user].
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">container</exception>
-        public bool IsVisibleToUser()
-        {
-            if (!this.control.IsVisible)
-            {
-                return false;
-            }
-
-            var container =(FrameworkElement)VisualTreeHelper.GetParent(this.control);
-            Rect bounds = this.control.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, this.control.RenderSize.Width, this.control.RenderSize.Height));
-            Rect rect = new Rect(0.0, 0.0, container.ActualWidth, container.ActualHeight);
-            return rect.IntersectsWith(bounds);
-        }
-
-        /// <summary>
         /// Calculates the position.
         /// </summary>
         private void CalcPosition()
         {
-            if (!this.IsVisibleToUser())
-            {
-                this.Close();
-                return;
-            }
-
             PresentationSource source = PresentationSource.FromVisual(this.control);
 
             if (source != null)
@@ -229,6 +204,7 @@ namespace Mantin.Controls.Wpf.Notification
                 // Compensate for the bubble point
                 double captionPointMargin = this.PathPointLeft.Margin.Left;
 
+                var screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
                 Point location = this.control.PointToScreen(new Point(0, 0));
 
                 double leftPosition;
@@ -251,10 +227,8 @@ namespace Mantin.Controls.Wpf.Notification
                     }
                 }
 
-                System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
-
                 // Check if the window is on the secondary screen.
-                if ((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + this.Width < screen.WorkingArea.Width) ||
+                if (((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + this.Width < screen.WorkingArea.Width)) ||
                     leftPosition >= 0 && leftPosition + this.Width < screen.WorkingArea.Width)
                 {
                     this.PathPointRight.Visibility = Visibility.Hidden;
