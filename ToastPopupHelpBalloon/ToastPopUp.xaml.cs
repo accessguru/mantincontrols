@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace Mantin.Controls.Wpf.Notification
@@ -17,6 +15,7 @@ namespace Mantin.Controls.Wpf.Notification
 
         private readonly string name = typeof(ToastPopUp).Name;
         private volatile object lockObject = new object();
+        private string title;
 
         #endregion Members
 
@@ -112,35 +111,6 @@ namespace Mantin.Controls.Wpf.Notification
             this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
-        /// </summary>
-        /// <param name="title">The title.</param>
-        /// <param name="text">The text.</param>
-        /// <param name="hyperlinkText">The hyperlink text.</param>
-        /// <param name="imageSource">The image source.</param>
-        /// <param name="hyperlinkClick">The hyperlink click.</param>
-        public ToastPopUp(string title, string text, string hyperlinkText, ImageSource imageSource, Action hyperlinkClick)
-            : this(title)
-        {
-            this.TextBoxShortDescription.Text = text;
-            this.SetHyperLinkButton(hyperlinkText);
-            this.buttonView.Click += delegate { hyperlinkClick(); };
-            this.imageLeft.Source = imageSource;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
-        /// </summary>
-        /// <param name="title">The title.</param>
-        /// <param name="text">The text.</param>
-        /// <param name="hyperlinkText">The hyperlink text.</param>
-        /// <param name="imageSource">The image source.</param>
-        /// <param name="hyperlinkClick">The hyperlink click.</param>
-        public ToastPopUp(string title, string text, string hyperlinkText, Bitmap imageSource, Action hyperlinkClick)
-            : this(title, text, hyperlinkText, imageSource.ToBitmapImage(), hyperlinkClick)
-        {
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
@@ -207,7 +177,7 @@ namespace Mantin.Controls.Wpf.Notification
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(notificationType));
+                    throw new ArgumentOutOfRangeException("notificationType");
             }
         }
 
@@ -221,19 +191,11 @@ namespace Mantin.Controls.Wpf.Notification
             System.Windows.Application.Current.MainWindow.Closing += this.MainWindowClosing;
 
             this.TextBoxTitle.Text = title;
-            this.Title = title;
+            this.title = title;
         }
         #endregion Constructors
 
         #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the maximum toast to pop.  Setting to 0 will not limit the count.
-        /// </summary>
-        /// <value>
-        /// The maximum toast.
-        /// </value>
-        public byte MaxToast { get; set; }
 
         /// <summary>
         /// Gets or sets the color of the font.
@@ -319,15 +281,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         public new void Show()
         {
-            int toastCount = System.Windows.Application.Current.Windows.OfType<ToastPopUp>().Count();
-
-            if (this.MaxToast > 0 && toastCount > this.MaxToast)
-            {
-                this.Close();
-                return;
-            }
-
-            IInputElement focusedElement = Keyboard.FocusedElement;
+            var focusedElement = Keyboard.FocusedElement;
 
             this.Topmost = true;
             base.Show();
@@ -364,7 +318,11 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected virtual void OnClosedByUser(EventArgs e)
         {
-            ClosedByUser?.Invoke(this, e);
+            EventHandler<EventArgs> onClosedByUser = ClosedByUser;
+            if (onClosedByUser != null)
+            {
+                onClosedByUser(this, e);
+            }
         }
 
         /// <summary>
@@ -373,7 +331,11 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected virtual void OnHyperlinkClicked(HyperLinkEventArgs e)
         {
-            HyperlinkClicked?.Invoke(this, e);
+            EventHandler<HyperLinkEventArgs> onHyperlinkClicked = HyperlinkClicked;
+            if (onHyperlinkClicked != null)
+            {
+                onHyperlinkClicked(this, e);
+            }
         }
 
         /// <summary>
@@ -472,7 +434,7 @@ namespace Mantin.Controls.Wpf.Notification
                 string windowName = window.GetType().Name;
 
                 if (windowName.Equals(this.name) &&
-                    !Equals(window, this) &&
+                    window != this &&
                     left == Screen.PrimaryScreen.WorkingArea.Width - this.Width)
                 {
                     return true;
@@ -491,14 +453,14 @@ namespace Mantin.Controls.Wpf.Notification
             {
                 Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
 
-                this.Left = workingArea.Width - this.ActualWidth;
-                double top = workingArea.Height - this.ActualHeight;
+                this.Left = SystemParameters.WorkArea.Width - this.ActualWidth;
+                double top = SystemParameters.WorkArea.Height - this.ActualHeight;
 
                 foreach (Window window in System.Windows.Application.Current.Windows)
                 {
                     string windowName = window.GetType().Name;
 
-                    if (windowName.Equals(this.name) && !Equals(window, this))
+                    if (windowName.Equals(this.name) && window != this)
                     {
                         window.Topmost = true;
 

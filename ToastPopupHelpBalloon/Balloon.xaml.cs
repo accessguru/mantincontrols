@@ -15,7 +15,8 @@ namespace Mantin.Controls.Wpf.Notification
         private readonly Control control;
         private readonly bool placeInCenter;
 
-        public static readonly DependencyProperty ShowCloseButtonProperty = DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(Balloon), new PropertyMetadata(OnShowCloseButtonChanged));
+        public static readonly DependencyProperty ShowCloseButtonProperty =
+            DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(Balloon), new PropertyMetadata(OnShowCloseButtonChanged));
 
         #endregion
 
@@ -35,38 +36,12 @@ namespace Mantin.Controls.Wpf.Notification
         /// Initializes a new instance of the <see cref="Balloon" /> class.
         /// </summary>
         /// <param name="control">The control.</param>
-        /// <param name="title">The title.</param>
-        /// <param name="caption">The caption.</param>
-        /// <param name="balloonType">Type of the balloon.</param>
-        public Balloon(Control control, string title, string caption, BalloonType balloonType)
-            : this(control, caption, balloonType, 0, 0, false, true, true, title)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Balloon" /> class.
-        /// </summary>
-        /// <param name="control">The control.</param>
         /// <param name="caption">The caption.</param>
         /// <param name="balloonType">Type of the balloon.</param>
         /// <param name="placeInCenter">if set to <c>true</c> [place in center].</param>
         /// <param name="showCloseButton">if set to <c>true</c> [show close button].</param>
         public Balloon(Control control, string caption, BalloonType balloonType, bool placeInCenter, bool showCloseButton)
             : this(control, caption, balloonType, 0, 0, false, placeInCenter, showCloseButton)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Balloon"/> class.
-        /// </summary>
-        /// <param name="control">The control.</param>
-        /// <param name="title">The title.</param>
-        /// <param name="caption">The caption.</param>
-        /// <param name="balloonType">Type of the balloon.</param>
-        /// <param name="placeInCenter">if set to <c>true</c> [place in center].</param>
-        /// <param name="showCloseButton">if set to <c>true</c> [show close button].</param>
-        public Balloon(Control control, string title, string caption, BalloonType balloonType, bool placeInCenter, bool showCloseButton)
-            : this(control, caption, balloonType, 0, 0, false, placeInCenter, showCloseButton, title)
         {
         }
 
@@ -96,7 +71,6 @@ namespace Mantin.Controls.Wpf.Notification
             this.control = control;
             this.placeInCenter = placeInCenter;
             this.ShowCloseButton = showCloseButton;
-            this.Owner = Application.Current.MainWindow;
 
             if (placeInCenter)
             {
@@ -132,7 +106,7 @@ namespace Mantin.Controls.Wpf.Notification
                 brush = this.FindResource("WarningGradient") as LinearGradientBrush;
             }
 
-            this.borderBalloon.SetValue(Control.BackgroundProperty, brush);
+            this.borderBalloon.SetValue(BackgroundProperty, brush);
 
             if (autoWidth)
             {
@@ -182,7 +156,7 @@ namespace Mantin.Controls.Wpf.Notification
                 return (bool)GetValue(ShowCloseButtonProperty);
             }
 
-            private set
+            set
             {
                 this.SetValue(ShowCloseButtonProperty, value);
             }
@@ -193,34 +167,10 @@ namespace Mantin.Controls.Wpf.Notification
         #region Private Methods
 
         /// <summary>
-        /// Determines whether [is visible to user].
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">container</exception>
-        public bool IsVisibleToUser()
-        {
-            if (!this.control.IsVisible)
-            {
-                return false;
-            }
-
-            var container =(FrameworkElement)VisualTreeHelper.GetParent(this.control);
-            Rect bounds = this.control.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, this.control.RenderSize.Width, this.control.RenderSize.Height));
-            Rect rect = new Rect(0.0, 0.0, container.ActualWidth, container.ActualHeight);
-            return rect.IntersectsWith(bounds);
-        }
-
-        /// <summary>
         /// Calculates the position.
         /// </summary>
         private void CalcPosition()
         {
-            if (!this.IsVisibleToUser())
-            {
-                this.Close();
-                return;
-            }
-
             PresentationSource source = PresentationSource.FromVisual(this.control);
 
             if (source != null)
@@ -229,6 +179,7 @@ namespace Mantin.Controls.Wpf.Notification
                 // Compensate for the bubble point
                 double captionPointMargin = this.PathPointLeft.Margin.Left;
 
+                var screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
                 Point location = this.control.PointToScreen(new Point(0, 0));
 
                 double leftPosition;
@@ -251,10 +202,8 @@ namespace Mantin.Controls.Wpf.Notification
                     }
                 }
 
-                System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
-
                 // Check if the window is on the secondary screen.
-                if ((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + this.Width < screen.WorkingArea.Width) ||
+                if (((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + this.Width < screen.WorkingArea.Width)) ||
                     leftPosition >= 0 && leftPosition + this.Width < screen.WorkingArea.Width)
                 {
                     this.PathPointRight.Visibility = Visibility.Hidden;
