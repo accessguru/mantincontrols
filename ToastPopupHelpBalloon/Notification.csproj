@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mantin.Controls.Wpf.Notification</RootNamespace>
     <AssemblyName>Mantin.Controls.Wpf.Notification</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -23,12 +23,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,7 +36,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -65,6 +63,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="NotificationCenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ToastPopUp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,12 +74,16 @@
     <Compile Include="Balloon.xaml.cs">
       <DependentUpon>Balloon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GridLengthAnimation.cs" />
     <Compile Include="HelpBalloon.xaml.cs">
       <DependentUpon>HelpBalloon.xaml</DependentUpon>
     </Compile>
     <Compile Include="BalloonType.cs" />
     <Compile Include="HyperLinkEventArgs.cs" />
     <Compile Include="ImagingExtension.cs" />
+    <Compile Include="NotificationCenter.xaml.cs">
+      <DependentUpon>NotificationCenter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NotificationType.cs" />
     <Compile Include="ToastPopUp.xaml.cs">
       <DependentUpon>ToastPopUp.xaml</DependentUpon>
@@ -133,6 +139,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\warning20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\media_rewind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\media_beginning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\media_end.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\media_fast_forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\navigate_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\navigate_down.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

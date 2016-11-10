@@ -10,11 +10,14 @@ namespace DemoApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Balloon balloon;
+        Balloon balloon;
+        readonly ViewModel viewModel = new ViewModel();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            this.DataContext = this.viewModel;
         }
 
         /// <summary>
@@ -26,9 +29,15 @@ namespace DemoApplication
         {
             if (this.balloon == null || !this.balloon.IsLoaded)
             {
-                this.balloon = new Balloon(this.textBoxGeneralUse, "You have moussed over this textbox.", ((ViewModel)this.DataContext).BalloonType, false, ((ViewModel)this.DataContext).ShowBalloonCloseButton);
+                this.balloon = new Balloon(this.textBoxGeneralUse, "You have moused over this textbox.", this.viewModel.BalloonType, false, this.viewModel.ShowBalloonCloseButton);
                 this.balloon.Show();
             }
+        }
+
+        private void ButtonPopToastNotificationCenterClick(object sender, RoutedEventArgs e)
+        {
+            ToastPopUp toast = this.viewModel.CreateToast(ToastType.Basic);
+            this.NotificationCenter.Add(toast);
         }
     }
 }
