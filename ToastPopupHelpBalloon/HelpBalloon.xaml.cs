@@ -10,45 +10,38 @@ namespace Mantin.Controls.Wpf.Notification
     public partial class HelpBalloon : UserControl
     {
         #region Members
-
+        
         private Balloon balloon = null;
-
+        
         public static readonly DependencyProperty CaptionProperty =
             DependencyProperty.Register("Caption", typeof(string), typeof(HelpBalloon));
-
-        public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(HelpBalloon));
-
+        
         public static readonly DependencyProperty BalloonTypeProperty =
-            DependencyProperty.Register("BalloonType", typeof(BalloonType), typeof(HelpBalloon), new PropertyMetadata(OnBalloonTypeChanged));
-
-        public new static readonly DependencyProperty MaxHeightProperty =
+            DependencyProperty.Register("BalloonType", typeof(BalloonType), typeof(HelpBalloon), new PropertyMetadata(new PropertyChangedCallback(OnBalloonTypeChanged)));
+        
+        public static readonly DependencyProperty MaxHeightProperty =
             DependencyProperty.Register("MaxHeight", typeof(double), typeof(HelpBalloon));
-
-        public new static readonly DependencyProperty MaxWidthProperty =
-            DependencyProperty.Register("MaxWidth", typeof(double), typeof(HelpBalloon));
-
+        
         public static readonly DependencyProperty AutoWidthProperty =
             DependencyProperty.Register("AutoWidth", typeof(bool), typeof(HelpBalloon));
 
         public static readonly DependencyProperty ShowCloseButtonProperty =
             DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(HelpBalloon));
-
+        
         #endregion
-
+        
         #region Constructor
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="HelpBalloon"/> class.
         /// </summary>
         public HelpBalloon()
         {
             InitializeComponent();
-            this.ShowCloseButton = true;
         }
-
+        
         #endregion
-
+        
         #region Properties
 
         /// <summary>
@@ -70,41 +63,24 @@ namespace Mantin.Controls.Wpf.Notification
                 this.SetValue(ShowCloseButtonProperty, value);
             }
         }
-
+        
         /// <summary>
         /// Gets or sets the maximum height constraint of the element.
         /// </summary>
         [Description("The maximum height of the Balloon caption."), Category("Common Properties")]
-        public new double MaxHeight
+        public double MaxHeight
         {
             get
             {
                 return (double)GetValue(MaxHeightProperty);
             }
-
+            
             set
             {
                 this.SetValue(MaxHeightProperty, value);
             }
         }
-
-        /// <summary>
-        /// Gets or sets the maximum width constraint of the element.
-        /// </summary>
-        [Description("The maximum width of the Balloon caption."), Category("Common Properties")]
-        public new double MaxWidth
-        {
-            get
-            {
-                return (double)GetValue(MaxWidthProperty);
-            }
-
-            set
-            {
-                this.SetValue(MaxWidthProperty, value);
-            }
-        }
-
+        
         /// <summary>
         /// Gets or sets the width of the element.
         /// </summary>
@@ -115,13 +91,13 @@ namespace Mantin.Controls.Wpf.Notification
             {
                 return (bool)GetValue(AutoWidthProperty);
             }
-
+            
             set
             {
                 this.SetValue(AutoWidthProperty, value);
             }
         }
-
+        
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
@@ -135,33 +111,13 @@ namespace Mantin.Controls.Wpf.Notification
             {
                 return (string)GetValue(CaptionProperty);
             }
-
+            
             set
             {
                 this.SetValue(CaptionProperty, value);
             }
         }
-
-        /// <summary>
-        /// Gets or sets the title.
-        /// </summary>
-        /// <value>
-        /// The title.
-        /// </value>
-        [Description("The title displayed in the Help Balloon."), Category("Common Properties")]
-        public string Title
-        {
-            get
-            {
-                return (string)GetValue(TitleProperty);
-            }
-
-            set
-            {
-                this.SetValue(TitleProperty, value);
-            }
-        }
-
+        
         /// <summary>
         /// Gets or sets the type of the balloon.
         /// </summary>
@@ -175,17 +131,17 @@ namespace Mantin.Controls.Wpf.Notification
             {
                 return (BalloonType)GetValue(BalloonTypeProperty);
             }
-
+            
             set
             {
                 this.SetValue(BalloonTypeProperty, value);
             }
         }
-
+        
         #endregion
-
+        
         #region Event Handlers
-
+       
         /// <summary>
         /// Called when [balloon type changed].
         /// </summary>
@@ -194,7 +150,7 @@ namespace Mantin.Controls.Wpf.Notification
         private static void OnBalloonTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             HelpBalloon helpBalloon = (HelpBalloon)d;
-
+            
             switch (helpBalloon.BalloonType)
             {
                 case BalloonType.Help:
@@ -210,7 +166,7 @@ namespace Mantin.Controls.Wpf.Notification
                     throw new InvalidOperationException("unsupported BalloonType");
             }
         }
-
+        
         /// <summary>
         /// Images the mouse enter.
         /// </summary>
@@ -220,12 +176,12 @@ namespace Mantin.Controls.Wpf.Notification
         {
             if (balloon == null)
             {
-                balloon = new Balloon(this, this.Caption, this.BalloonType, this.MaxHeight, this.MaxWidth, this.AutoWidth, true, this.ShowCloseButton, this.Title);
+                balloon = new Balloon(this, this.Caption, this.BalloonType, this.MaxHeight, this.AutoWidth, true, this.ShowCloseButton);
                 balloon.Closed += this.BalloonClosed;
                 balloon.Show();
             }
         }
-
+        
         /// <summary>
         /// Balloons the closed.
         /// </summary>
@@ -235,7 +191,7 @@ namespace Mantin.Controls.Wpf.Notification
         {
             this.balloon = null;
         }
-
+    
         #endregion
     }
 }
