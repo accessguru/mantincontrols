@@ -57,7 +57,7 @@ namespace DemoApplication
 
         #region Public Properties
 
-        public string EnumFile => 
+        public string EnumFile =>
             @"public enum Status
     {
         [StringValue(""-- Select --"")]
@@ -68,7 +68,10 @@ namespace DemoApplication
         Inactive = 2,
 
         [StringValue(""Pending Authorization"")]
-        PendingAuthorization = 3
+        PendingAuthorization = 3,
+
+        [StringValue]
+        Empty = 4,
     }";
 
         /// <summary>
