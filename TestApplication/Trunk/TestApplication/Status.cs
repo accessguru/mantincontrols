@@ -12,6 +12,9 @@ namespace DemoApplication
         Inactive = 2,
 
         [StringValue("Pending Authorization")]
-        PendingAuthorization = 3
+        PendingAuthorization = 3,
+
+        [StringValue]
+        Empty = 4,
     }
 }

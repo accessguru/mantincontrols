@@ -183,7 +183,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\EnumComboBox\Trunk\EnumComboBox\EnumComboBox.csproj">
+    <ProjectReference Include="..\..\..\EnumComboBox\Trunk\EnumComboBox\EnumComboBox.csproj">
       <Project>{ff67b03b-3d35-49cd-b287-41f7ece92722}</Project>
       <Name>EnumComboBox</Name>
     </ProjectReference>
