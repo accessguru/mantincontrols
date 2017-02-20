@@ -11,16 +11,16 @@ namespace Mantin.Controls.Wpf.EnumComboBox
         /// <summary>
         /// Initializes a new instance of the <see cref="StringValueAttribute"/> class.
         /// </summary>
+        public StringValueAttribute() 
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StringValueAttribute"/> class.
+        /// </summary>
         /// <param name="value">The value.</param>
         public StringValueAttribute(string value)
         {
-            if (!string.IsNullOrWhiteSpace(value))
-            {
-                this.Value = value;
-                return;
-            }
-
-            throw new ArgumentNullException(nameof(value));
+            this.Value = value;
         }
 
         /// <summary>
