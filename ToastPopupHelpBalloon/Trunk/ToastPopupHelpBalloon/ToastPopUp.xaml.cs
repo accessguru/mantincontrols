@@ -143,6 +143,21 @@ namespace Mantin.Controls.Wpf.Notification
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ToastPopUp"/> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="text">The text.</param>
+        /// <param name="hyperlinkText">The hyperlink text.</param>
+        /// <param name="hyperlinkClick">The hyperlink click.</param>
+        public ToastPopUp(string title, string text, string hyperlinkText, Action hyperlinkClick)
+            : this(title)
+        {
+            this.TextBoxShortDescription.Text = text;
+            this.SetHyperLinkButton(hyperlinkText);
+            this.buttonView.Click += delegate { hyperlinkClick(); };
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ToastPopUp" /> class.
         /// </summary>
         /// <param name="title">The title.</param>
