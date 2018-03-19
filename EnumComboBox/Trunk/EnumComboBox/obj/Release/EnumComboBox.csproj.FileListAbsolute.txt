@@ -1,0 +1,4 @@
+F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\bin\Release\Mantin.Controls.Wpf.EnumComboBox.dll
+F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\bin\Release\Mantin.Controls.Wpf.EnumComboBox.pdb
+F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\obj\Release\Mantin.Controls.Wpf.EnumComboBox.dll
+F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\obj\Release\Mantin.Controls.Wpf.EnumComboBox.pdb
