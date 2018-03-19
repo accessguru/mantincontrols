@@ -1,0 +1,149 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:notification="clr-namespace:Mantin.Controls.Wpf.Notification;assembly=Mantin.Controls.Wpf.Notification" x:Class="DemoApplication.MainWindow"
+    xmlns:demo="clr-namespace:DemoApplication"
+    Title="Toast Popup/Help Balloon Sample Application" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
+    Background="LightGray" ResizeMode="NoResize" Icon="Resources/toast.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <Style TargetType="Label" x:Key="Header">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style TargetType="Label" x:Key="SubHeader">
+                 <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0,10,0,0"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            </Style>
+        </Grid.Resources>
+
+        <Rectangle Grid.Column="1" Fill="DarkGray" Grid.RowSpan="3"
+                   Width="5" Margin="0,10,0,10"/>
+
+        <Label Style="{StaticResource Header}" Grid.Column="0" Grid.Row="0">Toast Popup</Label>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="10">
+            <notification:NotificationCenter x:Name="NotificationCenter"/>
+            <TextBlock Text="Title"/>
+            <TextBox Text="{Binding Title}"/>
+
+            <TextBlock Text="Text"/>
+            <TextBox TextWrapping="WrapWithOverflow" 
+                     Height="80"
+                     AcceptsReturn="True"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     Text="{Binding Text}"/>
+
+            <TextBlock Text="Hyper link Text"/>
+            <TextBox Text="{Binding HyperlinkText}"/>
+
+            <TextBlock Text="Type"/>
+            <ComboBox ItemsSource="{Binding NotificationTypeList}"
+                      SelectedItem="{Binding SelectedNotificationType}"
+                      DisplayMemberPath="Description"
+                      SelectedIndex="0"
+                      SelectedValuePath="Value"/>
+
+            <TextBlock Text="Font Color"/>
+            <xctk:ColorPicker SelectedColor="{Binding FontColor}" />
+
+            <TextBlock Text="Border Color"/>
+            <xctk:ColorPicker SelectedColor="{Binding BorderColor}" />
+
+            <TextBlock Text="Background Linear Start"/>
+            <xctk:ColorPicker SelectedColor="{Binding StartColor}" />
+
+            <TextBlock Text="Background Linear End"/>
+            <xctk:ColorPicker SelectedColor="{Binding EndColor}"/>
+            
+            <Button Content="Pop Toast through Notification Center"
+                    x:Name="ButtonPopToastNotificationCenter" 
+                    Click="ButtonPopToastNotificationCenterClick"/>
+
+            <Button Content="Pop Toast" 
+                    Command="{Binding PopToastCommand}"
+                    CommandParameter="{x:Static demo:ToastType.Basic }"/>
+
+            <Button Content="Pop Toast with Resource Image" 
+                    Command="{Binding PopToastCommand}"
+                    CommandParameter="{x:Static demo:ToastType.Image }"/>
+
+            <Button Content="Pop Toast with Formatted InLines" 
+                    Command="{Binding PopToastCommand}"
+                    CommandParameter="{x:Static demo:ToastType.Inlines }"/>
+        </StackPanel>
+
+        <Label Style="{StaticResource Header}" Grid.Column="2" Grid.Row="0">Help Balloon</Label>
+        <StackPanel Grid.Column="2" 
+                    Grid.Row="1"
+                    Orientation="Vertical" 
+                    Margin="10">
+            <TextBlock Text="Type"/>
+            <ComboBox ItemsSource="{Binding BalloonTypeList}"
+                      SelectedItem="{Binding SelectedBalloonType}"
+                      DisplayMemberPath="Description"
+                      SelectedIndex="0"
+                      SelectedValuePath="Value"/>
+
+            <CheckBox Content="Show Close Button" VerticalAlignment="Center" IsChecked="{Binding ShowBalloonCloseButton}"/>
+
+            <Label Style="{StaticResource SubHeader}">Bound to Help Balloon Control</Label>
+
+            <TextBlock Text="Caption Title"/>
+            <TextBox Text="{Binding BalloonTitle}"/>
+
+            <TextBlock Text="Caption Text"/>
+            <TextBox TextWrapping="WrapWithOverflow" 
+                     AcceptsReturn="True" 
+                     Height="80" 
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     Text="{Binding HelpText, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Max Height"/>
+             <TextBox Width="105" 
+                      HorizontalAlignment="Left"
+                      Text="{Binding MaxHeight}"/>
+
+            <TextBlock Text="Max Width"/>
+            <TextBox Width="105" 
+                     HorizontalAlignment="Left" 
+                     Text="{Binding MaxWidth}"/>
+
+            <CheckBox Content="Auto Width" VerticalAlignment="Center" IsChecked="{Binding AutoWidth}"/>
+
+            <notification:HelpBalloon Margin="0,20,0,0" 
+                                      Caption="{Binding HelpText}" 
+                                      BalloonType="{Binding BalloonType}" 
+                                      AutoWidth="{Binding AutoWidth}"
+                                      MaxHeight="{Binding MaxHeight}"
+                                      MaxWidth="{Binding MaxWidth}"
+                                      Title="{Binding BalloonTitle}"
+                                      ShowCloseButton="{Binding ShowBalloonCloseButton}" />
+
+            <Label Style="{StaticResource SubHeader}">General Use</Label>
+            <TextBox x:Name="textBoxGeneralUse" 
+                     TextWrapping="WrapWithOverflow" 
+                     Height="40" 
+                     Text="Move your mouse over this textbox."
+                     MouseEnter="TextBoxGeneralUseMouseEnter"/>
+        </StackPanel>
+        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="-133,276,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
