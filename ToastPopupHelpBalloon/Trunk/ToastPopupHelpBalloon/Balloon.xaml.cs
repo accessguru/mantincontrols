@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -96,12 +96,12 @@ namespace Mantin.Controls.Wpf.Notification
             this.control = control;
             this.placeInCenter = placeInCenter;
             this.ShowCloseButton = showCloseButton;
-            this.Owner = Application.Current.MainWindow;
+            this.Owner = GetWindow(control);
 
             if (placeInCenter)
             {
-                Application.Current.MainWindow.LocationChanged += this.MainWindowLocationChanged;
-                control.LayoutUpdated += this.MainWindowLocationChanged;
+                Owner.LocationChanged += this.OwnerLocationChanged;
+                control.LayoutUpdated += this.OwnerLocationChanged;
             }
 
             if (showCloseButton)
@@ -113,7 +113,7 @@ namespace Mantin.Controls.Wpf.Notification
                 this.imageClose.Visibility = Visibility.Collapsed;
             }
 
-            Application.Current.MainWindow.Closing += this.OwnerClosing;
+            Owner.Closing += this.OwnerClosing;
             LinearGradientBrush brush;
 
             if (balloonType == BalloonType.Help)
@@ -313,7 +313,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void MainWindowLocationChanged(object sender, EventArgs e)
+        private void OwnerLocationChanged(object sender, EventArgs e)
         {
             this.CalcPosition();
         }
