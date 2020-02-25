@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DemoApplication
 {
@@ -45,9 +44,9 @@ namespace DemoApplication
 
             var members = new List<EnumMember>();
 
-            foreach (string item in System.Enum.GetNames(type))
+            foreach (string item in Enum.GetNames(type))
             {
-                var enumType = System.Enum.Parse(type, item);
+                var enumType = Enum.Parse(type, item);
                 members.Add(new EnumMember() { Description = enumType.GetDescriptionValue(), Value = ((IConvertible)enumType).ToInt32(null) });
             }
 

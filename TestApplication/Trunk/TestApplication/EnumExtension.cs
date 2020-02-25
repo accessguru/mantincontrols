@@ -24,7 +24,7 @@ namespace DemoApplication
         {
             if (enumType == null)
             {
-                throw new ArgumentNullException("enumType");
+                throw new ArgumentNullException(nameof(enumType));
             }
 
             this.EnumType = enumType;
@@ -43,10 +43,7 @@ namespace DemoApplication
         /// <exception cref="System.ArgumentException">Type must be an Enum.</exception>
         public Type EnumType
         {
-            get
-            {
-                return this.enumType;
-            }
+            get => this.enumType;
 
             private set
             {
@@ -77,7 +74,7 @@ namespace DemoApplication
         /// </returns>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            Array enumValues = System.Enum.GetValues(EnumType);
+            Array enumValues = Enum.GetValues(EnumType);
 
             return (from object enumValue in enumValues
                     select new EnumMember
@@ -98,11 +95,9 @@ namespace DemoApplication
         /// <returns></returns>
         private string GetDescription(object enumValue)
         {
-            DescriptionAttribute descriptionAttribute = EnumType.GetField(enumValue.ToString())
-                                                                .GetCustomAttributes(typeof(DescriptionAttribute), false)
-                                                                .FirstOrDefault() as DescriptionAttribute;
-
-            return descriptionAttribute != null
+            return this.EnumType.GetField(enumValue.ToString())
+                .GetCustomAttributes(typeof(DescriptionAttribute), false)
+                .FirstOrDefault() is DescriptionAttribute descriptionAttribute
                    ? descriptionAttribute.Description
                    : enumValue.ToString();
         }

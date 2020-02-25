@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Mantin.Controls.Wpf.Notification
+﻿namespace Mantin.Controls.Wpf.Notification
 {
     public class HyperLinkEventArgs : System.EventArgs
     {
@@ -12,7 +9,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="hyperlinkObjectForRaisedEvent">The hyper link object for raised event.</param>
         public HyperLinkEventArgs(object hyperlinkObjectForRaisedEvent)
-            :this()
+            : this()
         {
             this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
         }
@@ -21,8 +18,8 @@ namespace Mantin.Controls.Wpf.Notification
         /// Initializes a new instance of the <see cref="HyperLinkEventArgs"/> class.
         /// </summary>
         public HyperLinkEventArgs()
-            :base()
-        { 
+            : base()
+        {
         }
 
         #endregion

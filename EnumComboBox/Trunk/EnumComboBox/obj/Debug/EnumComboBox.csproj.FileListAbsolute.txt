@@ -2,3 +2,8 @@ F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\bin\Debug\Mantin.Controls.W
 F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\bin\Debug\Mantin.Controls.Wpf.EnumComboBox.pdb
 F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\obj\Debug\Mantin.Controls.Wpf.EnumComboBox.dll
 F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\obj\Debug\Mantin.Controls.Wpf.EnumComboBox.pdb
+C:\Users\lmantin\source\repos\mantincontrols\EnumComboBox\Trunk\EnumComboBox\bin\Debug\Mantin.Controls.Wpf.EnumComboBox.dll
+C:\Users\lmantin\source\repos\mantincontrols\EnumComboBox\Trunk\EnumComboBox\bin\Debug\Mantin.Controls.Wpf.EnumComboBox.pdb
+C:\Users\lmantin\source\repos\mantincontrols\EnumComboBox\Trunk\EnumComboBox\obj\Debug\EnumComboBox.csprojAssemblyReference.cache
+C:\Users\lmantin\source\repos\mantincontrols\EnumComboBox\Trunk\EnumComboBox\obj\Debug\Mantin.Controls.Wpf.EnumComboBox.dll
+C:\Users\lmantin\source\repos\mantincontrols\EnumComboBox\Trunk\EnumComboBox\obj\Debug\Mantin.Controls.Wpf.EnumComboBox.pdb

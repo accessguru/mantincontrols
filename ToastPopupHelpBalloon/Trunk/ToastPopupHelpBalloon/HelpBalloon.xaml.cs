@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,7 +10,7 @@ namespace Mantin.Controls.Wpf.Notification
     {
         #region Members
 
-        private Balloon balloon = null;
+        private Balloon balloon;
 
         public static readonly DependencyProperty CaptionProperty =
             DependencyProperty.Register("Caption", typeof(string), typeof(HelpBalloon));
@@ -60,15 +59,8 @@ namespace Mantin.Controls.Wpf.Notification
         [Description("Sets whether the Help Balloon's close button will be visible."), Category("Common Properties")]
         public bool ShowCloseButton
         {
-            get
-            {
-                return (bool)GetValue(ShowCloseButtonProperty);
-            }
-
-            set
-            {
-                this.SetValue(ShowCloseButtonProperty, value);
-            }
+            get => (bool)GetValue(ShowCloseButtonProperty);
+            set => this.SetValue(ShowCloseButtonProperty, value);
         }
 
         /// <summary>
@@ -77,15 +69,8 @@ namespace Mantin.Controls.Wpf.Notification
         [Description("The maximum height of the Balloon caption."), Category("Common Properties")]
         public new double MaxHeight
         {
-            get
-            {
-                return (double)GetValue(MaxHeightProperty);
-            }
-
-            set
-            {
-                this.SetValue(MaxHeightProperty, value);
-            }
+            get => (double)GetValue(MaxHeightProperty);
+            set => this.SetValue(MaxHeightProperty, value);
         }
 
         /// <summary>
@@ -94,15 +79,8 @@ namespace Mantin.Controls.Wpf.Notification
         [Description("The maximum width of the Balloon caption."), Category("Common Properties")]
         public new double MaxWidth
         {
-            get
-            {
-                return (double)GetValue(MaxWidthProperty);
-            }
-
-            set
-            {
-                this.SetValue(MaxWidthProperty, value);
-            }
+            get => (double)GetValue(MaxWidthProperty);
+            set => this.SetValue(MaxWidthProperty, value);
         }
 
         /// <summary>
@@ -111,15 +89,8 @@ namespace Mantin.Controls.Wpf.Notification
         [Description("Sets whether the Help Balloon's width will be auto set."), Category("Common Properties")]
         public bool AutoWidth
         {
-            get
-            {
-                return (bool)GetValue(AutoWidthProperty);
-            }
-
-            set
-            {
-                this.SetValue(AutoWidthProperty, value);
-            }
+            get => (bool)GetValue(AutoWidthProperty);
+            set => this.SetValue(AutoWidthProperty, value);
         }
 
         /// <summary>
@@ -131,15 +102,8 @@ namespace Mantin.Controls.Wpf.Notification
         [Description("The caption displayed in the Help Balloon."), Category("Common Properties")]
         public string Caption
         {
-            get
-            {
-                return (string)GetValue(CaptionProperty);
-            }
-
-            set
-            {
-                this.SetValue(CaptionProperty, value);
-            }
+            get => (string)GetValue(CaptionProperty);
+            set => this.SetValue(CaptionProperty, value);
         }
 
         /// <summary>
@@ -151,15 +115,8 @@ namespace Mantin.Controls.Wpf.Notification
         [Description("The title displayed in the Help Balloon."), Category("Common Properties")]
         public string Title
         {
-            get
-            {
-                return (string)GetValue(TitleProperty);
-            }
-
-            set
-            {
-                this.SetValue(TitleProperty, value);
-            }
+            get => (string)GetValue(TitleProperty);
+            set => this.SetValue(TitleProperty, value);
         }
 
         /// <summary>
@@ -171,15 +128,8 @@ namespace Mantin.Controls.Wpf.Notification
         [Description("The type of Balloon to display."), Category("Common Properties")]
         public BalloonType BalloonType
         {
-            get
-            {
-                return (BalloonType)GetValue(BalloonTypeProperty);
-            }
-
-            set
-            {
-                this.SetValue(BalloonTypeProperty, value);
-            }
+            get => (BalloonType)GetValue(BalloonTypeProperty);
+            set => this.SetValue(BalloonTypeProperty, value);
         }
 
         #endregion

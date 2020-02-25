@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
@@ -14,7 +13,6 @@ namespace Mantin.Controls.Wpf.Notification
 
         private readonly Control control;
         private readonly bool placeInCenter;
-
         public static readonly DependencyProperty ShowCloseButtonProperty = DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(Balloon), new PropertyMetadata(OnShowCloseButtonChanged));
 
         #endregion
@@ -27,7 +25,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="caption">The caption.</param>
         /// <param name="balloonType">Type of the balloon.</param>
         public Balloon(Control control, string caption, BalloonType balloonType)
-            : this(control, caption, balloonType, 0, 0, false, true, true)
+            : this(control, caption, balloonType, 0, 0)
         {
         }
 
@@ -100,7 +98,7 @@ namespace Mantin.Controls.Wpf.Notification
 
             if (placeInCenter)
             {
-                Owner.LocationChanged += this.OwnerLocationChanged;
+                this.Owner.LocationChanged += this.OwnerLocationChanged;
                 control.LayoutUpdated += this.OwnerLocationChanged;
             }
 
@@ -113,7 +111,7 @@ namespace Mantin.Controls.Wpf.Notification
                 this.imageClose.Visibility = Visibility.Collapsed;
             }
 
-            Owner.Closing += this.OwnerClosing;
+            this.Owner.Closing += this.OwnerClosing;
             LinearGradientBrush brush;
 
             if (balloonType == BalloonType.Help)
@@ -177,15 +175,8 @@ namespace Mantin.Controls.Wpf.Notification
         [Description("Sets whether the Help Balloon's close button will be visible."), Category("Common Properties")]
         public bool ShowCloseButton
         {
-            get
-            {
-                return (bool)GetValue(ShowCloseButtonProperty);
-            }
-
-            private set
-            {
-                this.SetValue(ShowCloseButtonProperty, value);
-            }
+            get => (bool)GetValue(ShowCloseButtonProperty);
+            private set => this.SetValue(ShowCloseButtonProperty, value);
         }
 
         #endregion
@@ -204,7 +195,7 @@ namespace Mantin.Controls.Wpf.Notification
                 return false;
             }
 
-            var container =(FrameworkElement)VisualTreeHelper.GetParent(this.control);
+            var container = (FrameworkElement)VisualTreeHelper.GetParent(this.control);
             Rect bounds = this.control.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, this.control.RenderSize.Width, this.control.RenderSize.Height));
             Rect rect = new Rect(0.0, 0.0, container.ActualWidth, container.ActualHeight);
             return rect.IntersectsWith(bounds);
@@ -230,7 +221,6 @@ namespace Mantin.Controls.Wpf.Notification
                 double captionPointMargin = this.PathPointLeft.Margin.Left;
 
                 Point location = this.control.PointToScreen(new Point(0, 0));
-
                 double leftPosition;
 
                 if (this.placeInCenter)

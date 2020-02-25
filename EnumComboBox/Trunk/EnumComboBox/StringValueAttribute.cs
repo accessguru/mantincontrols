@@ -27,6 +27,6 @@ namespace Mantin.Controls.Wpf.EnumComboBox
         /// Gets the value.
         /// </summary>
         /// <value></value>
-        public string Value { get; private set; }
+        public string Value { get; }
     }
 }

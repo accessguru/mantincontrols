@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using Mantin.Controls.Wpf.Notification;
 using System.Windows;
-using Mantin.Controls.Wpf.Notification;
 
 namespace DemoApplication
 {

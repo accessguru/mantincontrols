@@ -5,7 +5,8 @@ using System.Reflection;
 
 namespace Mantin.Controls.Wpf.EnumComboBox
 {
-    public class EnumMember<T> where T : struct, IConvertible
+    public class EnumMember<T> 
+        where T : struct, IConvertible
     {
         #region Properties
 

@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Mantin.Controls.Wpf.Notification;
+using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Windows.Media;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
-using Mantin.Controls.Wpf.Notification;
-using TestApplication;
+using System.Windows.Media;
 
 namespace DemoApplication
 {
@@ -57,19 +54,19 @@ namespace DemoApplication
 
         #region Public Properties
 
-        public string EnumFile => 
+        public string EnumFile =>
             @"public enum Status
-    {
-        [StringValue(""-- Select --"")]
-        None = 0,
+            {
+                [StringValue(""-- Select --"")]
+                None = 0,
 
-        Active = 1,
+                Active = 1,
 
-        Inactive = 2,
+                Inactive = 2,
 
-        [StringValue(""Pending Authorization"")]
-        PendingAuthorization = 3
-    }";
+                [StringValue(""Pending Authorization"")]
+                PendingAuthorization = 3
+            }";
 
         /// <summary>
         /// Gets or sets the status.
@@ -79,7 +76,7 @@ namespace DemoApplication
         ///  </value>
         public Status Status
         {
-            get { return status; }
+            get => status;
             set
             {
                 if (this.status != value)
@@ -98,10 +95,7 @@ namespace DemoApplication
         /// </value>
         public Color FontColor
         {
-            get
-            {
-                return this.fontColor;
-            }
+            get => this.fontColor;
 
             set
             {
@@ -121,10 +115,7 @@ namespace DemoApplication
         /// </value>
         public Color BorderColor
         {
-            get
-            {
-                return this.borderColor;
-            }
+            get => this.borderColor;
 
             set
             {
@@ -144,10 +135,7 @@ namespace DemoApplication
         /// </value>
         public Color EndColor
         {
-            get
-            {
-                return this.endColor;
-            }
+            get => this.endColor;
             set
             {
                 if (this.endColor != value)
@@ -166,10 +154,7 @@ namespace DemoApplication
         /// </value>
         public Color StartColor
         {
-            get
-            {
-                return this.startColor;
-            }
+            get => this.startColor;
 
             set
             {
@@ -189,10 +174,7 @@ namespace DemoApplication
         /// </value>
         public double MaxWidth
         {
-            get
-            {
-                return this.maxWidth;
-            }
+            get => this.maxWidth;
 
             set
             {
@@ -212,10 +194,7 @@ namespace DemoApplication
         /// </value>
         public string BalloonTitle
         {
-            get
-            {
-                return this.balloonTitle;
-            }
+            get => this.balloonTitle;
 
             set
             {
@@ -235,10 +214,7 @@ namespace DemoApplication
         /// </value>
         public bool ShowBalloonCloseButton
         {
-            get
-            {
-                return this.showBalloonCloseButton;
-            }
+            get => this.showBalloonCloseButton;
 
             set
             {
@@ -258,10 +234,7 @@ namespace DemoApplication
         /// </value>
         public bool AutoWidth
         {
-            get
-            {
-                return this.autoWidth;
-            }
+            get => this.autoWidth;
 
             set
             {
@@ -281,10 +254,7 @@ namespace DemoApplication
         /// </value>
         public double MaxHeight
         {
-            get
-            {
-                return this.maxHeight;
-            }
+            get => this.maxHeight;
 
             set
             {
@@ -304,10 +274,7 @@ namespace DemoApplication
         /// </value>
         public BalloonType BalloonType
         {
-            get
-            {
-                return this.balloonType;
-            }
+            get => this.balloonType;
 
             set
             {
@@ -327,10 +294,7 @@ namespace DemoApplication
         /// </value>
         public string HelpText
         {
-            get
-            {
-                return this.helpText;
-            }
+            get => this.helpText;
 
             set
             {
@@ -350,10 +314,7 @@ namespace DemoApplication
         /// </value>
         public string HyperlinkText
         {
-            get
-            {
-                return this.hyperlinkText;
-            }
+            get => this.hyperlinkText;
 
             set
             {
@@ -381,10 +342,7 @@ namespace DemoApplication
         /// </value>
         public EnumMember SelectedNotificationType
         {
-            get
-            {
-                return this.selectedNotificationType;
-            }
+            get => this.selectedNotificationType;
 
             set
             {
@@ -404,10 +362,7 @@ namespace DemoApplication
         /// </value>
         public EnumMember SelectedBalloonType
         {
-            get
-            {
-                return this.selectedNotificationType;
-            }
+            get => this.selectedNotificationType;
 
             set
             {
@@ -429,10 +384,7 @@ namespace DemoApplication
         /// </value>
         public string Text
         {
-            get
-            {
-                return this.text;
-            }
+            get => this.text;
 
             set
             {
@@ -452,10 +404,7 @@ namespace DemoApplication
         /// </value>
         public string Title
         {
-            get
-            {
-                return this.title;
-            }
+            get => this.title;
 
             set
             {
@@ -475,10 +424,7 @@ namespace DemoApplication
         /// </value>
         public byte MaxToast
         {
-            get
-            {
-                return this.maxToast;
-            }
+            get => this.maxToast;
             set
             {
                 if (this.maxToast != value)
@@ -514,62 +460,58 @@ namespace DemoApplication
         /// </summary>
         public void PopToastExecute(object param)
         {
-            Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(
-                () =>
-                {
-                   var background = new LinearGradientBrush(this.StartColor, this.EndColor, 90);
-                   var brush = new SolidColorBrush(this.BorderColor);
-                   var font = new SolidColorBrush(this.fontColor);
+            var background = new LinearGradientBrush(this.StartColor, this.EndColor, 90);
+            var brush = new SolidColorBrush(this.BorderColor);
+            var font = new SolidColorBrush(this.fontColor);
 
-                   var notificationType = (NotificationType)Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
-                   ToastPopUp toast = null;
+            var notificationType = (NotificationType)Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
+            ToastPopUp toast;
 
-                    switch (param.ToString())
+            switch (param.ToString())
+            {
+                case "1":
+                    toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType)
                     {
-                        case "1":
-                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType)
-                            {
-                                Background = background,
-                                BorderBrush = brush,
-                                FontColor = font,
-                                MaxToast = this.MaxToast
-                            };
+                        Background = background,
+                        BorderBrush = brush,
+                        FontColor = font,
+                        MaxToast = this.MaxToast
+                    };
 
-                            break;
-                        case "2":
-                            toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, Properties.Resources.disk_blue)
-                            {
-                                Background = background,
-                                BorderBrush = brush,
-                                FontColor = font,
-                                MaxToast = this.MaxToast
-                            };
+                    break;
+                case "2":
+                    toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, Properties.Resources.disk_blue)
+                    {
+                        Background = background,
+                        BorderBrush = brush,
+                        FontColor = font,
+                        MaxToast = this.MaxToast
+                    };
 
-                            break;
-                        case "3":
-                            var inlines = new List<Inline>();
-                            inlines.Add(new Run { Text = this.Text });
-                            inlines.Add(new Run { Text = Environment.NewLine });
-                            inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
+                    break;
+                case "3":
+                    var inlines = new List<Inline>();
+                    inlines.Add(new Run { Text = this.Text });
+                    inlines.Add(new Run { Text = Environment.NewLine });
+                    inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
 
-                            toast = new ToastPopUp(this.Title, inlines, this.HyperlinkText, notificationType)
-                            {
-                                Background = background,
-                                BorderBrush = brush,
-                                FontColor = font,
-                                MaxToast = this.MaxToast
-                            };
+                    toast = new ToastPopUp(this.Title, inlines, this.HyperlinkText, notificationType)
+                    {
+                        Background = background,
+                        BorderBrush = brush,
+                        FontColor = font,
+                        MaxToast = this.MaxToast
+                    };
 
-                            break;
+                    break;
 
-                        default:
-                            throw new ArgumentOutOfRangeException(nameof(param));
-                    }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(param));
+            }
 
-                    toast.HyperlinkClicked += this.ToastHyperlinkClicked;
-                    toast.ClosedByUser += this.ToastClosedByUser;
-                    toast.Show();
-                }));
+            toast.HyperlinkClicked += ToastHyperlinkClicked;
+            toast.ClosedByUser += ToastClosedByUser;
+            toast.Show();
         }
 
         #endregion Public Methods
@@ -581,7 +523,7 @@ namespace DemoApplication
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void ToastHyperlinkClicked(object sender, EventArgs e)
+        private static void ToastHyperlinkClicked(object sender, EventArgs e)
         {
             MessageBox.Show("Hyper link clicked.");
         }
@@ -591,7 +533,7 @@ namespace DemoApplication
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void ToastClosedByUser(object sender, EventArgs e)
+        private static void ToastClosedByUser(object sender, EventArgs e)
         {
             MessageBox.Show("User closed the toast.");
         }

@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace Mantin.Controls.Wpf.Notification
@@ -57,7 +56,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="hyperlinkText">The hyperlink text.</param>
         /// <param name="imageSource">The image source.</param>
         /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
-        public ToastPopUp(string title, List<Inline> textInlines, string hyperlinkText, ImageSource imageSource, object hyperlinkObjectForRaisedEvent = null) 
+        public ToastPopUp(string title, List<Inline> textInlines, string hyperlinkText, ImageSource imageSource, object hyperlinkObjectForRaisedEvent = null)
             : this(title)
         {
             this.imageLeft.Source = imageSource;
@@ -89,7 +88,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="hyperlinkObjectForRaisedEvent">The hyperlink object for raised event.</param>
         public ToastPopUp(string title, List<Inline> textInlines, string hyperlinkText, NotificationType notificationType, object hyperlinkObjectForRaisedEvent = null)
             : this(title, notificationType)
-        {           
+        {
             this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
             this.TextBoxShortDescription.Inlines.AddRange(textInlines);
             this.SetHyperLinkButton(hyperlinkText);
@@ -233,7 +232,10 @@ namespace Mantin.Controls.Wpf.Notification
         private ToastPopUp(string title)
         {
             this.InitializeComponent();
-            System.Windows.Application.Current.MainWindow.Closing += this.MainWindowClosing;
+            if (System.Windows.Application.Current.MainWindow != null)
+            {
+                System.Windows.Application.Current.MainWindow.Closing += this.MainWindowClosing;
+            }
 
             this.TextBoxTitle.Text = title;
             this.Title = title;
@@ -258,10 +260,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// </value>
         public System.Windows.Media.Brush FontColor
         {
-            get
-            {
-                return this.TextBoxTitle.Foreground;
-            }
+            get => this.TextBoxTitle.Foreground;
 
             set
             {
@@ -275,15 +274,8 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         public new System.Windows.Media.Brush BorderBrush
         {
-            get
-            {
-                return this.borderBackground.BorderBrush;
-            }
-
-            set
-            {
-                this.borderBackground.BorderBrush = value;
-            }
+            get => this.borderBackground.BorderBrush;
+            set => this.borderBackground.BorderBrush = value;
         }
 
         /// <summary>
@@ -291,15 +283,8 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         public new System.Windows.Media.Brush Background
         {
-            get
-            {
-                return this.borderBackground.Background;
-            }
-
-            set
-            {
-                this.borderBackground.Background = value;
-            }
+            get => this.borderBackground.Background;
+            set => this.borderBackground.Background = value;
         }
 
         /// <summary>
@@ -370,7 +355,7 @@ namespace Mantin.Controls.Wpf.Notification
         }
 
         #endregion
-        
+
         #region Event Handlers
 
         /// <summary>
@@ -456,7 +441,7 @@ namespace Mantin.Controls.Wpf.Notification
                 if (windowName.Equals(this.name) && window != this)
                 {
                     // Adjust any windows that were above this one to drop down
-                    if (window.Top < this.Top &&  window.Left == this.Left)
+                    if (window.Top < this.Top && window.Left == this.Left)
                     {
                         window.Top = window.Top + this.ActualHeight;
 

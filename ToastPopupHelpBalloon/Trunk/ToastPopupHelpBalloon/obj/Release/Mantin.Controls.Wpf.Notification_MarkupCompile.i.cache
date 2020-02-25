@@ -4,7 +4,7 @@
 library
 C#
 .cs
-G:\Projects\CodePlex\toastspopuphelpballoon\ToastPopupHelpBalloon\Trunk\ToastPopupHelpBalloon\obj\Release\
+C:\Users\lmantin\Source\Repos\mantincontrols\ToastPopupHelpBalloon\Trunk\ToastPopupHelpBalloon\obj\Release\
 Mantin.Controls.Wpf.Notification
 none
 false
@@ -12,8 +12,8 @@ TRACE
 
 3320932875
 
-1450581202
-14-2145696238
+11123106654
+141471912834
 Balloon.xaml;HelpBalloon.xaml;ToastPopUp.xaml;
 
 False

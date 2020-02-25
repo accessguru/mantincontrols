@@ -30,8 +30,8 @@ namespace Mantin.Controls.Wpf.EnumComboBox
         /// </value>
         public Type EnumType
         {
-            get { return (Type) GetValue(EnumTypeProperty); }
-            set { SetValue(EnumTypeProperty, value); }
+            get => (Type)GetValue(EnumTypeProperty);
+            set => SetValue(EnumTypeProperty, value);
         }
 
         /// <summary>
@@ -41,13 +41,13 @@ namespace Mantin.Controls.Wpf.EnumComboBox
         /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void EnumTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var comboBox = (EnumComboBox) d;
+            var comboBox = (EnumComboBox)d;
 
             Type generic = typeof(EnumMember<>).MakeGenericType(comboBox.EnumType);
             object instance = Activator.CreateInstance(generic);
             MethodInfo method = instance.GetType().GetMethod("ConvertToList");
-            dynamic itemsource = method.Invoke(instance, null);
-            comboBox.ItemsSource = itemsource;
+            dynamic itemSource = method.Invoke(instance, null);
+            comboBox.ItemsSource = itemSource;
         }
     }
 }

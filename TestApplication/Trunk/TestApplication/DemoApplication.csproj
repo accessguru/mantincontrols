@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DemoApplication</RootNamespace>
     <AssemblyName>DemoApplication</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -183,16 +183,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\EnumComboBox\Trunk\EnumComboBox\EnumComboBox.csproj">
-      <Project>{ff67b03b-3d35-49cd-b287-41f7ece92722}</Project>
-      <Name>EnumComboBox</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\ToastPopupHelpBalloon\Trunk\ToastPopupHelpBalloon\Notification.csproj">
-      <Project>{5966439c-a414-42f5-b58a-d6b161fa3b98}</Project>
-      <Name>Notification</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\disk_blue.png" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +204,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\toast.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\EnumComboBox\Trunk\EnumComboBox\EnumComboBox.csproj">
+      <Project>{ff67b03b-3d35-49cd-b287-41f7ece92722}</Project>
+      <Name>EnumComboBox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ToastPopupHelpBalloon\Trunk\ToastPopupHelpBalloon\Notification.csproj">
+      <Project>{5966439c-a414-42f5-b58a-d6b161fa3b98}</Project>
+      <Name>Notification</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

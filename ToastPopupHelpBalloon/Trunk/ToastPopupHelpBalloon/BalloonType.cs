@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Mantin.Controls.Wpf.Notification
+﻿namespace Mantin.Controls.Wpf.Notification
 {
     public enum BalloonType
     {

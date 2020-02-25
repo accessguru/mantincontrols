@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows.Input;
 
 namespace DemoApplication
@@ -31,12 +30,7 @@ namespace DemoApplication
         /// <param name="canExecute">The can execute.</param>
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
-            if (execute == null)
-            {
-                throw new ArgumentNullException("execute");
-            }
-
-            this.execute = execute;
+            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this.canExecute = canExecute;
         }
         #endregion
@@ -47,8 +41,8 @@ namespace DemoApplication
         /// </summary>
         public event EventHandler CanExecuteChanged
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
         }
 
         /// <summary>
@@ -70,7 +64,7 @@ namespace DemoApplication
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
-            return this.canExecute == null ? true : this.canExecute(parameter);
+            return canExecute?.Invoke(parameter) ?? true;
         }
         #endregion
     }
