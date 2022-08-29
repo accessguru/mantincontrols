@@ -1,0 +1,15 @@
+F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\bin\Debug\Mantin.Controls.Wpf.EnumComboBox.dll
+F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\bin\Debug\Mantin.Controls.Wpf.EnumComboBox.pdb
+F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\obj\Debug\Mantin.Controls.Wpf.EnumComboBox.dll
+F:\Projects\CodePlex\EnumComboBox\Trunk\EnumComboBox\obj\Debug\Mantin.Controls.Wpf.EnumComboBox.pdb
+C:\Users\lmantin\source\repos\mantincontrols\EnumComboBox\Trunk\EnumComboBox\bin\Debug\Mantin.Controls.Wpf.EnumComboBox.dll
+C:\Users\lmantin\source\repos\mantincontrols\EnumComboBox\Trunk\EnumComboBox\bin\Debug\Mantin.Controls.Wpf.EnumComboBox.pdb
+C:\Users\lmantin\source\repos\mantincontrols\EnumComboBox\Trunk\EnumComboBox\obj\Debug\EnumComboBox.csprojAssemblyReference.cache
+C:\Users\lmantin\source\repos\mantincontrols\EnumComboBox\Trunk\EnumComboBox\obj\Debug\Mantin.Controls.Wpf.EnumComboBox.dll
+C:\Users\lmantin\source\repos\mantincontrols\EnumComboBox\Trunk\EnumComboBox\obj\Debug\Mantin.Controls.Wpf.EnumComboBox.pdb
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\bin\Debug\Mantin.Controls.Wpf.EnumComboBox.dll
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\bin\Debug\Mantin.Controls.Wpf.EnumComboBox.pdb
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\obj\Debug\EnumComboBox.csproj.AssemblyReference.cache
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\obj\Debug\EnumComboBox.csproj.CoreCompileInputs.cache
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\obj\Debug\Mantin.Controls.Wpf.EnumComboBox.dll
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\obj\Debug\Mantin.Controls.Wpf.EnumComboBox.pdb
