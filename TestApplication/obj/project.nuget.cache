@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "NzSDm6T/ZDKt+Y7I08UE3KGQUSMBvrXfw0lVPqCTzjaHYoA895TYD4xaPloz8tTyGKST7ovwtgEGLpN4NIOduQ==",
+  "dgSpecHash": "7VukNJH6NcMkcxCb5lZ7JXcysfJZwszqf+7HVAxLo2oC6nB/l67mK6c567Ahv62bzKohKQlIxv+tcOwogAjerQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\TestApplication\\DemoApplication.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\LawrenceMantin\\.nuget\\packages\\extended.wpf.toolkit\\3.8.2\\extended.wpf.toolkit.3.8.2.nupkg.sha512",
+    "C:\\Users\\LawrenceMantin\\.nuget\\packages\\extended.wpf.toolkit\\4.4.0\\extended.wpf.toolkit.4.4.0.nupkg.sha512",
     "C:\\Users\\LawrenceMantin\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
     "C:\\Users\\LawrenceMantin\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\LawrenceMantin\\.nuget\\packages\\microsoft.dotnet.upgradeassistant.extensions.default.analyzers\\0.4.346201\\microsoft.dotnet.upgradeassistant.extensions.default.analyzers.0.4.346201.nupkg.sha512",
@@ -66,16 +66,5 @@
     "C:\\Users\\LawrenceMantin\\.nuget\\packages\\system.web.services.description\\4.9.0\\system.web.services.description.4.9.0.nupkg.sha512",
     "C:\\Users\\LawrenceMantin\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Extended.Wpf.Toolkit 3.8.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Extended.Wpf.Toolkit",
-      "targetGraphs": [
-        "net6.0-windows7.0"
-      ]
-    }
-  ]
+  "logs": []
 }

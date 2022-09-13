@@ -59,5 +59,12 @@
 	<PropertyGroup>
 		<Version>6.0.0.0</Version>
 		<Authors>Lawrence Mantin</Authors>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/accessguru/mantincontrols</PackageProjectUrl>
+		<Description>WPF Control library for Toast Popup and Help Balloon.</Description>
+		<RepositoryUrl>https://github.com/accessguru/mantincontrols</RepositoryUrl>
+		<PackageTags> WPF control help balloon notification notify toast popup </PackageTags>
 	</PropertyGroup>
 </Project>

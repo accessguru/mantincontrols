@@ -1,0 +1,10 @@
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\bin\Release\net6.0-windows\Mantin.Controls.Wpf.EnumComboBox.deps.json
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\bin\Release\net6.0-windows\Mantin.Controls.Wpf.EnumComboBox.dll
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\bin\Release\net6.0-windows\Mantin.Controls.Wpf.EnumComboBox.pdb
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\obj\Release\net6.0-windows\EnumComboBox.csproj.AssemblyReference.cache
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\obj\Release\net6.0-windows\EnumComboBox.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\obj\Release\net6.0-windows\EnumComboBox.csproj.CoreCompileInputs.cache
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\obj\Release\net6.0-windows\Mantin.Controls.Wpf.EnumComboBox.dll
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\obj\Release\net6.0-windows\refint\Mantin.Controls.Wpf.EnumComboBox.dll
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\obj\Release\net6.0-windows\Mantin.Controls.Wpf.EnumComboBox.pdb
+C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\obj\Release\net6.0-windows\ref\Mantin.Controls.Wpf.EnumComboBox.dll

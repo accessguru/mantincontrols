@@ -19,6 +19,6 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_DotNet_UpgradeAssistant_Extensions_Default_Analyzers Condition=" '$(PkgMicrosoft_DotNet_UpgradeAssistant_Extensions_Default_Analyzers)' == '' ">C:\Users\LawrenceMantin\.nuget\packages\microsoft.dotnet.upgradeassistant.extensions.default.analyzers\0.4.346201</PkgMicrosoft_DotNet_UpgradeAssistant_Extensions_Default_Analyzers>
-    <PkgExtended_Wpf_Toolkit Condition=" '$(PkgExtended_Wpf_Toolkit)' == '' ">C:\Users\LawrenceMantin\.nuget\packages\extended.wpf.toolkit\3.8.2</PkgExtended_Wpf_Toolkit>
+    <PkgExtended_Wpf_Toolkit Condition=" '$(PkgExtended_Wpf_Toolkit)' == '' ">C:\Users\LawrenceMantin\.nuget\packages\extended.wpf.toolkit\4.4.0</PkgExtended_Wpf_Toolkit>
   </PropertyGroup>
 </Project>

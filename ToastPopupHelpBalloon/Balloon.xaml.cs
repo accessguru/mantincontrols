@@ -15,9 +15,10 @@ namespace Mantin.Controls.Wpf.Notification
         private readonly bool placeInCenter;
         public static readonly DependencyProperty ShowCloseButtonProperty = DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(Balloon), new PropertyMetadata(OnShowCloseButtonChanged));
 
-        #endregion
+        #endregion Members
 
         #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Balloon"/> class.
         /// </summary>
@@ -162,7 +163,7 @@ namespace Mantin.Controls.Wpf.Notification
             this.CalcPosition();
         }
 
-        #endregion
+        #endregion Constructors
 
         #region Properties
 
@@ -179,7 +180,7 @@ namespace Mantin.Controls.Wpf.Notification
             private set => this.SetValue(ShowCloseButtonProperty, value);
         }
 
-        #endregion
+        #endregion Properties
 
         #region Private Methods
 
@@ -262,7 +263,7 @@ namespace Mantin.Controls.Wpf.Notification
             }
         }
 
-        #endregion
+        #endregion Private Methods
 
         #region Event Handlers
 
@@ -315,7 +316,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void OwnerClosing(object sender, CancelEventArgs e)
         {
-            string name = typeof(Balloon).Name;
+            string name = nameof(Balloon);
 
             foreach (Window window in Application.Current.Windows)
             {
@@ -336,6 +337,7 @@ namespace Mantin.Controls.Wpf.Notification
         {
             this.Close();
         }
-        #endregion
+
+        #endregion Event Handlers
     }
 }

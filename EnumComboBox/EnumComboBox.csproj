@@ -18,7 +18,11 @@
     <RepositoryUrl>https://github.com/accessguru/mantincontrols</RepositoryUrl>
     <PackageTags> WPF enum enumeration combobox combo dropdownlist dropdown </PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
