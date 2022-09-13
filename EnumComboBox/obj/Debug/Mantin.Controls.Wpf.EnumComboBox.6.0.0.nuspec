@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Mantin.Controls.Wpf.EnumComboBox</id>
+    <version>6.0.0</version>
+    <authors>Lawrence Mantin</authors>
+    <projectUrl>https://github.com/accessguru/mantincontrols</projectUrl>
+    <description>Binds an enum to a ComboBox for WPF.</description>
+    <tags>WPF enum enumeration combobox combo dropdownlist dropdown</tags>
+    <repository url="https://github.com/accessguru/mantincontrols" />
+    <dependencies>
+      <group targetFramework="net6.0-windows7.0">
+        <dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Windows.Compatibility" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Data.DataSetExtensions" version="4.5.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\EnumComboBox\bin\Debug\net6.0-windows\Mantin.Controls.Wpf.EnumComboBox.dll" target="lib\net6.0-windows7.0\Mantin.Controls.Wpf.EnumComboBox.dll" />
+  </files>
+</package>
