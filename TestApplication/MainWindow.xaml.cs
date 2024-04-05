@@ -1,12 +1,11 @@
 ﻿using Mantin.Controls.Wpf.Notification;
-using System.Windows;
 
 namespace DemoApplication
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private Balloon balloon;
 
@@ -22,10 +21,10 @@ namespace DemoApplication
         /// <param name="e">The <see cref="System.Windows.Input.MouseEventArgs"/> instance containing the event data.</param>
         private void TextBoxGeneralUseMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (this.balloon == null || !this.balloon.IsLoaded)
+            if (balloon == null || !balloon.IsLoaded)
             {
-                this.balloon = new Balloon(this.textBoxGeneralUse, "You have moussed over this textbox.", ((ViewModel)this.DataContext).BalloonType, false, ((ViewModel)this.DataContext).ShowBalloonCloseButton);
-                this.balloon.Show();
+                balloon = new Balloon(textBoxGeneralUse, "You have moussed over this textbox.", ((ViewModel)DataContext).BalloonType, false, ((ViewModel)DataContext).ShowBalloonCloseButton);
+                balloon.Show();
             }
         }
     }

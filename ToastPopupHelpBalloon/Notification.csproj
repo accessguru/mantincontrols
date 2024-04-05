@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFramework>net8.0-windows7.0</TargetFramework>
 		<OutputType>Library</OutputType>
 		<RootNamespace>Mantin.Controls.Wpf.Notification</RootNamespace>
 		<AssemblyName>Mantin.Controls.Wpf.Notification</AssemblyName>
@@ -47,17 +47,17 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.346201">
+		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.3" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Remove="Toast.xaml.cs" />
 		<Page Remove="Toast.xaml" />
 	</ItemGroup>
 	<PropertyGroup>
-		<Version>6.0.0.0</Version>
+		<Version>8.0.0.0</Version>
 		<Authors>Lawrence Mantin</Authors>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>

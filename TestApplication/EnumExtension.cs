@@ -20,15 +20,7 @@ namespace DemoApplication
         /// </summary>
         /// <param name="enumType">Type of the enum.</param>
         /// <exception cref="System.ArgumentNullException">enumType</exception>
-        public EnumExtension(Type enumType)
-        {
-            if (enumType == null)
-            {
-                throw new ArgumentNullException(nameof(enumType));
-            }
-
-            this.EnumType = enumType;
-        }
+        public EnumExtension(Type enumType) => EnumType = enumType ?? throw new ArgumentNullException(nameof(enumType));
 
         #endregion Constructor
 
@@ -43,11 +35,11 @@ namespace DemoApplication
         /// <exception cref="System.ArgumentException">Type must be an Enum.</exception>
         public Type EnumType
         {
-            get => this.enumType;
+            get => enumType;
 
             private set
             {
-                if (this.enumType != value)
+                if (enumType != value)
                 {
                     Type type = Nullable.GetUnderlyingType(value) ?? value;
 
@@ -56,7 +48,7 @@ namespace DemoApplication
                         throw new ArgumentException("Type must be an Enum.");
                     }
 
-                    this.enumType = value;
+                    enumType = value;
                 }
             }
         }
@@ -93,14 +85,12 @@ namespace DemoApplication
         /// </summary>
         /// <param name="enumValue">The enum value.</param>
         /// <returns></returns>
-        private string GetDescription(object enumValue)
-        {
-            return this.EnumType.GetField(enumValue.ToString())
+        private string GetDescription(object enumValue) =>
+            EnumType.GetField(enumValue.ToString()!)!
                 .GetCustomAttributes(typeof(DescriptionAttribute), false)
                 .FirstOrDefault() is DescriptionAttribute descriptionAttribute
-                   ? descriptionAttribute.Description
-                   : enumValue.ToString();
-        }
+                ? descriptionAttribute.Description
+                : enumValue.ToString();
 
         #endregion Private Methods
     }

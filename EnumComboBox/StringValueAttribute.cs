@@ -16,7 +16,7 @@ namespace Mantin.Controls.Wpf.EnumComboBox
         {
             if (!string.IsNullOrWhiteSpace(value))
             {
-                this.Value = value;
+                Value = value;
                 return;
             }
 

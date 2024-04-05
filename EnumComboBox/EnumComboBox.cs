@@ -10,16 +10,16 @@ namespace Mantin.Controls.Wpf.EnumComboBox
         /// <summary>
         /// The enum type property
         /// </summary>
-        public static readonly DependencyProperty EnumTypeProperty = DependencyProperty.Register("EnumType", typeof(Type), typeof(EnumComboBox), new PropertyMetadata(EnumTypeChanged));
+        public static readonly DependencyProperty EnumTypeProperty = DependencyProperty.Register(nameof(EnumType), typeof(Type), typeof(EnumComboBox), new PropertyMetadata(EnumTypeChanged));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EnumComboBox"/> class.
         /// </summary>
         public EnumComboBox()
         {
-            this.IsEditable = false;
-            this.DisplayMemberPath = "Description";
-            this.SelectedValuePath = "Value";
+            IsEditable = false;
+            DisplayMemberPath = "Description";
+            SelectedValuePath = "Value";
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace Mantin.Controls.Wpf.EnumComboBox
 
             Type generic = typeof(EnumMember<>).MakeGenericType(comboBox.EnumType);
             object instance = Activator.CreateInstance(generic);
-            MethodInfo method = instance.GetType().GetMethod("ConvertToList");
-            dynamic itemSource = method.Invoke(instance, null);
+            MethodInfo method = instance!.GetType().GetMethod("ConvertToList");
+            dynamic itemSource = method!.Invoke(instance, null);
             comboBox.ItemsSource = itemSource;
         }
     }

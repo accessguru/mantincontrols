@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Mantin.Controls.Wpf.EnumComboBox
 {
-    public class EnumMember<T> 
+    public class EnumMember<T>
         where T : struct, IConvertible
     {
         #region Properties
@@ -63,8 +63,8 @@ namespace Mantin.Controls.Wpf.EnumComboBox
 
                 var enumMember = new EnumMember<T>
                 {
-                    Description = attr != null ? ((StringValueAttribute) attr).Value : memberInfo.Name,
-                    Value = (T) Enum.Parse(type, memberInfo.Name),
+                    Description = attr != null ? ((StringValueAttribute)attr).Value : memberInfo.Name,
+                    Value = (T)Enum.Parse(type, memberInfo.Name),
                     StringValue = memberInfo.Name
                 };
 
