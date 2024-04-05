@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\Users\LawrenceMantin\source\repos\accessguru\mantincontrols\ToastPopupHelpBalloon\obj\Debug\net6.0-windows\
+C:\Users\LawrenceMantin\Source\Repos\mantincontrols\ToastPopupHelpBalloon\obj\Debug\net6.0-windows\
 Mantin.Controls.Wpf.Notification
 none
 false
@@ -13,7 +13,7 @@ TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 31130919595
 
 11-403361509
-226-563210608
+226-300258712
 Balloon.xaml;HelpBalloon.xaml;ToastPopUp.xaml;
 
 False

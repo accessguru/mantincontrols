@@ -41,13 +41,13 @@ namespace DemoApplication
         /// </summary>
         public ViewModel()
         {
-            this.SelectedNotificationType = this.NotificationTypeList.First();
-            this.SelectedBalloonType = this.BalloonTypeList.First();
-            this.PopToastCommand = new RelayCommand(this.PopToastExecute);
-            this.StartColor = Color.FromRgb(253, 213, 167);
-            this.EndColor = Color.FromRgb(252, 231, 159);
-            this.BorderColor = Color.FromRgb(169, 169, 169);
-            this.FontColor = Color.FromRgb(0, 0, 0);
+            SelectedNotificationType = NotificationTypeList.First();
+            SelectedBalloonType = BalloonTypeList.First();
+            PopToastCommand = new RelayCommand(PopToastExecute);
+            StartColor = Color.FromRgb(253, 213, 167);
+            EndColor = Color.FromRgb(252, 231, 159);
+            BorderColor = Color.FromRgb(169, 169, 169);
+            FontColor = Color.FromRgb(0, 0, 0);
         }
 
         #endregion Constructor
@@ -79,10 +79,10 @@ namespace DemoApplication
             get => status;
             set
             {
-                if (this.status != value)
+                if (status != value)
                 {
-                    this.status = value;
-                    this.OnPropertyChanged(() => this.Status);
+                    status = value;
+                    OnPropertyChanged(() => Status);
                 }
             }
         }
@@ -95,14 +95,14 @@ namespace DemoApplication
         /// </value>
         public Color FontColor
         {
-            get => this.fontColor;
+            get => fontColor;
 
             set
             {
-                if (this.fontColor != value)
+                if (fontColor != value)
                 {
-                    this.fontColor = value;
-                    this.OnPropertyChanged(() => this.FontColor);
+                    fontColor = value;
+                    OnPropertyChanged(() => FontColor);
                 }
             }
         }
@@ -115,14 +115,14 @@ namespace DemoApplication
         /// </value>
         public Color BorderColor
         {
-            get => this.borderColor;
+            get => borderColor;
 
             set
             {
-                if (this.borderColor != value)
+                if (borderColor != value)
                 {
-                    this.borderColor = value;
-                    this.OnPropertyChanged(() => this.BorderColor);
+                    borderColor = value;
+                    OnPropertyChanged(() => BorderColor);
                 }
             }
         }
@@ -135,13 +135,13 @@ namespace DemoApplication
         /// </value>
         public Color EndColor
         {
-            get => this.endColor;
+            get => endColor;
             set
             {
-                if (this.endColor != value)
+                if (endColor != value)
                 {
-                    this.endColor = value;
-                    this.OnPropertyChanged(() => this.EndColor);
+                    endColor = value;
+                    OnPropertyChanged(() => EndColor);
                 }
             }
         }
@@ -154,14 +154,14 @@ namespace DemoApplication
         /// </value>
         public Color StartColor
         {
-            get => this.startColor;
+            get => startColor;
 
             set
             {
-                if (this.startColor != value)
+                if (startColor != value)
                 {
-                    this.startColor = value;
-                    this.OnPropertyChanged(() => this.StartColor);
+                    startColor = value;
+                    OnPropertyChanged(() => StartColor);
                 }
             }
         }
@@ -174,14 +174,14 @@ namespace DemoApplication
         /// </value>
         public double MaxWidth
         {
-            get => this.maxWidth;
+            get => maxWidth;
 
             set
             {
-                if (this.maxWidth != value)
+                if (maxWidth != value)
                 {
-                    this.maxWidth = value;
-                    this.OnPropertyChanged(() => this.MaxWidth);
+                    maxWidth = value;
+                    OnPropertyChanged(() => MaxWidth);
                 }
             }
         }
@@ -194,14 +194,14 @@ namespace DemoApplication
         /// </value>
         public string BalloonTitle
         {
-            get => this.balloonTitle;
+            get => balloonTitle;
 
             set
             {
-                if (this.balloonTitle != value)
+                if (balloonTitle != value)
                 {
-                    this.balloonTitle = value;
-                    this.OnPropertyChanged(() => this.BalloonTitle);
+                    balloonTitle = value;
+                    OnPropertyChanged(() => BalloonTitle);
                 }
             }
         }
@@ -214,14 +214,14 @@ namespace DemoApplication
         /// </value>
         public bool ShowBalloonCloseButton
         {
-            get => this.showBalloonCloseButton;
+            get => showBalloonCloseButton;
 
             set
             {
-                if (this.showBalloonCloseButton != value)
+                if (showBalloonCloseButton != value)
                 {
-                    this.showBalloonCloseButton = value;
-                    this.OnPropertyChanged(() => this.ShowBalloonCloseButton);
+                    showBalloonCloseButton = value;
+                    OnPropertyChanged(() => ShowBalloonCloseButton);
                 }
             }
         }
@@ -234,14 +234,14 @@ namespace DemoApplication
         /// </value>
         public bool AutoWidth
         {
-            get => this.autoWidth;
+            get => autoWidth;
 
             set
             {
-                if (this.autoWidth != value)
+                if (autoWidth != value)
                 {
-                    this.autoWidth = value;
-                    this.OnPropertyChanged(() => this.AutoWidth);
+                    autoWidth = value;
+                    OnPropertyChanged(() => AutoWidth);
                 }
             }
         }
@@ -254,14 +254,14 @@ namespace DemoApplication
         /// </value>
         public double MaxHeight
         {
-            get => this.maxHeight;
+            get => maxHeight;
 
             set
             {
-                if (this.maxHeight != value)
+                if (maxHeight != value)
                 {
-                    this.maxHeight = value;
-                    this.OnPropertyChanged(() => this.MaxHeight);
+                    maxHeight = value;
+                    OnPropertyChanged(() => MaxHeight);
                 }
             }
         }
@@ -274,14 +274,14 @@ namespace DemoApplication
         /// </value>
         public BalloonType BalloonType
         {
-            get => this.balloonType;
+            get => balloonType;
 
             set
             {
-                if (this.balloonType != value)
+                if (balloonType != value)
                 {
-                    this.balloonType = value;
-                    this.OnPropertyChanged(() => this.BalloonType);
+                    balloonType = value;
+                    OnPropertyChanged(() => BalloonType);
                 }
             }
         }
@@ -294,34 +294,34 @@ namespace DemoApplication
         /// </value>
         public string HelpText
         {
-            get => this.helpText;
+            get => helpText;
 
             set
             {
-                if (this.helpText != value)
+                if (helpText != value)
                 {
-                    this.helpText = value;
-                    this.OnPropertyChanged(() => this.HelpText);
+                    helpText = value;
+                    OnPropertyChanged(() => HelpText);
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the hyper link text.
+        /// Gets or sets the hyperlink text.
         /// </summary>
         /// <value>
-        /// The hyper link text.
+        /// The hyperlink text.
         /// </value>
         public string HyperlinkText
         {
-            get => this.hyperlinkText;
+            get => hyperlinkText;
 
             set
             {
-                if (this.hyperlinkText != value)
+                if (hyperlinkText != value)
                 {
-                    this.hyperlinkText = value;
-                    this.OnPropertyChanged(() => this.HyperlinkText);
+                    hyperlinkText = value;
+                    OnPropertyChanged(() => HyperlinkText);
                 }
             }
         }
@@ -342,14 +342,14 @@ namespace DemoApplication
         /// </value>
         public EnumMember SelectedNotificationType
         {
-            get => this.selectedNotificationType;
+            get => selectedNotificationType;
 
             set
             {
-                if (this.selectedNotificationType != value)
+                if (selectedNotificationType != value)
                 {
-                    this.selectedNotificationType = value;
-                    this.OnPropertyChanged(() => this.SelectedNotificationType);
+                    selectedNotificationType = value;
+                    OnPropertyChanged(() => SelectedNotificationType);
                 }
             }
         }
@@ -362,16 +362,16 @@ namespace DemoApplication
         /// </value>
         public EnumMember SelectedBalloonType
         {
-            get => this.selectedNotificationType;
+            get => selectedNotificationType;
 
             set
             {
-                if (this.selectedBalloonType != value)
+                if (selectedBalloonType != value)
                 {
-                    this.selectedBalloonType = value;
-                    this.OnPropertyChanged(() => this.SelectedBalloonType);
+                    selectedBalloonType = value;
+                    OnPropertyChanged(() => SelectedBalloonType);
 
-                    this.BalloonType = (BalloonType)Enum.Parse(typeof(BalloonType), value.Value.ToString());
+                    BalloonType = (BalloonType)Enum.Parse(typeof(BalloonType), value.Value.ToString());
                 }
             }
         }
@@ -384,14 +384,14 @@ namespace DemoApplication
         /// </value>
         public string Text
         {
-            get => this.text;
+            get => text;
 
             set
             {
-                if (this.text != value)
+                if (text != value)
                 {
-                    this.text = value;
-                    this.OnPropertyChanged(() => this.Text);
+                    text = value;
+                    OnPropertyChanged(() => Text);
                 }
             }
         }
@@ -404,14 +404,14 @@ namespace DemoApplication
         /// </value>
         public string Title
         {
-            get => this.title;
+            get => title;
 
             set
             {
-                if (this.title != value)
+                if (title != value)
                 {
-                    this.title = value;
-                    this.OnPropertyChanged(() => this.Title);
+                    title = value;
+                    OnPropertyChanged(() => Title);
                 }
             }
         }
@@ -424,13 +424,13 @@ namespace DemoApplication
         /// </value>
         public byte MaxToast
         {
-            get => this.maxToast;
+            get => maxToast;
             set
             {
-                if (this.maxToast != value)
+                if (maxToast != value)
                 {
-                    this.maxToast = value;
-                    this.OnPropertyChanged(() => this.MaxToast);
+                    maxToast = value;
+                    OnPropertyChanged(() => MaxToast);
                 }
             }
         }
@@ -445,7 +445,7 @@ namespace DemoApplication
         /// <value>
         /// The notification type list.
         /// </value>
-        public List<EnumMember> NotificationTypeList => EnumMember.ConvertToList<NotificationType>();
+        public static List<EnumMember> NotificationTypeList => EnumMember.ConvertToList<NotificationType>();
 
         /// <summary>
         /// Gets the balloon type list.
@@ -453,54 +453,58 @@ namespace DemoApplication
         /// <value>
         /// The balloon type list.
         /// </value>
-        public List<EnumMember> BalloonTypeList => EnumMember.ConvertToList<BalloonType>();
+        public static List<EnumMember> BalloonTypeList => EnumMember.ConvertToList<BalloonType>();
 
         /// <summary>
         /// Pops the toast execute.
         /// </summary>
         public void PopToastExecute(object param)
         {
-            var background = new LinearGradientBrush(this.StartColor, this.EndColor, 90);
-            var brush = new SolidColorBrush(this.BorderColor);
-            var font = new SolidColorBrush(this.fontColor);
+            var background = new LinearGradientBrush(StartColor, EndColor, 90);
+            var brush = new SolidColorBrush(BorderColor);
+            var font = new SolidColorBrush(fontColor);
 
-            var notificationType = (NotificationType)Enum.Parse(typeof(NotificationType), this.SelectedNotificationType.Value.ToString());
+            var notificationType = (NotificationType)Enum.Parse(typeof(NotificationType), SelectedNotificationType.Value.ToString());
             ToastPopUp toast;
 
             switch (param.ToString())
             {
                 case "1":
-                    toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, notificationType)
+                    toast = new ToastPopUp(Title, Text, HyperlinkText, notificationType)
                     {
                         Background = background,
                         BorderBrush = brush,
                         FontColor = font,
-                        MaxToast = this.MaxToast
+                        MaxToast = MaxToast
                     };
 
                     break;
+
                 case "2":
-                    toast = new ToastPopUp(this.Title, this.Text, this.HyperlinkText, Properties.Resources.disk_blue)
+                    toast = new ToastPopUp(Title, Text, HyperlinkText, Properties.Resources.disk_blue)
                     {
                         Background = background,
                         BorderBrush = brush,
                         FontColor = font,
-                        MaxToast = this.MaxToast
+                        MaxToast = MaxToast
                     };
 
                     break;
-                case "3":
-                    var inlines = new List<Inline>();
-                    inlines.Add(new Run { Text = this.Text });
-                    inlines.Add(new Run { Text = Environment.NewLine });
-                    inlines.Add(new Run("This text will be italic.") { FontStyle = FontStyles.Italic });
 
-                    toast = new ToastPopUp(this.Title, inlines, this.HyperlinkText, notificationType)
+                case "3":
+                    var inlines = new List<Inline>
+                    {
+                        new Run { Text = Text },
+                        new Run { Text = Environment.NewLine },
+                        new Run("This text will be italic.") { FontStyle = FontStyles.Italic }
+                    };
+
+                    toast = new ToastPopUp(Title, inlines, HyperlinkText, notificationType)
                     {
                         Background = background,
                         BorderBrush = brush,
                         FontColor = font,
-                        MaxToast = this.MaxToast
+                        MaxToast = MaxToast
                     };
 
                     break;
@@ -519,24 +523,18 @@ namespace DemoApplication
         #region Event Handlers
 
         /// <summary>
-        /// Toasts the hyper link clicked.
+        /// Toasts the hyperlink clicked.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private static void ToastHyperlinkClicked(object sender, EventArgs e)
-        {
-            MessageBox.Show("Hyper link clicked.");
-        }
+        private static void ToastHyperlinkClicked(object sender, EventArgs e) => MessageBox.Show("Hyper link clicked.");
 
         /// <summary>
         /// Toasts the closed by user.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private static void ToastClosedByUser(object sender, EventArgs e)
-        {
-            MessageBox.Show("User closed the toast.");
-        }
+        private static void ToastClosedByUser(object sender, EventArgs e) => MessageBox.Show("User closed the toast.");
 
         #endregion Event Handlers
     }

@@ -11,9 +11,10 @@ namespace DemoApplication
         private readonly Action<object> execute;
         private readonly Predicate<object> canExecute;
 
-        #endregion
+        #endregion Members
 
         #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayCommand"/> class.
         /// </summary>
@@ -33,9 +34,11 @@ namespace DemoApplication
             this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this.canExecute = canExecute;
         }
-        #endregion
+
+        #endregion Constructors
 
         #region ICommand Members
+
         /// <summary>
         /// Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
@@ -51,7 +54,7 @@ namespace DemoApplication
         /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
         public void Execute(object parameter)
         {
-            this.execute(parameter);
+            execute(parameter);
         }
 
         /// <summary>
@@ -66,6 +69,7 @@ namespace DemoApplication
         {
             return canExecute?.Invoke(parameter) ?? true;
         }
-        #endregion
+
+        #endregion ICommand Members
     }
 }

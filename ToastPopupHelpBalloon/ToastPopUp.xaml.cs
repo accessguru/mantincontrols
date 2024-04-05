@@ -10,12 +10,12 @@ using System.Windows.Media;
 
 namespace Mantin.Controls.Wpf.Notification
 {
-    public partial class ToastPopUp : Window
+    public partial class ToastPopUp
     {
         #region Members
 
-        private readonly string name = typeof(ToastPopUp).Name;
-        private volatile object lockObject = new object();
+        private const string name = nameof(ToastPopUp);
+        private volatile object lockObject = new();
 
         #endregion Members
 
@@ -30,7 +30,7 @@ namespace Mantin.Controls.Wpf.Notification
         public ToastPopUp(string title, string text, NotificationType notificationType)
             : this(title, notificationType)
         {
-            this.TextBoxShortDescription.Text = text;
+            TextBoxShortDescription.Text = text;
         }
 
         /// <summary>
@@ -44,8 +44,8 @@ namespace Mantin.Controls.Wpf.Notification
         public ToastPopUp(string title, string text, string hyperlinkText, NotificationType notificationType, object hyperlinkObjectForRaisedEvent = null)
             : this(title, text, notificationType)
         {
-            this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
-            this.SetHyperLinkButton(hyperlinkText);
+            HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
+            SetHyperLinkButton(hyperlinkText);
         }
 
         /// <summary>
@@ -59,10 +59,10 @@ namespace Mantin.Controls.Wpf.Notification
         public ToastPopUp(string title, List<Inline> textInlines, string hyperlinkText, ImageSource imageSource, object hyperlinkObjectForRaisedEvent = null)
             : this(title)
         {
-            this.imageLeft.Source = imageSource;
-            this.TextBoxShortDescription.Inlines.AddRange(textInlines);
-            this.SetHyperLinkButton(hyperlinkText);
-            this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
+            imageLeft.Source = imageSource;
+            TextBoxShortDescription.Inlines.AddRange(textInlines);
+            SetHyperLinkButton(hyperlinkText);
+            HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
         }
 
         /// <summary>
@@ -89,9 +89,9 @@ namespace Mantin.Controls.Wpf.Notification
         public ToastPopUp(string title, List<Inline> textInlines, string hyperlinkText, NotificationType notificationType, object hyperlinkObjectForRaisedEvent = null)
             : this(title, notificationType)
         {
-            this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
-            this.TextBoxShortDescription.Inlines.AddRange(textInlines);
-            this.SetHyperLinkButton(hyperlinkText);
+            HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
+            TextBoxShortDescription.Inlines.AddRange(textInlines);
+            SetHyperLinkButton(hyperlinkText);
         }
 
         /// <summary>
@@ -105,10 +105,10 @@ namespace Mantin.Controls.Wpf.Notification
         public ToastPopUp(string title, string text, string hyperlinkText, Bitmap imageSource, object hyperlinkObjectForRaisedEvent = null)
             : this(title)
         {
-            this.TextBoxShortDescription.Text = text;
-            this.SetHyperLinkButton(hyperlinkText);
-            this.imageLeft.Source = imageSource.ToBitmapImage();
-            this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
+            TextBoxShortDescription.Text = text;
+            SetHyperLinkButton(hyperlinkText);
+            imageLeft.Source = imageSource.ToBitmapImage();
+            HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
         }
 
         /// <summary>
@@ -122,10 +122,10 @@ namespace Mantin.Controls.Wpf.Notification
         public ToastPopUp(string title, string text, string hyperlinkText, ImageSource imageSource, Action hyperlinkClick)
             : this(title)
         {
-            this.TextBoxShortDescription.Text = text;
-            this.SetHyperLinkButton(hyperlinkText);
-            this.buttonView.Click += delegate { hyperlinkClick(); };
-            this.imageLeft.Source = imageSource;
+            TextBoxShortDescription.Text = text;
+            SetHyperLinkButton(hyperlinkText);
+            buttonView.Click += delegate { hyperlinkClick(); };
+            imageLeft.Source = imageSource;
         }
 
         /// <summary>
@@ -151,9 +151,9 @@ namespace Mantin.Controls.Wpf.Notification
         public ToastPopUp(string title, string text, string hyperlinkText, Action hyperlinkClick)
             : this(title)
         {
-            this.TextBoxShortDescription.Text = text;
-            this.SetHyperLinkButton(hyperlinkText);
-            this.buttonView.Click += delegate { hyperlinkClick(); };
+            TextBoxShortDescription.Text = text;
+            SetHyperLinkButton(hyperlinkText);
+            buttonView.Click += delegate { hyperlinkClick(); };
         }
 
         /// <summary>
@@ -165,8 +165,8 @@ namespace Mantin.Controls.Wpf.Notification
         public ToastPopUp(string title, string text, ImageSource imageSource)
             : this(title)
         {
-            this.TextBoxShortDescription.Text = text;
-            this.imageLeft.Source = imageSource;
+            TextBoxShortDescription.Text = text;
+            imageLeft.Source = imageSource;
         }
 
         /// <summary>
@@ -191,10 +191,10 @@ namespace Mantin.Controls.Wpf.Notification
         public ToastPopUp(string title, string text, string hyperlinkText, ImageSource imageSource, object hyperlinkObjectForRaisedEvent = null)
             : this(title)
         {
-            this.TextBoxShortDescription.Text = text;
-            this.HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
-            this.SetHyperLinkButton(hyperlinkText);
-            this.imageLeft.Source = imageSource;
+            TextBoxShortDescription.Text = text;
+            HyperlinkObjectForRaisedEvent = hyperlinkObjectForRaisedEvent;
+            SetHyperLinkButton(hyperlinkText);
+            imageLeft.Source = imageSource;
         }
 
         /// <summary>
@@ -209,15 +209,15 @@ namespace Mantin.Controls.Wpf.Notification
             switch (notificationType)
             {
                 case NotificationType.Error:
-                    this.imageLeft.Source = Properties.Resources.Error.ToBitmapImage();
+                    imageLeft.Source = Properties.Resources.Error.ToBitmapImage();
                     break;
 
                 case NotificationType.Information:
-                    this.imageLeft.Source = Properties.Resources.Information.ToBitmapImage();
+                    imageLeft.Source = Properties.Resources.Information.ToBitmapImage();
                     break;
 
                 case NotificationType.Warning:
-                    this.imageLeft.Source = Properties.Resources.Warning.ToBitmapImage();
+                    imageLeft.Source = Properties.Resources.Warning.ToBitmapImage();
                     break;
 
                 default:
@@ -231,15 +231,16 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="title">The title.</param>
         private ToastPopUp(string title)
         {
-            this.InitializeComponent();
+            InitializeComponent();
             if (System.Windows.Application.Current.MainWindow != null)
             {
-                System.Windows.Application.Current.MainWindow.Closing += this.MainWindowClosing;
+                System.Windows.Application.Current.MainWindow.Closing += MainWindowClosing;
             }
 
-            this.TextBoxTitle.Text = title;
-            this.Title = title;
+            TextBoxTitle.Text = title;
+            Title = title;
         }
+
         #endregion Constructors
 
         #region Public Properties
@@ -260,12 +261,12 @@ namespace Mantin.Controls.Wpf.Notification
         /// </value>
         public System.Windows.Media.Brush FontColor
         {
-            get => this.TextBoxTitle.Foreground;
+            get => TextBoxTitle.Foreground;
 
             set
             {
-                this.TextBoxTitle.Foreground = value;
-                this.TextBoxShortDescription.Foreground = value;
+                TextBoxTitle.Foreground = value;
+                TextBoxShortDescription.Foreground = value;
             }
         }
 
@@ -274,8 +275,8 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         public new System.Windows.Media.Brush BorderBrush
         {
-            get => this.borderBackground.BorderBrush;
-            set => this.borderBackground.BorderBrush = value;
+            get => borderBackground.BorderBrush;
+            set => borderBackground.BorderBrush = value;
         }
 
         /// <summary>
@@ -283,8 +284,8 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         public new System.Windows.Media.Brush Background
         {
-            get => this.borderBackground.Background;
-            set => this.borderBackground.Background = value;
+            get => borderBackground.Background;
+            set => borderBackground.Background = value;
         }
 
         /// <summary>
@@ -321,20 +322,20 @@ namespace Mantin.Controls.Wpf.Notification
         {
             int toastCount = System.Windows.Application.Current.Windows.OfType<ToastPopUp>().Count();
 
-            if (this.MaxToast > 0 && toastCount > this.MaxToast)
+            if (MaxToast > 0 && toastCount > MaxToast)
             {
-                this.Close();
+                Close();
                 return;
             }
 
             IInputElement focusedElement = Keyboard.FocusedElement;
 
-            this.Topmost = true;
+            Topmost = true;
             base.Show();
 
-            this.Owner = System.Windows.Application.Current.MainWindow;
-            this.Closed += this.NotificationWindowClosed;
-            this.AdjustWindows();
+            Owner = System.Windows.Application.Current.MainWindow;
+            Closed += NotificationWindowClosed;
+            AdjustWindows();
 
             if (focusedElement != null)
             {
@@ -345,16 +346,7 @@ namespace Mantin.Controls.Wpf.Notification
             }
         }
 
-        /// <summary>
-        /// Shows the dialog.
-        /// </summary>
-        /// <exception cref="System.NotImplementedException">ShowDialog() is not supported.  Use Show() instead.</exception>
-        public new void ShowDialog()
-        {
-            throw new NotImplementedException("ShowDialog() is not supported.  Use Show() instead.");
-        }
-
-        #endregion
+        #endregion Public Methods
 
         #region Event Handlers
 
@@ -383,7 +375,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void ButtonViewClick(object sender, RoutedEventArgs e)
         {
-            this.OnHyperlinkClicked(new HyperLinkEventArgs { HyperlinkObjectForRaisedEvent = this.HyperlinkObjectForRaisedEvent });
+            OnHyperlinkClicked(new HyperLinkEventArgs { HyperlinkObjectForRaisedEvent = this.HyperlinkObjectForRaisedEvent });
         }
 
         /// <summary>
@@ -393,9 +385,9 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void DoubleAnimationCompleted(object sender, EventArgs e)
         {
-            if (!this.IsMouseOver)
+            if (!IsMouseOver)
             {
-                this.Close();
+                Close();
             }
         }
 
@@ -406,8 +398,8 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void ImageMouseUp(object sender, MouseButtonEventArgs e)
         {
-            this.OnClosedByUser(new EventArgs());
-            this.Close();
+            OnClosedByUser(EventArgs.Empty);
+            Close();
         }
 
         /// <summary>
@@ -415,12 +407,12 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
-        private void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private static void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             foreach (Window window in System.Windows.Application.Current.Windows)
             {
                 string windowType = window.GetType().Name;
-                if (windowType.Equals(this.name))
+                if (windowType.Equals(name))
                 {
                     window.Close();
                 }
@@ -438,22 +430,22 @@ namespace Mantin.Controls.Wpf.Notification
             {
                 string windowName = window.GetType().Name;
 
-                if (windowName.Equals(this.name) && window != this)
+                if (windowName.Equals(name) && window != this)
                 {
                     // Adjust any windows that were above this one to drop down
-                    if (window.Top < this.Top && window.Left == this.Left)
+                    if (window.Top < Top && window.Left == Left)
                     {
-                        window.Top = window.Top + this.ActualHeight;
+                        window.Top += ActualHeight;
 
-                        if (!WindowsExistToTheRight(this.Left))
+                        if (!WindowsExistToTheRight(Left))
                         {
-                            window.Left = window.Left + this.ActualWidth;
+                            window.Left += ActualWidth;
                         }
                     }
                 }
             }
 
-            this.AdjustWindows();
+            AdjustWindows();
         }
 
         #endregion Event Handlers
@@ -471,9 +463,9 @@ namespace Mantin.Controls.Wpf.Notification
             {
                 string windowName = window.GetType().Name;
 
-                if (windowName.Equals(this.name) &&
+                if (windowName.Equals(name) &&
                     !Equals(window, this) &&
-                    left == Screen.PrimaryScreen.WorkingArea.Width - this.Width)
+                    left == Screen.PrimaryScreen!.WorkingArea.Width - Width)
                 {
                     return true;
                 }
@@ -489,33 +481,33 @@ namespace Mantin.Controls.Wpf.Notification
         {
             lock (lockObject)
             {
-                Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
+                Rectangle workingArea = Screen.PrimaryScreen!.WorkingArea;
 
-                this.Left = workingArea.Width - this.ActualWidth;
-                double top = workingArea.Height - this.ActualHeight;
+                Left = workingArea.Width - ActualWidth;
+                double top = workingArea.Height - ActualHeight;
 
                 foreach (Window window in System.Windows.Application.Current.Windows)
                 {
                     string windowName = window.GetType().Name;
 
-                    if (windowName.Equals(this.name) && !Equals(window, this))
+                    if (windowName.Equals(name) && !Equals(window, this))
                     {
                         window.Topmost = true;
 
-                        if (this.Left == window.Left)
+                        if (Left == window.Left)
                         {
-                            top = top - window.ActualHeight;
+                            top -= window.ActualHeight;
                         }
 
                         if (top < 0)
                         {
-                            this.Left = this.Left - this.ActualWidth;
-                            top = workingArea.Bottom - this.ActualHeight;
+                            Left -= ActualWidth;
+                            top = workingArea.Bottom - ActualHeight;
                         }
                     }
                 }
 
-                this.Top = top;
+                Top = top;
             }
         }
 
@@ -527,8 +519,8 @@ namespace Mantin.Controls.Wpf.Notification
         {
             if (!string.IsNullOrWhiteSpace(hyperlinkText))
             {
-                this.buttonView.Content = hyperlinkText;
-                this.buttonView.Visibility = Visibility.Visible;
+                buttonView.Content = hyperlinkText;
+                buttonView.Visibility = Visibility.Visible;
             }
         }
 

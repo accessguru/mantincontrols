@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Mantin.Controls.Wpf.Notification</id>
+    <version>6.0.0</version>
+    <authors>Lawrence Mantin</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/accessguru/mantincontrols</projectUrl>
+    <description>WPF Control library for Toast Popup and Help Balloon.</description>
+    <tags>WPF control help balloon notification notify toast popup</tags>
+    <repository type="git" url="https://github.com/accessguru/mantincontrols" commit="cd03f57f2effa3a995d3483d2ca05ea2e6024d82" />
+    <dependencies>
+      <group targetFramework="net8.0-windows7.0">
+        <dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Windows.Compatibility" version="8.0.3" exclude="Build,Analyzers" />
+        <dependency id="System.Data.DataSetExtensions" version="4.5.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="C:\Users\LawrenceMantin\Source\Repos\mantincontrols\ToastPopupHelpBalloon\bin\Debug\net8.0-windows7.0\Mantin.Controls.Wpf.Notification.dll" target="lib\net8.0-windows7.0\Mantin.Controls.Wpf.Notification.dll" />
+  </files>
+</package>

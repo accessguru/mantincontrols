@@ -23,7 +23,7 @@ namespace DemoApplication
         /// </value>
         public int Value { get; set; }
 
-        #endregion
+        #endregion Properties
 
         #region Public Methods
 
@@ -47,13 +47,12 @@ namespace DemoApplication
             foreach (string item in Enum.GetNames(type))
             {
                 var enumType = Enum.Parse(type, item);
-                members.Add(new EnumMember() { Description = enumType.GetDescriptionValue(), Value = ((IConvertible)enumType).ToInt32(null) });
+                members.Add(new EnumMember { Description = enumType.GetDescriptionValue(), Value = ((IConvertible)enumType).ToInt32(null) });
             }
 
             return members;
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }
-

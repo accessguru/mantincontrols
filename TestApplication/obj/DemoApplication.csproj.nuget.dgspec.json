@@ -1,40 +1,38 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\TestApplication\\DemoApplication.csproj": {}
+    "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\TestApplication\\DemoApplication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\EnumComboBox\\EnumComboBox.csproj": {
-      "version": "6.0.0",
+    "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\EnumComboBox\\EnumComboBox.csproj": {
+      "version": "8.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\EnumComboBox\\EnumComboBox.csproj",
+        "projectUniqueName": "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\EnumComboBox\\EnumComboBox.csproj",
         "projectName": "Mantin.Controls.Wpf.EnumComboBox",
-        "projectPath": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\EnumComboBox\\EnumComboBox.csproj",
+        "projectPath": "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\EnumComboBox\\EnumComboBox.csproj",
         "packagesPath": "C:\\Users\\LawrenceMantin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\EnumComboBox\\obj\\",
+        "outputPath": "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\EnumComboBox\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\LawrenceMantin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows7.0"
+          "net8.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/accelaeng/_packaging/CivicPay/nuget/v3/index.json": {},
           "https://pkgs.dev.azure.com/accelaeng/_packaging/FA/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0-windows7.0": {
-            "targetAlias": "net6.0-windows",
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows7.0",
             "projectReferences": {}
           }
         },
@@ -42,11 +40,16 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows7.0",
           "dependencies": {
             "Microsoft.CSharp": {
               "target": "Package",
@@ -55,11 +58,11 @@
             "Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[0.4.346201, )"
+              "version": "[0.4.421302, )"
             },
             "Microsoft.Windows.Compatibility": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[8.0.3, )"
             },
             "System.Data.DataSetExtensions": {
               "target": "Package",
@@ -72,7 +75,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -84,47 +88,45 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\TestApplication\\DemoApplication.csproj": {
-      "version": "6.0.0",
+    "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\TestApplication\\DemoApplication.csproj": {
+      "version": "8.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\TestApplication\\DemoApplication.csproj",
+        "projectUniqueName": "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\TestApplication\\DemoApplication.csproj",
         "projectName": "DemoApplication",
-        "projectPath": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\TestApplication\\DemoApplication.csproj",
+        "projectPath": "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\TestApplication\\DemoApplication.csproj",
         "packagesPath": "C:\\Users\\LawrenceMantin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\TestApplication\\obj\\",
+        "outputPath": "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\TestApplication\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\LawrenceMantin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows7.0"
+          "net8.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/accelaeng/_packaging/CivicPay/nuget/v3/index.json": {},
           "https://pkgs.dev.azure.com/accelaeng/_packaging/FA/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0-windows7.0": {
-            "targetAlias": "net6.0-windows",
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows7.0",
             "projectReferences": {
-              "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\EnumComboBox\\EnumComboBox.csproj": {
-                "projectPath": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\EnumComboBox\\EnumComboBox.csproj"
+              "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\EnumComboBox\\EnumComboBox.csproj": {
+                "projectPath": "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\EnumComboBox\\EnumComboBox.csproj"
               },
-              "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\ToastPopupHelpBalloon\\Notification.csproj": {
-                "projectPath": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\ToastPopupHelpBalloon\\Notification.csproj"
+              "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\ToastPopupHelpBalloon\\Notification.csproj": {
+                "projectPath": "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\ToastPopupHelpBalloon\\Notification.csproj"
               }
             }
           }
@@ -133,15 +135,20 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows7.0",
           "dependencies": {
             "Extended.Wpf.Toolkit": {
               "target": "Package",
-              "version": "[4.4.0, )"
+              "version": "[4.6.0, )"
             },
             "Microsoft.CSharp": {
               "target": "Package",
@@ -150,7 +157,7 @@
             "Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[0.4.346201, )"
+              "version": "[0.4.421302, )"
             },
             "System.Data.DataSetExtensions": {
               "target": "Package",
@@ -163,7 +170,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -175,41 +183,39 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\ToastPopupHelpBalloon\\Notification.csproj": {
-      "version": "6.0.0",
+    "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\ToastPopupHelpBalloon\\Notification.csproj": {
+      "version": "8.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\ToastPopupHelpBalloon\\Notification.csproj",
+        "projectUniqueName": "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\ToastPopupHelpBalloon\\Notification.csproj",
         "projectName": "Mantin.Controls.Wpf.Notification",
-        "projectPath": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\ToastPopupHelpBalloon\\Notification.csproj",
+        "projectPath": "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\ToastPopupHelpBalloon\\Notification.csproj",
         "packagesPath": "C:\\Users\\LawrenceMantin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LawrenceMantin\\source\\repos\\accessguru\\mantincontrols\\ToastPopupHelpBalloon\\obj\\",
+        "outputPath": "C:\\Users\\LawrenceMantin\\Source\\Repos\\mantincontrols\\ToastPopupHelpBalloon\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\LawrenceMantin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows7.0"
+          "net8.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/accelaeng/_packaging/CivicPay/nuget/v3/index.json": {},
           "https://pkgs.dev.azure.com/accelaeng/_packaging/FA/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0-windows7.0": {
-            "targetAlias": "net6.0-windows",
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows7.0",
             "projectReferences": {}
           }
         },
@@ -217,11 +223,16 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows7.0",
           "dependencies": {
             "Microsoft.CSharp": {
               "target": "Package",
@@ -230,11 +241,11 @@
             "Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[0.4.346201, )"
+              "version": "[0.4.421302, )"
             },
             "Microsoft.Windows.Compatibility": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[8.0.3, )"
             },
             "System.Data.DataSetExtensions": {
               "target": "Package",
@@ -247,7 +258,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -259,7 +271,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

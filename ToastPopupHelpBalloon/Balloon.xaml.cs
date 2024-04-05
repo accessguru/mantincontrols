@@ -7,13 +7,13 @@ using System.Windows.Media;
 
 namespace Mantin.Controls.Wpf.Notification
 {
-    public partial class Balloon : Window
+    public partial class Balloon
     {
         #region Members
 
         private readonly Control control;
         private readonly bool placeInCenter;
-        public static readonly DependencyProperty ShowCloseButtonProperty = DependencyProperty.Register("ShowCloseButton", typeof(bool), typeof(Balloon), new PropertyMetadata(OnShowCloseButtonChanged));
+        public static readonly DependencyProperty ShowCloseButtonProperty = DependencyProperty.Register(nameof(ShowCloseButton), typeof(bool), typeof(Balloon), new PropertyMetadata(OnShowCloseButtonChanged));
 
         #endregion Members
 
@@ -26,7 +26,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="caption">The caption.</param>
         /// <param name="balloonType">Type of the balloon.</param>
         public Balloon(Control control, string caption, BalloonType balloonType)
-            : this(control, caption, balloonType, 0, 0)
+            : this(control, caption, balloonType, 0)
         {
         }
 
@@ -94,73 +94,68 @@ namespace Mantin.Controls.Wpf.Notification
             InitializeComponent();
             this.control = control;
             this.placeInCenter = placeInCenter;
-            this.ShowCloseButton = showCloseButton;
-            this.Owner = GetWindow(control);
+            ShowCloseButton = showCloseButton;
+            Owner = GetWindow(control);
 
             if (placeInCenter)
             {
-                this.Owner.LocationChanged += this.OwnerLocationChanged;
-                control.LayoutUpdated += this.OwnerLocationChanged;
+                Owner!.LocationChanged += OwnerLocationChanged;
+                control.LayoutUpdated += OwnerLocationChanged;
             }
 
-            if (showCloseButton)
-            {
-                this.imageClose.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                this.imageClose.Visibility = Visibility.Collapsed;
-            }
+            imageClose.Visibility = showCloseButton ? Visibility.Visible : Visibility.Collapsed;
 
-            this.Owner.Closing += this.OwnerClosing;
+            Owner!.Closing += OwnerClosing;
             LinearGradientBrush brush;
 
-            if (balloonType == BalloonType.Help)
+            switch (balloonType)
             {
-                this.imageType.Source = Properties.Resources.help.ToBitmapImage();
-                brush = this.FindResource("HelpGradient") as LinearGradientBrush;
-            }
-            else if (balloonType == BalloonType.Information)
-            {
-                this.imageType.Source = Properties.Resources.Information.ToBitmapImage();
-                brush = this.FindResource("InfoGradient") as LinearGradientBrush;
-            }
-            else
-            {
-                this.imageType.Source = Properties.Resources.Warning.ToBitmapImage();
-                brush = this.FindResource("WarningGradient") as LinearGradientBrush;
+                case BalloonType.Help:
+                    imageType.Source = Properties.Resources.help.ToBitmapImage();
+                    brush = FindResource("HelpGradient") as LinearGradientBrush;
+                    break;
+
+                case BalloonType.Information:
+                    imageType.Source = Properties.Resources.Information.ToBitmapImage();
+                    brush = FindResource("InfoGradient") as LinearGradientBrush;
+                    break;
+
+                default:
+                    imageType.Source = Properties.Resources.Warning.ToBitmapImage();
+                    brush = FindResource("WarningGradient") as LinearGradientBrush;
+                    break;
             }
 
-            this.borderBalloon.SetValue(Control.BackgroundProperty, brush);
+            borderBalloon.SetValue(BackgroundProperty, brush);
 
             if (autoWidth)
             {
-                this.SizeToContent = SizeToContent.WidthAndHeight;
+                SizeToContent = SizeToContent.WidthAndHeight;
             }
 
-            this.textBlockCaption.Text = caption;
+            textBlockCaption.Text = caption;
 
             if (maxHeight > 0)
             {
-                this.scrollViewerCaption.MaxHeight = maxHeight;
+                scrollViewerCaption.MaxHeight = maxHeight;
             }
 
             if (maxWidth > 0)
             {
-                this.MaxWidth = maxWidth;
+                MaxWidth = maxWidth;
             }
 
             if (!string.IsNullOrWhiteSpace(title))
             {
-                this.textBlockTitle.Text = title;
+                textBlockTitle.Text = title;
             }
             else
             {
-                this.textBlockTitle.Visibility = Visibility.Collapsed;
-                this.lineTitle.Visibility = Visibility.Collapsed;
+                textBlockTitle.Visibility = Visibility.Collapsed;
+                lineTitle.Visibility = Visibility.Collapsed;
             }
 
-            this.CalcPosition();
+            CalcPosition();
         }
 
         #endregion Constructors
@@ -177,7 +172,7 @@ namespace Mantin.Controls.Wpf.Notification
         public bool ShowCloseButton
         {
             get => (bool)GetValue(ShowCloseButtonProperty);
-            private set => this.SetValue(ShowCloseButtonProperty, value);
+            private init => SetValue(ShowCloseButtonProperty, value);
         }
 
         #endregion Properties
@@ -191,14 +186,14 @@ namespace Mantin.Controls.Wpf.Notification
         /// <exception cref="System.ArgumentNullException">container</exception>
         public bool IsVisibleToUser()
         {
-            if (!this.control.IsVisible)
+            if (!control.IsVisible)
             {
                 return false;
             }
 
-            var container = (FrameworkElement)VisualTreeHelper.GetParent(this.control);
-            Rect bounds = this.control.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, this.control.RenderSize.Width, this.control.RenderSize.Height));
-            Rect rect = new Rect(0.0, 0.0, container.ActualWidth, container.ActualHeight);
+            var container = (FrameworkElement)VisualTreeHelper.GetParent(control);
+            Rect bounds = control.TransformToAncestor(container!).TransformBounds(new Rect(0.0, 0.0, control.RenderSize.Width, control.RenderSize.Height));
+            Rect rect = new(0.0, 0.0, container.ActualWidth, container.ActualHeight);
             return rect.IntersectsWith(bounds);
         }
 
@@ -207,26 +202,26 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         private void CalcPosition()
         {
-            if (!this.IsVisibleToUser())
+            if (!IsVisibleToUser())
             {
-                this.Close();
+                Close();
                 return;
             }
 
-            PresentationSource source = PresentationSource.FromVisual(this.control);
+            PresentationSource source = PresentationSource.FromVisual(control);
 
             if (source != null)
             {
                 // Position balloon relative to the help image and screen placement
                 // Compensate for the bubble point
-                double captionPointMargin = this.PathPointLeft.Margin.Left;
+                double captionPointMargin = PathPointLeft.Margin.Left;
 
-                Point location = this.control.PointToScreen(new Point(0, 0));
+                Point location = control.PointToScreen(new Point(0, 0));
                 double leftPosition;
 
-                if (this.placeInCenter)
+                if (placeInCenter)
                 {
-                    leftPosition = location.X + (this.control.ActualWidth / 2) - captionPointMargin;
+                    leftPosition = location.X + (control.ActualWidth / 2) - captionPointMargin;
                 }
                 else
                 {
@@ -236,30 +231,30 @@ namespace Mantin.Controls.Wpf.Notification
                     {
                         leftPosition = location.X;
                     }
-                    else if (leftPosition > location.X + this.control.ActualWidth)
+                    else if (leftPosition > location.X + control.ActualWidth)
                     {
-                        leftPosition = location.X + this.control.ActualWidth - (captionPointMargin * 2);
+                        leftPosition = location.X + control.ActualWidth - (captionPointMargin * 2);
                     }
                 }
 
-                System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow).Handle);
+                System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(Application.Current.MainWindow!).Handle);
 
                 // Check if the window is on the secondary screen.
-                if ((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + this.Width < screen.WorkingArea.Width) ||
-                    leftPosition >= 0 && leftPosition + this.Width < screen.WorkingArea.Width)
+                if ((leftPosition < 0 && screen.WorkingArea.Width + leftPosition + Width < screen.WorkingArea.Width) ||
+                    leftPosition >= 0 && leftPosition + Width < screen.WorkingArea.Width)
                 {
-                    this.PathPointRight.Visibility = Visibility.Hidden;
-                    this.PathPointLeft.Visibility = Visibility.Visible;
-                    this.Left = leftPosition;
+                    PathPointRight.Visibility = Visibility.Hidden;
+                    PathPointLeft.Visibility = Visibility.Visible;
+                    Left = leftPosition;
                 }
                 else
                 {
-                    this.PathPointLeft.Visibility = Visibility.Hidden;
-                    this.PathPointRight.Visibility = Visibility.Visible;
-                    this.Left = location.X + (this.control.ActualWidth / 2) + captionPointMargin - this.Width;
+                    PathPointLeft.Visibility = Visibility.Hidden;
+                    PathPointRight.Visibility = Visibility.Visible;
+                    Left = location.X + (control.ActualWidth / 2) + captionPointMargin - Width;
                 }
 
-                this.Top = location.Y + (this.control.ActualHeight / 2);
+                Top = location.Y + (control.ActualHeight / 2);
             }
         }
 
@@ -275,15 +270,7 @@ namespace Mantin.Controls.Wpf.Notification
         private static void OnShowCloseButtonChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             Balloon balloon = (Balloon)d;
-
-            if (balloon.ShowCloseButton)
-            {
-                balloon.imageClose.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                balloon.imageClose.Visibility = Visibility.Collapsed;
-            }
+            balloon.imageClose.Visibility = balloon.ShowCloseButton ? Visibility.Visible : Visibility.Collapsed;
         }
 
         /// <summary>
@@ -293,9 +280,9 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void DoubleAnimationCompleted(object sender, EventArgs e)
         {
-            if (!this.IsMouseOver)
+            if (!IsMouseOver)
             {
-                this.Close();
+                Close();
             }
         }
 
@@ -306,7 +293,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OwnerLocationChanged(object sender, EventArgs e)
         {
-            this.CalcPosition();
+            CalcPosition();
         }
 
         /// <summary>
@@ -314,9 +301,9 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
-        private void OwnerClosing(object sender, CancelEventArgs e)
+        private static void OwnerClosing(object sender, CancelEventArgs e)
         {
-            string name = nameof(Balloon);
+            const string name = nameof(Balloon);
 
             foreach (Window window in Application.Current.Windows)
             {
@@ -333,10 +320,7 @@ namespace Mantin.Controls.Wpf.Notification
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
-        private void ImageCloseMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this.Close();
-        }
+        private void ImageCloseMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => Close();
 
         #endregion Event Handlers
     }
